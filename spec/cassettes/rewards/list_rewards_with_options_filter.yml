@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/rewards.json?include_totals=true&page=1&per_page=10&tags=battlefield-bad-company-2%2Cps3
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 13 Dec 2011 16:34:02 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"e233cf758bc6624a6f03eb519d9914d4"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlNjEyZWI1ODc3OTllY2U2OTY0MTIzMTQ3MWQ0M2NlYWQ%3D--88bdb2d180f8baa7e9c2330d1271d11b44dcea58;
+        path=/; expires=Tue, 27-Dec-2011 16:34:02 GMT; HttpOnly
+      X-Runtime:
+      - '0.193714'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":[{"name":null,"created_at":"2011-05-19T11:41:12-07:00","activity_id":"4dd56448c47eed2fbd000372","id":"4dd56448c47eed2fbd000373","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      1st in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:14-07:00","activity_id":"4dd56449c47eed2fbd000374","id":"4dd5644ac47eed2fbd000375","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      2nd in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:15-07:00","activity_id":"4dd5644ac47eed2fbd000376","id":"4dd5644bc47eed2fbd000377","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      3rd in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:16-07:00","activity_id":"4dd5644cc47eed2fbd000378","id":"4dd5644cc47eed2fbd000379","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      4th in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:17-07:00","activity_id":"4dd5644dc47eed2fbd00037a","id":"4dd5644dc47eed2fbd00037b","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      5th in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:18-07:00","activity_id":"4dd5644ec47eed2fbd00037c","id":"4dd5644ec47eed2fbd00037d","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      6th in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:19-07:00","activity_id":"4dd5644fc47eed2fbd00037e","id":"4dd5644fc47eed2fbd00037f","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      7th in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:21-07:00","activity_id":"4dd56450c47eed2fbd000380","id":"4dd56451c47eed2fbd000381","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      8th in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:22-07:00","activity_id":"4dd56451c47eed2fbd000382","id":"4dd56452c47eed2fbd000383","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      9th in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null},{"name":null,"created_at":"2011-05-19T11:41:23-07:00","activity_id":"4dd56453c47eed2fbd000384","id":"4dd56453c47eed2fbd000385","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","definition":null,"image":null,"tags":["medal","online_competition","ps3","battlefield-bad-company-2"],"status":null,"message":"Ranked
+      10th in a Battlefield: Bad Company 2 Arena","history":{"toast":{"4dcd8c3ac47eed6b2a000077":"2011-07-21T00:28:59Z"},"facebook":null,"twitter":null,"email":null},"next_reward_id":null}],"paging":{"current_page":1,"per_page":10,"total_entries":442,"total_pages":45}}'
+    http_version: '1.1'
+  recorded_at: Tue, 13 Dec 2011 16:34:02 GMT
+recorded_with: VCR 2.0.0.rc1

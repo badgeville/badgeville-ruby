@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/activities.json?include_totals=true&page=1&per_page=10&site=community.stagingdomain.com
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 13 Dec 2011 19:24:50 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"3eb7f770154e181ea68bf1a5d4813d4b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlN2ZhYWRjYjY5MzVlNGJiZWIxYmQ2ZjVjMDk5N2M4NDY%3D--c4cda3a2456e9bba27fa55e7a325b942e5de3c7c;
+        path=/; expires=Tue, 27-Dec-2011 19:24:50 GMT; HttpOnly
+      X-Runtime:
+      - '0.943139'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":[{"_id":"4ee79ac34dd6254842000136","_type":"Activity","created_at":"2011-12-13T10:34:43-08:00","definition_ids":["4dcc44e6c47eed597300c232"],"internal":false,"player_id":"4ddd2b58c47eed304e00019b","points":0,"shard_id":"e0b1a3077db679f12851b0179dc411f1","site_id":"4d700bd351c21c1e3c000004","team_ids":[],"user_id":"4ddd2b58c47eed304e00019a","verb":"active_member_years","years":2,"rewards":[],"contents":[]},{"_id":"4ee79ac23dc64832040000f8","_type":"Activity","created_at":"2011-12-13T10:34:42-08:00","definition_ids":["4dcc44e8c47eed597000bcc3"],"internal":false,"player_id":"4ddd2b58c47eed304e00019b","points":0,"shard_id":"e0b1a3077db679f12851b0179dc411f1","site_id":"4d700bd351c21c1e3c000004","team_ids":[],"user_id":"4ddd2b58c47eed304e00019a","verb":"joined_BDV","year":2010,"rewards":[],"contents":[]},{"_id":"4ee797c93dc64810b0000129","_type":"Activity","created_at":"2011-12-13T10:22:01-08:00","definition_ids":[],"game":"fifa-soccer-11","internal":false,"player_id":"4e0a0f48c47eed2f80015921","points":0,"shard_id":"180cc8a35fd6fa3cae02720761b71092","site_id":"4d700bd351c21c1e3c000004","sku":"xbox360","team_ids":[],"user_id":"4e0a0f48c47eed2f80015920","verb":"xbox360_fifa-soccer-11_rankedexact_1_cmrs","rewards":[],"contents":[]},{"_id":"4ee797c84dd625483000018e","_type":"Activity","created_at":"2011-12-13T10:22:00-08:00","definition_ids":["4ed7d2cb6a898d2bf0000678"],"internal":false,"player_id":"4e0a0f48c47eed2f80015921","points":0,"shard_id":"180cc8a35fd6fa3cae02720761b71092","site_id":"4d700bd351c21c1e3c000004","team_ids":[],"user_id":"4e0a0f48c47eed2f80015920","verb":"votedcorrectly_cmrs","rewards":[],"contents":[]},{"_id":"4ee796793dc64810b0000123","_type":"Activity","created_at":"2011-12-13T10:16:25-08:00","definition_ids":["4ed7d2cb6a898d2bf0000678"],"internal":false,"player_id":"4e0a0f48c47eed2f80015921","points":0,"shard_id":"180cc8a35fd6fa3cae02720761b71092","site_id":"4d700bd351c21c1e3c000004","team_ids":[],"user_id":"4e0a0f48c47eed2f80015920","verb":"votedcorrectly_cmrs","rewards":[],"contents":[]},{"_id":"4ee796796a898d10e5000104","_type":"Activity","created_at":"2011-12-13T10:16:25-08:00","definition_ids":[],"game":"league-of-legends","internal":false,"player_id":"4e0a0f48c47eed2f80015921","points":0,"shard_id":"180cc8a35fd6fa3cae02720761b71092","site_id":"4d700bd351c21c1e3c000004","sku":"pc","team_ids":[],"user_id":"4e0a0f48c47eed2f80015920","verb":"pc_league-of-legends_rankedexact_1_cmrs","rewards":[],"contents":[]},{"_id":"4ee795243dc64810b0000121","_type":"Activity","created_at":"2011-12-13T10:10:44-08:00","definition_ids":[],"game":"nba-2k11","internal":false,"player_id":"4e0a0f48c47eed2f80015921","points":0,"shard_id":"180cc8a35fd6fa3cae02720761b71092","site_id":"4d700bd351c21c1e3c000004","sku":"xbox360","team_ids":[],"user_id":"4e0a0f48c47eed2f80015920","verb":"xbox360_nba-2k11_rankedexact_1_cmrs","rewards":[],"contents":[]},{"_id":"4ee795234dd625483000018a","_type":"Activity","created_at":"2011-12-13T10:10:43-08:00","definition_ids":["4ed7d2cb6a898d2bf0000678"],"internal":false,"player_id":"4e0a0f48c47eed2f80015921","points":0,"shard_id":"180cc8a35fd6fa3cae02720761b71092","site_id":"4d700bd351c21c1e3c000004","team_ids":[],"user_id":"4e0a0f48c47eed2f80015920","verb":"votedcorrectly_cmrs","rewards":[],"contents":[]},{"_id":"4ee794b54dd625483c000151","_type":"Activity","created_at":"2011-12-13T10:08:53-08:00","definition_ids":[],"game":"halo3","internal":false,"player_id":"4e0a0f48c47eed2f80015921","points":0,"shard_id":"180cc8a35fd6fa3cae02720761b71092","site_id":"4d700bd351c21c1e3c000004","sku":"xbox360","team_ids":[],"user_id":"4e0a0f48c47eed2f80015920","verb":"xbox360_halo3_rankedexact_1_cmrs","rewards":[],"contents":[]},{"_id":"4ee794b44dd625483c000150","_type":"Activity","created_at":"2011-12-13T10:08:52-08:00","definition_ids":["4ed7d2cb6a898d2bf0000678"],"internal":false,"player_id":"4e0a0f48c47eed2f80015921","points":0,"shard_id":"180cc8a35fd6fa3cae02720761b71092","site_id":"4d700bd351c21c1e3c000004","team_ids":[],"user_id":"4e0a0f48c47eed2f80015920","verb":"votedcorrectly_cmrs","rewards":[],"contents":[]}],"paging":{"current_page":1,"per_page":10,"total_entries":58910,"total_pages":5891}}'
+    http_version: '1.1'
+  recorded_at: Tue, 13 Dec 2011 19:24:50 GMT
+recorded_with: VCR 2.0.0.rc1

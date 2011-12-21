@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/rewards.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 13 Dec 2011 23:36:48 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 201 Created
+      Location:
+      - http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/rewards
+      Cache-Control:
+      - no-cache
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlYTQ5ODkyNzVhMjk3MWRlZDA2MDM1OGM4NmZmNDE0OGU%3D--02c75552b70d32c93664abbf6f91e08b04d99005;
+        path=/; expires=Tue, 27-Dec-2011 23:36:48 GMT; HttpOnly
+      X-Runtime:
+      - '0.066320'
+    body: ! '{"name":"Seeded in a Battlefield: Bad Company 2 Team Ladder Playoff","created_at":"2011-12-13T15:36:48-08:00","activity_id":null,"id":"4ee7e1903dc64810b4000206","user_id":null,"site_id":"4d9f67f951c21c5100000013","definition":{"type":"rewarddefinition","name":"Seeded
+      in a Battlefield: Bad Company 2 Team Ladder Playoff","created_at":"2011-09-08T12:39:45-07:00","assignable":false,"allow_duplicates":false,"components":"[{\"comparator\":{\"$gte\":1},\"command\":\"count\",\"where\":{\"verb\":\"ps3_battlefield-bad-company-2_team_seeded_ladderplayoffs\",\"user_id\":\"%user_id\",\"site_id\":\"%site_id\",\"game\":\"battlefield-bad-company-2\",\"sku\":\"ps3\",\"ladder\":\"team\"}}]","reward_template":{"message":"Seeded
+      in a Battlefield: Bad Company 2 Team Ladder Playoff"},"tags":"medal,online_competition,ladder,ps3,battlefield-bad-company-2,team","site_id":"4d9f67f951c21c5100000013","image_url":"http://s3.amazonaws.com/badgeville-production-reward-definitions/images/4e691a01c47eed282900000e/original.png?1315510785","image_file_name":"GB_playoffs.png","data":{},"_id":"4e691a01c47eed282900000e","id":"4e691a01c47eed282900000e","active":true,"hint":null,"message":"Seeded
+      in a Battlefield: Bad Company 2 Team Ladder Playoff","active_start_at":null,"active_end_at":null},"image":"http://s3.amazonaws.com/badgeville-production-reward-definitions/images/4e691a01c47eed282900000e/original.png?1315510785","tags":null,"status":null,"message":null,"history":null,"next_reward_id":null}'
+    http_version: '1.1'
+  recorded_at: Tue, 13 Dec 2011 23:36:48 GMT
+recorded_with: VCR 2.0.0.rc1

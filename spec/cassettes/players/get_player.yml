@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/players/4dcd8c3ac47eed6b2a000077.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 13 Dec 2011 20:26:12 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"b080a1c9b3f3a63df0d32f966f2c7645"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlMTc1NTg3MDYwNTUyMTc1ZGQ4YmIzMjhjZGRkMTU0Yjg%3D--de14518ae1cf5c5036f73f5417d6579e7c503122;
+        path=/; expires=Tue, 27-Dec-2011 20:26:12 GMT; HttpOnly
+      X-Runtime:
+      - '0.025413'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":{"_id":"4dcd8c3ac47eed6b2a000077","id":"4dcd8c3ac47eed6b2a000077","name":"3","first_name":null,"last_name":null,"display_name":null,"nick_name":null,"email":"3@staging-badgeville-somedomain.com","user_email":"3@staging-badgeville-somedomain.com","created_at":"2011-05-13T12:53:30-07:00","user_id":"4d8a348f51c21c494100011d","site_id":"4d700bd351c21c1e3c000004","site_url":"community.stagingdomain.com","admin":false,"points_day":0.0,"points_week":0.0,"points_month":0.0,"points_all":0.0,"facebook_id":null,"facebook_link":null,"twitter_id":null,"twitter_username":null,"twitter_link":null,"email_notifications":null,"custom_picture_url":null,"picture_url":null,"preferences":{"hide_notifications":false,"publish_activity":true,"email_notifications":null},"tracks":{}},"paging":null}'
+    http_version: '1.1'
+  recorded_at: Tue, 13 Dec 2011 20:26:12 GMT
+recorded_with: VCR 2.0.0.rc1

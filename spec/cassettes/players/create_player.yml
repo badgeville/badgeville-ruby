@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/users.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 13 Dec 2011 20:56:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 201 Created
+      Location:
+      - http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/users
+      Cache-Control:
+      - no-cache
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlMDM4MjJjZjZmYmUwZWFhMGYxNGZkMTM3OTY4NjQ0NjA%3D--70891492f270b8f8ce7eca74b46266a71cce8f11;
+        path=/; expires=Tue, 27-Dec-2011 20:56:44 GMT; HttpOnly
+      X-Runtime:
+      - '0.035039'
+    body: ! '{"name":"player_hater","created_at":"2011-12-13T12:56:44-08:00","email":"player_hater@community.stagingdomain.com","_id":"4ee7bc0c6a898d10ed00016b"}'
+    http_version: '1.1'
+  recorded_at: Tue, 13 Dec 2011 20:56:44 GMT
+- request:
+    method: post
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/players.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 13 Dec 2011 20:56:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 201 Created
+      Location:
+      - http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/players
+      Cache-Control:
+      - no-cache
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlMTRmODhjYmI5M2FhZjBjYTg4N2RlMjkyOWI2ZDEwN2Y%3D--5647ee99f1429bf660fc3fd61b74604fb29f19b5;
+        path=/; expires=Tue, 27-Dec-2011 20:56:44 GMT; HttpOnly
+      X-Runtime:
+      - '0.046656'
+    body: ! '{"_id":"4ee7bc0c3dc64810b0000157","id":"4ee7bc0c3dc64810b0000157","name":"player_hater","first_name":null,"last_name":null,"display_name":null,"nick_name":null,"email":"player_hater@community.stagingdomain.com","user_email":"player_hater@community.stagingdomain.com","created_at":"2011-12-13T12:56:44-08:00","user_id":"4ee7bc0c6a898d10ed00016b","site_id":"4d700bd351c21c1e3c000004","site_url":"community.stagingdomain.com","admin":false,"points_day":0.0,"points_week":0.0,"points_month":0.0,"points_all":0.0,"facebook_id":null,"facebook_link":null,"twitter_id":null,"twitter_username":null,"twitter_link":null,"email_notifications":true,"custom_picture_url":null,"picture_url":null,"preferences":{"email_notifications":true,"hide_notifications":false,"publish_activity":true},"tracks":{}}'
+    http_version: '1.1'
+  recorded_at: Tue, 13 Dec 2011 20:56:44 GMT
+recorded_with: VCR 2.0.0.rc1

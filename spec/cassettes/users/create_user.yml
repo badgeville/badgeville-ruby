@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/users.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Mon, 12 Dec 2011 23:36:16 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 201 Created
+      Location:
+      - http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/users
+      Cache-Control:
+      - no-cache
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlNDhjZjE1MWMzYjQ5ODI3OTZkOGM4ZTQ3YjRkMjIzMmQ%3D--a0291eeb1b13036e44f95e3087cf361be95f6b7b;
+        path=/; expires=Mon, 26-Dec-2011 23:36:16 GMT; HttpOnly
+      X-Runtime:
+      - '0.103669'
+    body: ! '{"name":"a_badgeville_user","created_at":"2011-12-12T15:36:16-08:00","email":"a_badgeville_user@email.com","_id":"4ee68ff06a898d10f8000104"}'
+    http_version: '1.1'
+  recorded_at: Mon, 12 Dec 2011 23:36:13 GMT
+recorded_with: VCR 2.0.0.rc1
