@@ -152,13 +152,18 @@ module Badgeville
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
+    def get_group(group_id, options = {})
+      response = Typhoeus::Request.get(build_api_url("groups/#{group_id}.json"), 
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
     def list_groups(options = {})
       response = Typhoeus::Request.get(build_api_url('groups.json'), 
         :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def update_group(group_id, options)
+    def update_group(group_id, options = {})
       response = Typhoeus::Request.put(build_api_url("groups/#{group_id}.json"), 
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end

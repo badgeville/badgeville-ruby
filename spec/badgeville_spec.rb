@@ -274,6 +274,13 @@ describe Badgeville::API do
       end
     end
 
+    it 'should allow you to retrieve a group' do
+      VCR.use_cassette('groups/get_group_by_id') do
+        badgeville_response = @badgeville.get_group('4f034a566a898d7049001633')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
     it 'should allow you to list the groups' do
       VCR.use_cassette('groups/list_groups') do
         badgeville_response = @badgeville.list_groups(:page => 1, :per_page => 15)
