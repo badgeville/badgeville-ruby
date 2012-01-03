@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/players/info.json?email=76%40staging-badgeville-stagingdomain.com&site=community.stagingdomain.com
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 03 Jan 2012 21:05:38 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"75ca2cb2f405d46d3470023e801007a5"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlMmY4N2RkMDc4NDY3MThkNTI2OGQ1MTVjY2I4NTA3YTM%3D--42ea6166e801ae91629b25f466f50ffb392a4f5b;
+        path=/; expires=Tue, 17-Jan-2012 21:05:38 GMT; HttpOnly
+      X-Runtime:
+      - '0.031432'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":{"_id":"4de3e2d9c47eed1777000335","id":"4de3e2d9c47eed1777000335","name":null,"first_name":null,"last_name":null,"display_name":null,"nick_name":null,"email":"76@staging-badgeville-majorleaguegaming.com","user_email":"76@staging-badgeville-stagingdomain.com","created_at":"2011-05-30T11:32:57-07:00","user_id":"4de3e2d9c47eed1777000334","site_id":"4d700bd351c21c1e3c000004","site_url":"community.stagingdomain.com","admin":false,"points_day":0.0,"points_week":0.0,"points_month":0.0,"points_all":0.0,"facebook_id":null,"facebook_link":null,"twitter_id":null,"twitter_username":null,"twitter_link":null,"email_notifications":null,"custom_picture_url":null,"picture_url":null,"preferences":{"hide_notifications":false,"publish_activity":true,"email_notifications":null},"tracks":{}},"paging":null}'
+    http_version: '1.1'
+  recorded_at: Tue, 03 Jan 2012 21:05:38 GMT
+recorded_with: VCR 2.0.0.rc1

@@ -233,6 +233,13 @@ describe Badgeville::API do
       end
     end
 
+    it 'should allow you to get info for a player' do
+      VCR.use_cassette('players/info_player') do
+        badgeville_response = @badgeville.info_player('community.stagingdomain.com', '76@staging-badgeville-stagingdomain.com')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
     it 'should allow you to get a player' do
       VCR.use_cassette('players/get_player') do
         badgeville_response = @badgeville.get_player('4dcd8c3ac47eed6b2a000077')

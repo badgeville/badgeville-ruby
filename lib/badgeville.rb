@@ -182,6 +182,11 @@ module Badgeville
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
+    def info_player(site, email)
+      response = Typhoeus::Request.get(build_api_url("players/info.json"),
+        :params => {:site => site, :email => email}, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
     def list_players(options = {})
       response = Typhoeus::Request.get(build_api_url('players.json'), 
         :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
