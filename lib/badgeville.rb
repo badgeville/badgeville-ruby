@@ -27,6 +27,10 @@ module Badgeville
 
     ######################################
     # Activities
+    #
+    # NOTE: Only create_ and list_ are 
+    # defined in the Badgeville API 
+    # documentation
     ######################################
 
     def create_activity(options = {})
@@ -47,6 +51,27 @@ module Badgeville
     def create_activity_definition(options = {})
       response = Typhoeus::Request.post(build_api_url('activity_definitions.json'), 
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def get_activity_definition(activity_definition_id)
+      response = Typhoeus::Request.get(build_api_url("activity_definitions/#{activity_definition_id}.json"), 
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def list_activity_definitions(options = {})
+      response = Typhoeus::Request.get(build_api_url('activity_definitions.json'), 
+        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def update_activity_definition(activity_definition_id, options)
+      response = Typhoeus::Request.put(build_api_url("activity_definitions/#{activity_definition_id}.json"), 
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def delete_activity_definition(activity_definition_id)
+      response = Typhoeus::Request.delete(build_api_url("activity_definitions/#{activity_definition_id}.json"), 
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
     ######################################

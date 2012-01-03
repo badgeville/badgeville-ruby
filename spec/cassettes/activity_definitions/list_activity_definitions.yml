@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/activity_definitions.json?include_totals=true&page=1&per_page=10&site=community.stagingdomain.com
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 03 Jan 2012 16:25:54 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"7e4bebc39116ad78853628ef2785ab15"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlZjBlYjEzZWM2MGQ4NDc3NTdhY2EzYzM3NmE2MTVlMWQ%3D--9359a207188b9c0fb13fea0b8ccfb672036413d5;
+        path=/; expires=Tue, 17-Jan-2012 16:25:54 GMT; HttpOnly
+      X-Runtime:
+      - '0.075429'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":[{"_id":"4e95d3ed6a898d3aa3011581","name":"1st place in three
+      or more matches in a PS3 Resistance 3 Ladder","selector":{"verb":"ps3_resistance-3_won_laddermatchfirst_threematches"},"adjustment":{"points":0},"bucket_drain_rate":null,"bucket_max_capacity":null,"limit_per_player":null,"limit_field_scope":"","site_id":"4d700bd351c21c1e3c000004","verb":"ps3_resistance-3_won_laddermatchfirst_threematches","icon":null,"tool_tip":"","hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4dcc44dfc47eed597300c210","name":"20XX
+      Season Points Winner","selector":{"verb":"season_points_winner"},"adjustment":{"points":0},"bucket_drain_rate":0.0,"bucket_max_capacity":0.0,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"season_points_winner","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4dcc453ac47eed597000bd81","name":"API
+      Test","selector":{"verb":"test_api"},"adjustment":{"points":0},"bucket_drain_rate":0.0,"bucket_max_capacity":0.0,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"test_api","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4dcc44e4c47eed597300c22a","name":"API
+      Test V2 (localhost)","selector":{"verb":"api_test_v2"},"adjustment":{"points":0},"bucket_drain_rate":0.0,"bucket_max_capacity":0.0,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"api_test_v2","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4dcc44dcc47eed597300c1fc","name":"API
+      test (V2)","selector":{"verb":"api_test_v2"},"adjustment":{"points":0},"bucket_drain_rate":0.0,"bucket_max_capacity":0.0,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"api_test_v2","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4ee7acca4dd625482400015f","name":"API
+      test (V2) activity - gem test","selector":{"verb":"api_test_v2_gem"},"adjustment":{"points":5},"bucket_drain_rate":null,"bucket_max_capacity":null,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"api_test_v2_gem","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4dcc4637c47eed597000bfe6","name":"API
+      test (stuff)","selector":{"verb":"api_test_stuff"},"adjustment":{"points":0},"bucket_drain_rate":0.0,"bucket_max_capacity":0.0,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"api_test_stuff","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4dcc44dcc47eed597300c1ff","name":"Accepted
+      Friend Request","selector":{"verb":"accepted_friend_request"},"adjustment":{"points":0},"bucket_drain_rate":0.0,"bucket_max_capacity":0.0,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"accepted_friend_request","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4dcc44e5c47eed597300c231","name":"Active
+      member for X months","selector":{"verb":"active_member_months"},"adjustment":{"points":0},"bucket_drain_rate":0.0,"bucket_max_capacity":0.0,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"active_member_months","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null},{"_id":"4dcc44e6c47eed597300c232","name":"Active
+      member for X years","selector":{"verb":"active_member_years"},"adjustment":{"points":0},"bucket_drain_rate":0.0,"bucket_max_capacity":0.0,"limit_per_player":null,"limit_field_scope":null,"site_id":"4d700bd351c21c1e3c000004","verb":"active_member_years","icon":null,"tool_tip":null,"hide_in_widgets":true,"enable_rate_limiting":false,"enable_count_limiting":false,"enable_site_notification":null,"enable_user_notification":null,"enable_auto_subscription":null,"description":null}],"paging":{"current_page":1,"per_page":10,"total_entries":1946,"total_pages":195}}'
+    http_version: '1.1'
+  recorded_at: Tue, 03 Jan 2012 16:25:54 GMT
+recorded_with: VCR 2.0.0.rc1

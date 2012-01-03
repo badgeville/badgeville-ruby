@@ -56,6 +56,36 @@ describe Badgeville::API do
         badgeville_response.code.should eql(201)
       end
     end
+
+    it 'should be able to list activity definitions' do
+      VCR.use_cassette('activity_definitions/list_activity_definitions') do
+        badgeville_response = @badgeville.list_activity_definitions(:site => 'community.stagingdomain.com')
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(10)
+      end
+    end
+
+    it 'should be able to get an activity definition' do
+      VCR.use_cassette('activity_definitions/get_activity_definition_by_id') do
+        badgeville_response = @badgeville.get_activity_definition('4e95d3ed6a898d3aa3011581')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should be able to update an activity definition' do
+      VCR.use_cassette('activity_definitions/update_activity_definition') do
+        badgeville_response = @badgeville.update_activity_definition('4dcc44e4c47eed597300c22a', {:name => 'A new updated name}'})
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should be able to delete an activity definition' do
+      VCR.use_cassette('activity_definitions/delete_activity') do
+        badgeville_response = @badgeville.delete_activity_definition('4dcc4637c47eed597000bfe6')
+        badgeville_response.code.should eql(200)
+      end
+    end
   end
 
   ######################################
