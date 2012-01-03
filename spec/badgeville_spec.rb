@@ -229,6 +229,47 @@ describe Badgeville::API do
   end
 
   ######################################
+  # Groups
+  ######################################
+
+  describe 'groups' do
+    it 'should allow you to create a group' do
+      VCR.use_cassette('groups/create_group') do
+        badgeville_response = @badgeville.create_group(
+          :group => {
+            :site_id => '4d700bd351c21c1e3c000004',
+            :name => 'Test Group'
+          })
+        badgeville_response.code.should eql(201)
+      end
+    end
+
+    it 'should allow you to list the groups' do
+      VCR.use_cassette('groups/list_groups') do
+        badgeville_response = @badgeville.list_groups(:page => 1, :per_page => 15)
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(1)
+      end
+    end
+
+    it 'should allow you to update a group' do
+      VCR.use_cassette('groups/update_group') do
+        badgeville_response = @badgeville.update_group('4f034a566a898d7049001633', 
+          :group => {:name => 'Updated Group Name'})
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to delete a group' do
+      VCR.use_cassette('groups/delete_group') do
+        badgeville_response = @badgeville.delete_group('4f034a566a898d7049001633')
+        badgeville_response.code.should eql(200)
+      end
+    end
+  end
+
+  ######################################
   # Rewards
   ######################################  
 

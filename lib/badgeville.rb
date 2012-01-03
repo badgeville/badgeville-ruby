@@ -123,6 +123,31 @@ module Badgeville
     end
 
     ######################################
+    # Groups
+    ######################################
+
+    def create_group(options)
+      response = Typhoeus::Request.post(build_api_url('groups.json'), 
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def list_groups(options = {})
+      response = Typhoeus::Request.get(build_api_url('groups.json'), 
+        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def update_group(group_id, options)
+      response = Typhoeus::Request.put(build_api_url("groups/#{group_id}.json"), 
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def delete_group(group_id)
+      response = Typhoeus::Request.delete(build_api_url("groups/#{group_id}.json"), 
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    ######################################
     # Players
     ######################################
 
