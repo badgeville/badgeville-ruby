@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/leaderboards.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 03 Jan 2012 19:09:40 GMT
+      Content-Type:
+      - text/html
+      Connection:
+      - close
+      Status:
+      - 500 Internal Server Error
+      Content-Length:
+      - '728'
+      X-Runtime:
+      - '0.013269'
+    body: ! "<!DOCTYPE html>\n<html>\n<head>\n  <title>We're sorry, but something
+      went wrong (500)</title>\n  <style type=\"text/css\">\n    body { background-color:
+      #fff; color: #666; text-align: center; font-family: arial, sans-serif; }\n    div.dialog
+      {\n      width: 25em;\n      padding: 0 4em;\n      margin: 4em auto 0 auto;\n
+      \     border: 1px solid #ccc;\n      border-right-color: #999;\n      border-bottom-color:
+      #999;\n    }\n    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }\n
+      \ </style>\n</head>\n\n<body>\n  <!-- This file lives in public/500.html -->\n
+      \ <div class=\"dialog\">\n    <h1>We're sorry, but something went wrong.</h1>\n
+      \   <p>We've been notified about this issue and we'll take a look at it shortly.</p>\n
+      \ </div>\n</body>\n</html>\n"
+    http_version: '1.1'
+  recorded_at: Tue, 03 Jan 2012 19:09:40 GMT
+recorded_with: VCR 2.0.0.rc1

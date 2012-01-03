@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/reward_definitions/4ee7ab313dc64810b40001a4.json?name=API+test+%28V2%29+reward+-+gem+test+update
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: Continue
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 03 Jan 2012 19:44:32 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Location:
+      - http://sandbox.v2.badgeville.com/api/berlin/4ee7ab313dc64810b40001a4/reward_definitions/4ee7ab313dc64810b40001a4
+      Etag:
+      - ! '"99914b932bd37a50b983c5e7c90ae93b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlZjdlODIwMDIyODEwMjhkMjM4ODQ3MzVmZTRmMjI5YmE%3D--866004d5554d8ac9172018e293577a4af66eb11e;
+        path=/; expires=Tue, 17-Jan-2012 19:44:32 GMT; HttpOnly
+      X-Runtime:
+      - '0.044423'
+      Content-Encoding:
+      - gzip
+    body: ! '{}'
+    http_version: '1.1'
+  recorded_at: Tue, 03 Jan 2012 19:44:32 GMT
+recorded_with: VCR 2.0.0.rc1

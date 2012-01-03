@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/reward_definitions/4ee7ab313dc64810b40001a4.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Tue, 03 Jan 2012 19:43:08 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"e9d7d1a0d1cca89c1b793fdc32fc1c92"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlYmJhMDA5ZGZkYTQ0NGE4YTM4NDM4OWNlOGJlMGM3ZWE%3D--eb5919ddbf896acee038facc0e08370677ed5dcc;
+        path=/; expires=Tue, 17-Jan-2012 19:43:08 GMT; HttpOnly
+      X-Runtime:
+      - '0.023661'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":{"type":"rewarddefinition","name":"API test (V2) reward - gem
+      test","created_at":"2011-12-13T11:44:49-08:00","assignable":false,"allow_duplicates":false,"components":"[{\"comparator\":{\"$gte\":1},\"command\":\"count\",\"where\":{\"verb\":\"api_test_v2\",\"user_id\":\"%user_id\",\"site_id\":\"%site_id\"}}]","reward_template":{"message":"Congratulations!
+      You''ve won the API test V2 badge!"},"tags":"API,test,v2","site_id":"4d700bd351c21c1e3c000004","image_url":"http://sandbox.v2.badgeville.com/images/misc/missing_badge.png","image_file_name":null,"data":{},"_id":"4ee7ab313dc64810b40001a4","id":"4ee7ab313dc64810b40001a4","active":true,"hint":null,"message":"Congratulations!
+      You''ve won the API test V2 badge!","active_start_at":null,"active_end_at":null},"paging":null}'
+    http_version: '1.1'
+  recorded_at: Tue, 03 Jan 2012 19:43:08 GMT
+recorded_with: VCR 2.0.0.rc1

@@ -108,6 +108,36 @@ describe Badgeville::API do
         badgeville_response.code.should eql(201)
       end
     end
+
+    it 'should be able to list reward definitions' do
+      VCR.use_cassette('reward_definitions/list_reward_definitions') do
+        badgeville_response = @badgeville.list_reward_definitions(:site => 'community.stagingdomain.com')
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(10)
+      end
+    end
+
+    it 'should be able to get a reward definition' do
+      VCR.use_cassette('reward_definitions/get_reward_definition_by_id') do
+        badgeville_response = @badgeville.get_reward_definition('4ee7ab313dc64810b40001a4')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should be able to update a reward definition' do
+      VCR.use_cassette('reward_definitions/update_reward_definition') do
+        badgeville_response = @badgeville.update_reward_definition('4ee7ab313dc64810b40001a4', {:name => 'API test (V2) reward - gem test update'})
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should be able to delete a reward definition' do
+      VCR.use_cassette('reward_definitions/delete_reward_definition') do
+        badgeville_response = @badgeville.delete_reward_definition('4ee7ab313dc64810b40001a4')
+        badgeville_response.code.should eql(200)
+      end
+    end
   end
 
   ######################################
@@ -267,6 +297,13 @@ describe Badgeville::API do
         badgeville_response.code.should eql(200)
       end
     end
+  end
+
+  ######################################
+  # Leaderboards
+  ######################################
+
+  describe 'leaderboards' do
   end
 
   ######################################
