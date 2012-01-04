@@ -94,7 +94,7 @@ module Badgeville
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def update_reward_definition(reward_definition_id, options)
+    def update_reward_definition(reward_definition_id, options = {})
       response = Typhoeus::Request.put(build_api_url("reward_definitions/#{reward_definition_id}.json"), 
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
@@ -108,13 +108,9 @@ module Badgeville
     # Users
     ######################################
 
-    def create_user(name, email)
-      response = Typhoeus::Request.post(build_api_url('users.json'), :params => {
-        :user => {
-          :name => name,
-          :email => email
-        }
-      }, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    def create_user(options = {})
+      response = Typhoeus::Request.post(build_api_url('users.json'), :params => options,
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
     def get_user(email_or_id)
@@ -128,14 +124,9 @@ module Badgeville
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def update_user(email_or_id, name, email)
+    def update_user(email_or_id, options = {})
       response = Typhoeus::Request.put(build_api_url("users/#{email_or_id}.json"),
-        :params => {
-          :user => {
-            :name => name,
-            :email => email
-          }
-        }, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
     def delete_user(email_or_id)
@@ -147,7 +138,7 @@ module Badgeville
     # Groups
     ######################################
 
-    def create_group(options)
+    def create_group(options = {})
       response = Typhoeus::Request.post(build_api_url('groups.json'), 
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
@@ -177,7 +168,7 @@ module Badgeville
     # Players
     ######################################
 
-    def create_player(options)
+    def create_player(options = {})
       response = Typhoeus::Request.post(build_api_url('players.json'), 
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
@@ -198,7 +189,7 @@ module Badgeville
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def update_player(player_id, options)
+    def update_player(player_id, options = {})
       response = Typhoeus::Request.put(build_api_url("players/#{player_id}.json"), 
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
@@ -212,7 +203,7 @@ module Badgeville
     # Leaderboards
     ######################################
 
-    def create_leaderboard(options)
+    def create_leaderboard(options = {})
       response = Typhoeus::Request.post(build_api_url('leaderboards.json'), 
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
@@ -228,7 +219,7 @@ module Badgeville
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def update_leaderboard(leaderboard_id, options)
+    def update_leaderboard(leaderboard_id, options = {})
       response = Typhoeus::Request.put(build_api_url("leaderboards/#{leaderboard_id}.json"), 
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end

@@ -147,7 +147,12 @@ describe Badgeville::API do
   describe 'users' do
     it 'should allow you to create a user' do
       VCR.use_cassette('users/create_user') do
-        badgeville_response = @badgeville.create_user('a_badgeville_user', 'a_badgeville_user@email.com')
+        badgeville_response = @badgeville.create_user(
+          :user => {
+            :name => 'a_badgeville_user', 
+            :email => 'a_badgeville_user@email.com'
+          }
+        )
         badgeville_response.code.should eql(201)
       end
     end
@@ -177,7 +182,11 @@ describe Badgeville::API do
 
     it 'should allow you to update a user by ID' do
       VCR.use_cassette('users/update_user_by_ID') do
-        badgeville_response = @badgeville.update_user('4e9604a14d6ce65520020998', 'a_new_name', '098@staging-badgeville-somedomain.com')
+        badgeville_response = @badgeville.update_user('4e9604a14d6ce65520020998', 
+          :user => {
+            :name => 'a_new_name', 
+            :email => '098@staging-badgeville-somedomain.com'
+          })
         badgeville_response.code.should eql(200)
       end
     end
@@ -205,7 +214,12 @@ describe Badgeville::API do
   describe 'players' do
     it 'should allow you to create a player' do
       VCR.use_cassette('players/create_player') do
-        badgeville_response = @badgeville.create_user('player_hater', 'player_hater@community.stagingdomain.com')
+        badgeville_response = @badgeville.create_user(
+          :user => {
+            :name => 'player_hater', 
+            :email => 'player_hater@community.stagingdomain.com'
+          }
+        )
         badgeville_response.code.should eql(201)
 
         badgeville_response = @badgeville.create_player(:email => 'player_hater@community.stagingdomain.com', 
