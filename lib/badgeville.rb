@@ -255,6 +255,36 @@ module Badgeville
     end
 
     ######################################
+    # Tracks
+    ######################################
+
+    def create_track(options = {})
+      response = Typhoeus::Request.post(build_api_url('tracks.json'), 
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def get_track(track_id)
+      response = Typhoeus::Request.get(build_api_url("tracks/#{track_id}.json"), 
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def list_tracks(options = {})
+      response = Typhoeus::Request.get(build_api_url('tracks.json'),
+        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def update_track(track_id, options = {})
+      response = Typhoeus::Request.put(build_api_url("tracks/#{track_id}.json"), 
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def delete_track(track_id)
+      response = Typhoeus::Request.delete(build_api_url("tracks/#{track_id}.json"), 
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    ######################################
     # Users
     ######################################
 

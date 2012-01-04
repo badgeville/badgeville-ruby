@@ -89,197 +89,6 @@ describe Badgeville::API do
   end
 
   ######################################
-  # Reward Definitions
-  ######################################
-
-  describe 'reward definitions' do
-    it 'should be able to create a reward definition' do
-      VCR.use_cassette('reward_definitions/create_reward_definition') do
-        badgeville_response = @badgeville.create_reward_definition(
-          :reward_definition => {
-            :site_id => '4d700bd351c21c1e3c000004',
-            :name => 'API test (V2) reward - gem test',
-            :components => '[{"comparator":{"$gte":1},"command":"count","where":{"verb":"api_test_v2","user_id":"%user_id","site_id":"%site_id"}}]',
-            :reward_template => '{"message":"Congratulations! You\'ve won the API test V2 badge!"}',
-            :tags => 'API,test,v2',
-            :active => true
-          }
-        )
-        badgeville_response.code.should eql(201)
-      end
-    end
-
-    it 'should be able to list reward definitions' do
-      VCR.use_cassette('reward_definitions/list_reward_definitions') do
-        badgeville_response = @badgeville.list_reward_definitions(:site => 'community.stagingdomain.com')
-        badgeville_response.code.should eql(200)
-        parsed_badgeville_response = JSON.parse(badgeville_response.body)
-        parsed_badgeville_response['data'].size.should eql(10)
-      end
-    end
-
-    it 'should be able to get a reward definition' do
-      VCR.use_cassette('reward_definitions/get_reward_definition_by_id') do
-        badgeville_response = @badgeville.get_reward_definition('4ee7ab313dc64810b40001a4')
-        badgeville_response.code.should eql(200)
-      end
-    end
-
-    it 'should be able to update a reward definition' do
-      VCR.use_cassette('reward_definitions/update_reward_definition') do
-        badgeville_response = @badgeville.update_reward_definition('4ee7ab313dc64810b40001a4', {:name => 'API test (V2) reward - gem test update'})
-        badgeville_response.code.should eql(200)
-      end
-    end
-
-    it 'should be able to delete a reward definition' do
-      VCR.use_cassette('reward_definitions/delete_reward_definition') do
-        badgeville_response = @badgeville.delete_reward_definition('4ee7ab313dc64810b40001a4')
-        badgeville_response.code.should eql(200)
-      end
-    end
-  end
-
-  ######################################
-  # Users
-  ######################################
-
-  describe 'users' do
-    it 'should allow you to create a user' do
-      VCR.use_cassette('users/create_user') do
-        badgeville_response = @badgeville.create_user(
-          :user => {
-            :name => 'a_badgeville_user', 
-            :email => 'a_badgeville_user@email.com'
-          }
-        )
-        badgeville_response.code.should eql(201)
-      end
-    end
-
-    it 'should allow you to get a user by email' do
-      VCR.use_cassette('users/list_user_by_email') do
-        badgeville_response = @badgeville.get_user('a_badgeville_user@email.com')
-        badgeville_response.code.should eql(200)
-      end
-    end
-
-    it 'should allow you to get a user by ID' do
-      VCR.use_cassette('users/list_user_by_ID') do
-        badgeville_response = @badgeville.get_user('4ee68ff06a898d10f8000104')
-        badgeville_response.code.should eql(200)
-      end
-    end
-
-    it 'should allow you to list the users' do
-      VCR.use_cassette('users/list_users') do
-        badgeville_response = @badgeville.list_users(:page => 1, :per_page => 10)
-        badgeville_response.code.should eql(200)
-        parsed_badgeville_response = JSON.parse(badgeville_response.body)
-        parsed_badgeville_response['data'].size.should eql(10)
-      end
-    end
-
-    it 'should allow you to update a user by ID' do
-      VCR.use_cassette('users/update_user_by_ID') do
-        badgeville_response = @badgeville.update_user('4e9604a14d6ce65520020998', 
-          :user => {
-            :name => 'a_new_name', 
-            :email => '098@staging-badgeville-somedomain.com'
-          })
-        badgeville_response.code.should eql(200)
-      end
-    end
-
-
-    it 'should allow you to delete a user by email' do
-      VCR.use_cassette('users/delete_user_by_email') do
-        badgeville_response = @badgeville.delete_user('a_badgeville_user@email.com')
-        badgeville_response.code.should eql(0)
-      end
-    end
-
-    it 'should allow you to delete a user by ID' do
-      VCR.use_cassette('users/delete_user_by_ID') do
-        badgeville_response = @badgeville.delete_user('4ee68ff06a898d10f8000104')
-        badgeville_response.code.should eql(0)
-      end
-    end
-  end
-
-  ######################################
-  # Players
-  ######################################
-
-  describe 'players' do
-    it 'should allow you to create a player' do
-      VCR.use_cassette('players/create_player') do
-        badgeville_response = @badgeville.create_user(
-          :user => {
-            :name => 'player_hater', 
-            :email => 'player_hater@community.stagingdomain.com'
-          }
-        )
-        badgeville_response.code.should eql(201)
-
-        badgeville_response = @badgeville.create_player(:email => 'player_hater@community.stagingdomain.com', 
-          :site => 'community.stagingdomain.com', :player => {:email => 'player_hater@community.stagingdomain.com'},
-          :verbose => true)
-        badgeville_response.code.should eql(201)
-      end
-    end
-
-    it 'should allow you to list the players' do
-      VCR.use_cassette('players/list_players') do
-        badgeville_response = @badgeville.list_players(:page => 1, :per_page => 15)
-        badgeville_response.code.should eql(200)
-        parsed_badgeville_response = JSON.parse(badgeville_response.body)
-        parsed_badgeville_response['data'].size.should eql(15)
-      end
-    end
-
-    it 'should allow you to list the players and filter by email' do
-      VCR.use_cassette('players/list_players_and_filter_by_email') do
-        badgeville_response = @badgeville.list_players(:email => '117@staging-badgeville-somedomain.com')
-        badgeville_response.code.should eql(200)
-        parsed_badgeville_response = JSON.parse(badgeville_response.body)
-        parsed_badgeville_response['data'].size.should eql(1)
-      end
-    end
-
-    it 'should allow you to get info for a player' do
-      VCR.use_cassette('players/info_player') do
-        badgeville_response = @badgeville.info_player('community.stagingdomain.com', '76@staging-badgeville-stagingdomain.com')
-        badgeville_response.code.should eql(200)
-      end
-    end
-
-    it 'should allow you to get a player' do
-      VCR.use_cassette('players/get_player') do
-        badgeville_response = @badgeville.get_player('4dcd8c3ac47eed6b2a000077')
-        badgeville_response.code.should eql(200)
-        parsed_badgeville_response = JSON.parse(badgeville_response.body)
-        parsed_badgeville_response['data']['id'].should eql('4dcd8c3ac47eed6b2a000077')
-      end
-    end
-
-    it 'should allow you to update a player' do
-      VCR.use_cassette('players/update_player') do
-        badgeville_response = @badgeville.update_player('4dd12aa0c47eed6b2a0007ed', 
-          :player => {:first_name => 'UpdatedFirstName'})
-        badgeville_response.code.should eql(200)
-      end
-    end
-
-    it 'should allow you to delete a player' do
-      VCR.use_cassette('players/delete_player') do
-        badgeville_response = @badgeville.delete_player('4de5090dc47eed17720004b5')
-        badgeville_response.code.should eql(200)
-      end
-    end
-  end
-
-  ######################################
   # Groups
   ######################################
 
@@ -377,6 +186,78 @@ describe Badgeville::API do
   end
 
   ######################################
+  # Players
+  ######################################
+
+  describe 'players' do
+    it 'should allow you to create a player' do
+      VCR.use_cassette('players/create_player') do
+        badgeville_response = @badgeville.create_user(
+          :user => {
+            :name => 'player_hater', 
+            :email => 'player_hater@community.stagingdomain.com'
+          }
+        )
+        badgeville_response.code.should eql(201)
+
+        badgeville_response = @badgeville.create_player(:email => 'player_hater@community.stagingdomain.com', 
+          :site => 'community.stagingdomain.com', :player => {:email => 'player_hater@community.stagingdomain.com'},
+          :verbose => true)
+        badgeville_response.code.should eql(201)
+      end
+    end
+
+    it 'should allow you to list the players' do
+      VCR.use_cassette('players/list_players') do
+        badgeville_response = @badgeville.list_players(:page => 1, :per_page => 15)
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(15)
+      end
+    end
+
+    it 'should allow you to list the players and filter by email' do
+      VCR.use_cassette('players/list_players_and_filter_by_email') do
+        badgeville_response = @badgeville.list_players(:email => '117@staging-badgeville-somedomain.com')
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(1)
+      end
+    end
+
+    it 'should allow you to get info for a player' do
+      VCR.use_cassette('players/info_player') do
+        badgeville_response = @badgeville.info_player('community.stagingdomain.com', '76@staging-badgeville-stagingdomain.com')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to get a player' do
+      VCR.use_cassette('players/get_player') do
+        badgeville_response = @badgeville.get_player('4dcd8c3ac47eed6b2a000077')
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data']['id'].should eql('4dcd8c3ac47eed6b2a000077')
+      end
+    end
+
+    it 'should allow you to update a player' do
+      VCR.use_cassette('players/update_player') do
+        badgeville_response = @badgeville.update_player('4dd12aa0c47eed6b2a0007ed', 
+          :player => {:first_name => 'UpdatedFirstName'})
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to delete a player' do
+      VCR.use_cassette('players/delete_player') do
+        badgeville_response = @badgeville.delete_player('4de5090dc47eed17720004b5')
+        badgeville_response.code.should eql(200)
+      end
+    end
+  end
+
+  ######################################
   # Rewards
   ######################################  
 
@@ -424,6 +305,58 @@ describe Badgeville::API do
     it 'should allow you to delete a reward' do
       VCR.use_cassette('rewards/delete_reward') do
         badgeville_response = @badgeville.delete_reward('4e691cf9c47eed2809000094')
+        badgeville_response.code.should eql(200)
+      end
+    end
+  end
+
+  ######################################
+  # Reward Definitions
+  ######################################
+
+  describe 'reward definitions' do
+    it 'should be able to create a reward definition' do
+      VCR.use_cassette('reward_definitions/create_reward_definition') do
+        badgeville_response = @badgeville.create_reward_definition(
+          :reward_definition => {
+            :site_id => '4d700bd351c21c1e3c000004',
+            :name => 'API test (V2) reward - gem test',
+            :components => '[{"comparator":{"$gte":1},"command":"count","where":{"verb":"api_test_v2","user_id":"%user_id","site_id":"%site_id"}}]',
+            :reward_template => '{"message":"Congratulations! You\'ve won the API test V2 badge!"}',
+            :tags => 'API,test,v2',
+            :active => true
+          }
+        )
+        badgeville_response.code.should eql(201)
+      end
+    end
+
+    it 'should be able to list reward definitions' do
+      VCR.use_cassette('reward_definitions/list_reward_definitions') do
+        badgeville_response = @badgeville.list_reward_definitions(:site => 'community.stagingdomain.com')
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(10)
+      end
+    end
+
+    it 'should be able to get a reward definition' do
+      VCR.use_cassette('reward_definitions/get_reward_definition_by_id') do
+        badgeville_response = @badgeville.get_reward_definition('4ee7ab313dc64810b40001a4')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should be able to update a reward definition' do
+      VCR.use_cassette('reward_definitions/update_reward_definition') do
+        badgeville_response = @badgeville.update_reward_definition('4ee7ab313dc64810b40001a4', {:name => 'API test (V2) reward - gem test update'})
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should be able to delete a reward definition' do
+      VCR.use_cassette('reward_definitions/delete_reward_definition') do
+        badgeville_response = @badgeville.delete_reward_definition('4ee7ab313dc64810b40001a4')
         badgeville_response.code.should eql(200)
       end
     end
@@ -478,4 +411,121 @@ describe Badgeville::API do
       end
     end
   end
+
+  ######################################
+  # Tracks
+  ######################################  
+
+  describe 'tracks' do
+    it 'should allow you to create a track' do
+      VCR.use_cassette('tracks/create_track') do
+        badgeville_response = @badgeville.create_track(
+          :track => {
+            :site_id => '4d700bd351c21c1e3c000004',
+            :label => 'Track label'
+          }
+        )
+        badgeville_response.code.should eql(201)
+      end
+    end
+
+    it 'should allow you to get a track' do
+      VCR.use_cassette('tracks/get_track') do
+        badgeville_response = @badgeville.get_track('4f047a264dd625324d001931')
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data']['label'].should eql('Track label')
+      end
+    end
+
+    it 'should allow you to list tracks' do
+      VCR.use_cassette('tracks/list_tracks') do
+        badgeville_response = @badgeville.list_tracks
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(1)
+      end
+    end
+
+    it 'should allow you to update a track' do
+      VCR.use_cassette('tracks/update_track') do
+        badgeville_response = @badgeville.update_track('4f047a264dd625324d001931', 
+          :track => {:label => 'Updated track label'})
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to delete a track' do
+      VCR.use_cassette('tracks/delete_track') do
+        badgeville_response = @badgeville.delete_track('4f047a264dd625324d001931')
+        badgeville_response.code.should eql(200)
+      end
+    end
+  end
+
+  ######################################
+  # Users
+  ######################################
+
+  describe 'users' do
+    it 'should allow you to create a user' do
+      VCR.use_cassette('users/create_user') do
+        badgeville_response = @badgeville.create_user(
+          :user => {
+            :name => 'a_badgeville_user', 
+            :email => 'a_badgeville_user@email.com'
+          }
+        )
+        badgeville_response.code.should eql(201)
+      end
+    end
+
+    it 'should allow you to get a user by email' do
+      VCR.use_cassette('users/list_user_by_email') do
+        badgeville_response = @badgeville.get_user('a_badgeville_user@email.com')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to get a user by ID' do
+      VCR.use_cassette('users/list_user_by_ID') do
+        badgeville_response = @badgeville.get_user('4ee68ff06a898d10f8000104')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to list the users' do
+      VCR.use_cassette('users/list_users') do
+        badgeville_response = @badgeville.list_users(:page => 1, :per_page => 10)
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(10)
+      end
+    end
+
+    it 'should allow you to update a user by ID' do
+      VCR.use_cassette('users/update_user_by_ID') do
+        badgeville_response = @badgeville.update_user('4e9604a14d6ce65520020998', 
+          :user => {
+            :name => 'a_new_name', 
+            :email => '098@staging-badgeville-somedomain.com'
+          })
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to delete a user by email' do
+      VCR.use_cassette('users/delete_user_by_email') do
+        badgeville_response = @badgeville.delete_user('a_badgeville_user@email.com')
+        badgeville_response.code.should eql(0)
+      end
+    end
+
+    it 'should allow you to delete a user by ID' do
+      VCR.use_cassette('users/delete_user_by_ID') do
+        badgeville_response = @badgeville.delete_user('4ee68ff06a898d10f8000104')
+        badgeville_response.code.should eql(0)
+      end
+    end
+  end  
 end

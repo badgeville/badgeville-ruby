@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/tracks/4f047a264dd625324d001931.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Wed, 04 Jan 2012 16:14:25 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"a87cdfe13a0835d07074bbe33c70dc93"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlMTUyZDk3ZjNlYjM2ZDU1NGYyM2IxOTg2MDU2MDc1OTY%3D--440fd104f219cbf848929c6cf2e89bc3c278d1ba;
+        path=/; expires=Wed, 18-Jan-2012 16:14:25 GMT; HttpOnly
+      X-Runtime:
+      - '0.047953'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":{"id":"4f047a264dd625324d001931","label":"Track label","type":"Track","image_url":null,"hint":null,"missionList":[],"nextMission":null},"paging":null}'
+    http_version: '1.1'
+  recorded_at: Wed, 04 Jan 2012 16:14:25 GMT
+recorded_with: VCR 2.0.0.rc1

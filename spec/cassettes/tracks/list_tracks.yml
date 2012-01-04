@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/tracks.json?include_totals=true&page=1&per_page=10
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Wed, 04 Jan 2012 16:15:42 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"c40e8c0409cc4ee8e981ffb3b9c1b304"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlNWJkODFiYmFmNzUxZjhlNzY4YTFhNDhkZmI0MmU1MWQ%3D--35cce3c6da02b0874156995e8caa8771b102d1b6;
+        path=/; expires=Wed, 18-Jan-2012 16:15:42 GMT; HttpOnly
+      X-Runtime:
+      - '0.163491'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":[{"id":"4f047a264dd625324d001931","label":"Track label","type":"Track","image_url":null,"hint":null,"missionList":[],"nextMission":null}],"paging":{"current_page":1,"per_page":10,"total_entries":1,"total_pages":1}}'
+    http_version: '1.1'
+  recorded_at: Wed, 04 Jan 2012 16:15:42 GMT
+recorded_with: VCR 2.0.0.rc1
