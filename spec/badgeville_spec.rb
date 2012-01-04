@@ -318,6 +318,48 @@ describe Badgeville::API do
   ######################################
 
   describe 'leaderboards' do
+    it 'should allow you to create a leaderboard' do
+      VCR.use_cassette('leaderboards/create_leaderboard') do
+        badgeville_response = @badgeville.create_leaderboard(
+          :leaderboard => {
+            :network_id => '4d5f289f51c21c12de000001',
+            :name => 'Leaderboard Name'
+          }
+        )
+        badgeville_response.code.should eql(201)
+      end
+    end
+
+    it 'should allow you to retrieve a leaderboard' do
+      VCR.use_cassette('leaderboards/get_leaderboard_by_id') do
+        badgeville_response = @badgeville.get_leaderboard('4f0370c14dd625324500174f')
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to list the leaderboards' do
+      VCR.use_cassette('leaderboards/list_leaderboards') do
+        badgeville_response = @badgeville.list_leaderboards(:page => 1, :per_page => 15)
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data'].size.should eql(2)
+      end
+    end
+
+    it 'should allow you to update a leaderboard' do
+      VCR.use_cassette('leaderboards/update_leaderboard') do
+        badgeville_response = @badgeville.update_leaderboard('4f0370c14dd625324500174f', 
+          :leaderboard => {:name => 'Updated Leaderboard Name'})
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to delete a leaderboard' do
+      VCR.use_cassette('leaderboards/delete_leaderboard') do
+        badgeville_response = @badgeville.delete_leaderboard('4f0370c14dd625324500174f')
+        badgeville_response.code.should eql(200)
+      end
+    end
   end
 
   ######################################

@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/leaderboards.json
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Wed, 04 Jan 2012 14:01:56 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 201 Created
+      Location:
+      - http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/leaderboards
+      Cache-Control:
+      - no-cache
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlYzZhMDIyNjI0YjFkZTBjMzk3YTQ5ZTNhNjY0ZmE0MmM%3D--7129b3b61756b7b6d2b8f4ffab2dd4b74a381910;
+        path=/; expires=Wed, 18-Jan-2012 14:01:56 GMT; HttpOnly
+      X-Runtime:
+      - '0.022815'
+    body: ! '{"id":"4f045bd44dd625323b0018ee","type":"Leaderboard","name":"Leaderboard
+      Name","target_model":"Activity","command":"sum","field":"points","selector":{},"label":null,"data":{}}'
+    http_version: '1.1'
+  recorded_at: Wed, 04 Jan 2012 14:01:57 GMT
+recorded_with: VCR 2.0.0.rc1

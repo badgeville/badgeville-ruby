@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/leaderboards.json?include_totals=true&page=1&per_page=15
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Wed, 04 Jan 2012 14:06:24 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Etag:
+      - ! '"dcc3a1c50d223a98b37a9066c693c2bf"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlN2UxYTMwNzhlNzdlNzg4ZmNiYzBiZDNlYzBmZDZjMDM%3D--eddda3fd2073906433fdd57b577615d444cb8ffe;
+        path=/; expires=Wed, 18-Jan-2012 14:06:24 GMT; HttpOnly
+      X-Runtime:
+      - '0.033302'
+      Content-Encoding:
+      - gzip
+    body: ! '{"data":[{"id":"4f0370c14dd625324500174f","type":"Leaderboard","name":"Mine","target_model":"Activity","command":"sum","field":"points","selector":{},"label":null,"data":{}},{"id":"4f045bd44dd625323b0018ee","type":"Leaderboard","name":"Leaderboard
+      Name","target_model":"Activity","command":"sum","field":"points","selector":{},"label":null,"data":{}}],"paging":{"current_page":1,"per_page":15,"total_entries":2,"total_pages":1}}'
+    http_version: '1.1'
+  recorded_at: Wed, 04 Jan 2012 14:06:25 GMT
+recorded_with: VCR 2.0.0.rc1
