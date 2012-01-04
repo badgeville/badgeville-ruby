@@ -10,6 +10,22 @@ or if you are using a `Gemfile`, use
 
 `gem 'badgeville', '1.0.0'`
 
+# Examples
+
+## Create a user and then a player for that user
+
+```ruby
+badgeville_response = @badgeville.create_user(
+  :user => {
+    :name => 'Player Name', 
+    :email => 'player_name@yoursite.com'
+  }
+)
+
+badgeville_response = @badgeville.create_player(:email => 'player_name@yoursite.com', 
+  :site => 'yoursite.com', :player => {:email => 'player_name@yoursite.com'}, :verbose => true)
+```
+
 # Compatibility
 
 The gem has been built under Ruby 1.9.3, but should be fine to use under Ruby 1.9.2 or Ruby 1.8.7.
