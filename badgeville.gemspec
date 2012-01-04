@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Badgeville::VERSION
   s.authors     = ["David Czarnecki"]
   s.email       = ["dczarnecki@agoragames.com"]
-  s.homepage    = "https://github.com/badgeville/badgeville"
+  s.homepage    = "https://github.com/badgeville/badgeville-ruby"
   s.summary     = %q{Ruby API for interacting with Badgeville}
   s.description = %q{Ruby API for interacting with Badgeville}
 
