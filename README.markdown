@@ -12,6 +12,12 @@ or if you are using a `Gemfile`, use
 
 # Examples
 
+## Create an instance for interacting with Badgeville
+
+```ruby
+@badgeville = Badgeville::API.new('thisisyourbadgevilleapikey')
+```
+
 ## Create a user and then a player for that user
 
 ```ruby
