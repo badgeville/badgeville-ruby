@@ -34,11 +34,11 @@ module Badgeville
     ######################################
 
     def create_activity(options = {})
-      POST_to_badgeville('activities', options)
+      post_to_badgeville('activities', options)
     end
 
     def list_activities(options = {})
-      GET_list_from_badgeville('activities', options)
+      get_list_from_badgeville('activities', options)
     end
 
     ######################################
@@ -46,23 +46,23 @@ module Badgeville
     ######################################
 
     def create_activity_definition(options = {})
-      POST_to_badgeville('activity_definitions', options)
+      post_to_badgeville('activity_definitions', options)
     end
 
     def get_activity_definition(activity_definition_id)
-      GET_from_badgeville('activity_definitions', activity_definition_id)
+      get_from_badgeville('activity_definitions', activity_definition_id)
     end
 
     def list_activity_definitions(options = {})
-      GET_list_from_badgeville('activity_definitions', options)
+      get_list_from_badgeville('activity_definitions', options)
     end
 
     def update_activity_definition(activity_definition_id, options)
-      PUT_to_badgeville('activity_definitions', activity_definition_id, options)
+      put_to_badgeville('activity_definitions', activity_definition_id, options)
     end
 
     def delete_activity_definition(activity_definition_id)
-      DELETE_from_badgeville('activity_definitions', activity_definition_id)
+      delete_from_badgeville('activity_definitions', activity_definition_id)
     end
 
     ######################################
@@ -70,23 +70,23 @@ module Badgeville
     ######################################
 
     def create_group(options = {})
-      POST_to_badgeville('groups', options)
+      post_to_badgeville('groups', options)
     end
 
     def get_group(group_id)
-      GET_from_badgeville('groups', group_id)
+      get_from_badgeville('groups', group_id)
     end
 
     def list_groups(options = {})
-      GET_list_from_badgeville('groups', options)
+      get_list_from_badgeville('groups', options)
     end
 
     def update_group(group_id, options = {})
-      PUT_to_badgeville('groups', group_id, options)
+      put_to_badgeville('groups', group_id, options)
     end
 
     def delete_group(group_id)
-      DELETE_from_badgeville('groups', group_id)
+      delete_from_badgeville('groups', group_id)
     end
 
     ######################################
@@ -94,23 +94,23 @@ module Badgeville
     ######################################
 
     def create_leaderboard(options = {})
-      POST_to_badgeville('leaderboards', options)
+      post_to_badgeville('leaderboards', options)
     end
 
     def list_leaderboards(options = {})
-      GET_list_from_badgeville('leaderboards', options)
+      get_list_from_badgeville('leaderboards', options)
     end
 
     def get_leaderboard(leaderboard_id)
-      GET_from_badgeville('leaderboards', leaderboard_id)
+      get_from_badgeville('leaderboards', leaderboard_id)
     end
 
     def update_leaderboard(leaderboard_id, options = {})
-      PUT_to_badgeville('leaderboards', leaderboard_id, options)
+      put_to_badgeville('leaderboards', leaderboard_id, options)
     end
 
     def delete_leaderboard(leaderboard_id)
-      DELETE_from_badgeville('leaderboards', leaderboard_id)
+      delete_from_badgeville('leaderboards', leaderboard_id)
     end
 
     ######################################
@@ -118,7 +118,7 @@ module Badgeville
     ######################################
 
     def create_player(options = {})
-      POST_to_badgeville('players', options)
+      post_to_badgeville('players', options)
     end
 
     def info_player(site, email)
@@ -127,19 +127,19 @@ module Badgeville
     end
 
     def list_players(options = {})
-      GET_list_from_badgeville('players', options)
+      get_list_from_badgeville('players', options)
     end
 
     def get_player(player_id)
-      GET_from_badgeville('players', player_id)
+      get_from_badgeville('players', player_id)
     end
 
     def update_player(player_id, options = {})
-      PUT_to_badgeville('players', player_id, options)
+      put_to_badgeville('players', player_id, options)
     end
 
     def delete_player(player_id)
-      DELETE_from_badgeville('players', player_id)
+      delete_from_badgeville('players', player_id)
     end
 
     ######################################
@@ -147,19 +147,19 @@ module Badgeville
     ######################################
 
     def create_reward(options = {})
-      POST_to_badgeville('rewards', options)
+      post_to_badgeville('rewards', options)
     end
 
     def get_reward(reward_id)
-      GET_from_badgeville('rewards', reward_id)
+      get_from_badgeville('rewards', reward_id)
     end
 
     def list_rewards(options = {})
-      GET_list_from_badgeville('rewards', options)
+      get_list_from_badgeville('rewards', options)
     end
 
     def delete_reward(reward_id)
-      DELETE_from_badgeville('rewards', reward_id)
+      delete_from_badgeville('rewards', reward_id)
     end
 
     ######################################
@@ -167,23 +167,23 @@ module Badgeville
     ######################################
 
     def create_reward_definition(options = {})
-      POST_to_badgeville('reward_definitions', options)
+      post_to_badgeville('reward_definitions', options)
     end
 
     def get_reward_definition(reward_definition_id)
-      GET_from_badgeville('reward_definitions', reward_definition_id)
+      get_from_badgeville('reward_definitions', reward_definition_id)
     end
 
     def list_reward_definitions(options = {})
-      GET_list_from_badgeville('reward_definitions', options)
+      get_list_from_badgeville('reward_definitions', options)
     end
 
     def update_reward_definition(reward_definition_id, options = {})
-      PUT_to_badgeville('reward_definitions', reward_definition_id, options)
+      put_to_badgeville('reward_definitions', reward_definition_id, options)
     end
 
     def delete_reward_definition(reward_definition_id)
-      DELETE_from_badgeville('reward_definitions', reward_definition_id)
+      delete_from_badgeville('reward_definitions', reward_definition_id)
     end
 
     ######################################
@@ -191,23 +191,23 @@ module Badgeville
     ######################################
 
     def create_site(options = {})
-      POST_to_badgeville('sites', options)
+      post_to_badgeville('sites', options)
     end
 
     def get_site(site_id_or_url)
-      GET_from_badgeville('sites', site_id_or_url)
+      get_from_badgeville('sites', site_id_or_url)
     end
 
     def list_sites(options = {})
-      GET_list_from_badgeville('sites', options)
+      get_list_from_badgeville('sites', options)
     end
 
     def update_site(site_id_or_url, options = {})
-      PUT_to_badgeville('sites', site_id_or_url, options)
+      put_to_badgeville('sites', site_id_or_url, options)
     end
 
     def delete_site(site_id_or_url)
-      DELETE_from_badgeville('sites', site_id_or_url)
+      delete_from_badgeville('sites', site_id_or_url)
     end
 
     ######################################
@@ -215,23 +215,23 @@ module Badgeville
     ######################################
 
     def create_track(options = {})
-      POST_to_badgeville('tracks', options)
+      post_to_badgeville('tracks', options)
     end
 
     def get_track(track_id)
-      GET_from_badgeville('tracks', track_id)
+      get_from_badgeville('tracks', track_id)
     end
 
     def list_tracks(options = {})
-      GET_list_from_badgeville('tracks', options)      
+      get_list_from_badgeville('tracks', options)      
     end
 
     def update_track(track_id, options = {})
-      PUT_to_badgeville('tracks', track_id, options)
+      put_to_badgeville('tracks', track_id, options)
     end
 
     def delete_track(track_id)
-      DELETE_from_badgeville('tracks', track_id)
+      delete_from_badgeville('tracks', track_id)
     end
 
     ######################################
@@ -239,49 +239,49 @@ module Badgeville
     ######################################
 
     def create_user(options = {})
-      POST_to_badgeville('users', options)
+      post_to_badgeville('users', options)
     end
 
     def get_user(email_or_id)
-      GET_from_badgeville('users', email_or_id)
+      get_from_badgeville('users', email_or_id)
     end
 
     def list_users(options = {})
-      GET_list_from_badgeville('users', options)
+      get_list_from_badgeville('users', options)
     end
 
     def update_user(email_or_id, options = {})
-      PUT_to_badgeville('users', email_or_id, options)
+      put_to_badgeville('users', email_or_id, options)
     end
 
     def delete_user(email_or_id)
-      DELETE_from_badgeville('users', email_or_id)
+      delete_from_badgeville('users', email_or_id)
     end
 
     private
 
-    def GET_from_badgeville(endpoint, id)
+    def get_from_badgeville(endpoint, id)
       response = Typhoeus::Request.get(build_api_url("#{endpoint}/#{id}.json"), 
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def GET_list_from_badgeville(endpoint, options = {})
+    def get_list_from_badgeville(endpoint, options = {})
       response = Typhoeus::Request.get(build_api_url("#{endpoint}.json"), 
         :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def POST_to_badgeville(endpoint, options = {})
+    def post_to_badgeville(endpoint, options = {})
       response = Typhoeus::Request.post(build_api_url("#{endpoint}.json"), :params => options,
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def PUT_to_badgeville(endpoint, id, options = {})
+    def put_to_badgeville(endpoint, id, options = {})
       response = Typhoeus::Request.put(build_api_url("#{endpoint}/#{id}.json"),
         :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def DELETE_from_badgeville(endpoint, id)
+    def delete_from_badgeville(endpoint, id)
       response = Typhoeus::Request.delete(build_api_url("#{endpoint}/#{id}.json"), 
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
