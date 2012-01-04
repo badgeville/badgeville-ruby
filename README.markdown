@@ -32,6 +32,45 @@ badgeville_response = @badgeville.create_player(:email => 'player_name@yoursite.
   :site => 'yoursite.com', :player => {:email => 'player_name@yoursite.com'}, :verbose => true)
 ```
 
+## Create an activity definition
+
+```ruby
+badgeville_response = @badgeville.create_activity_definition(
+  :activity_definition => {
+    :site_id => '4d700bd351c21c1e3c000004',
+    :name => 'API test (V2) activity - gem test',
+    :selector => '{"verb":"api_test_v2_gem"}',
+    :adjustment => '{"points":5}'
+  }
+)
+```
+
+## Create a reward definition
+
+```ruby
+badgeville_response = @badgeville.create_reward_definition(
+  :reward_definition => {
+    :site_id => '4d700bd351c21c1e3c000004',
+    :name => 'API test (V2) reward - gem test',
+    :components => '[{"comparator":{"$gte":1},"command":"count","where":{"verb":"api_test_v2_gem","user_id":"%user_id","site_id":"%site_id"}}]',
+    :reward_template => '{"message":"Congratulations! You\'ve won the API test V2 badge!"}',
+    :tags => 'API,test,v2',
+    :active => true
+  }
+)
+```
+
+## Submit activity for a player
+
+```ruby
+badgeville_response = @badgeville.create_activity(
+  :player_id => '4ee7bc0c3dc64810b0000157',
+  :activity => {:verb => 'api_test_v2_gem'}
+)
+```
+
+
+
 # Compatibility
 
 The gem has been built under Ruby 1.9.3, but should be fine to use under Ruby 1.9.2 or Ruby 1.8.7.
