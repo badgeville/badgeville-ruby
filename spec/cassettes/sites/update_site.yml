@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/sites/4f046a1b4dd625323b0018f8.json?site%5Bname%5D=Updated+Site+Name
+    body: ''
+    headers:
+      User-Agent:
+      - badgeville gem 1.0.0
+      Accept:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: Continue
+    headers:
+      Server:
+      - nginx/0.8.55
+      Date:
+      - Wed, 04 Jan 2012 15:09:17 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      Location:
+      - http://sandbox.v2.badgeville.com/api/berlin/4f046a1b4dd625323b0018f8/sites/4f046a1b4dd625323b0018f8
+      Etag:
+      - ! '"99914b932bd37a50b983c5e7c90ae93b"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _Badgeville_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRiIlZDhkYzcyZWUxNDMyZmNiMWVhM2MzODRhNjBiN2IzYmM%3D--405fc450de35c4d6fe5edb89e80849896fc89c37;
+        path=/; expires=Wed, 18-Jan-2012 15:09:17 GMT; HttpOnly
+      X-Runtime:
+      - '0.048440'
+      Content-Encoding:
+      - gzip
+    body: ! '{}'
+    http_version: '1.1'
+  recorded_at: Wed, 04 Jan 2012 15:09:17 GMT
+recorded_with: VCR 2.0.0.rc1

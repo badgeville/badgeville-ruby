@@ -434,12 +434,47 @@ describe Badgeville::API do
   ######################################  
 
   describe 'sites' do
+    it 'should allow you to create a site' do
+      VCR.use_cassette('sites/create_site') do
+        badgeville_response = @badgeville.create_site(
+          :site => {
+            :name => 'Test Site Name',
+            :url => 'www.badgeville.com'
+          })
+        badgeville_response.code.should eql(201)
+      end
+    end
+
+    it 'should allow you to get a site' do
+      VCR.use_cassette('sites/get_site') do
+        badgeville_response = @badgeville.get_site('4f046a1b4dd625323b0018f8')
+        badgeville_response.code.should eql(200)
+        parsed_badgeville_response = JSON.parse(badgeville_response.body)
+        parsed_badgeville_response['data']['name'].should eql('Test Site Name')
+      end
+    end
+
     it 'should allow you to list sites' do
       VCR.use_cassette('sites/list_sites') do
         badgeville_response = @badgeville.list_sites
         badgeville_response.code.should eql(200)
         parsed_badgeville_response = JSON.parse(badgeville_response.body)
         parsed_badgeville_response['data'].size.should eql(10)
+      end
+    end
+
+    it 'should allow you to update a site' do
+      VCR.use_cassette('sites/update_site') do
+        badgeville_response = @badgeville.update_site('4f046a1b4dd625323b0018f8', 
+          :site => {:name => 'Updated Site Name'})
+        badgeville_response.code.should eql(200)
+      end
+    end
+
+    it 'should allow you to delete a site' do
+      VCR.use_cassette('sites/delete_site') do
+        badgeville_response = @badgeville.delete_site('4f046a1b4dd625323b0018f8')
+        badgeville_response.code.should eql(200)
       end
     end
   end

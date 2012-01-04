@@ -258,9 +258,29 @@ module Badgeville
     # Sites
     ######################################
 
+    def create_site(options = {})
+      response = Typhoeus::Request.post(build_api_url('sites.json'), 
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def get_site(site_id_or_url)
+      response = Typhoeus::Request.get(build_api_url("sites/#{site_id_or_url}.json"), 
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
     def list_sites(options = {})
       response = Typhoeus::Request.get(build_api_url('sites.json'),
         :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def update_site(site_id_or_url, options = {})
+      response = Typhoeus::Request.put(build_api_url("sites/#{site_id_or_url}.json"), 
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def delete_site(site_id_or_url)
+      response = Typhoeus::Request.delete(build_api_url("sites/#{site_id_or_url}.json"), 
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
