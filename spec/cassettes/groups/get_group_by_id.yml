@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/groups/4f034a566a898d7049001633.json?
+    uri: http://sandbox.v2.badgeville.com/api/berlin/thisisyourbadgevilleapikey/groups/4f034a566a898d7049001633.json
     body: ''
     headers:
       User-Agent:

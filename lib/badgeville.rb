@@ -34,14 +34,11 @@ module Badgeville
     ######################################
 
     def create_activity(options = {})
-      response = Typhoeus::Request.post(build_api_url('activities.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('activities', options)
     end
 
     def list_activities(options = {})
-      response = Typhoeus::Request.get(build_api_url('activities.json'), 
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('activities', options)
     end
 
     ######################################
@@ -49,29 +46,23 @@ module Badgeville
     ######################################
 
     def create_activity_definition(options = {})
-      response = Typhoeus::Request.post(build_api_url('activity_definitions.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('activity_definitions', options)
     end
 
     def get_activity_definition(activity_definition_id)
-      response = Typhoeus::Request.get(build_api_url("activity_definitions/#{activity_definition_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_from_badgeville('activity_definitions', activity_definition_id)
     end
 
     def list_activity_definitions(options = {})
-      response = Typhoeus::Request.get(build_api_url('activity_definitions.json'), 
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('activity_definitions', options)
     end
 
     def update_activity_definition(activity_definition_id, options)
-      response = Typhoeus::Request.put(build_api_url("activity_definitions/#{activity_definition_id}.json"), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      PUT_to_badgeville('activity_definitions', activity_definition_id, options)
     end
 
     def delete_activity_definition(activity_definition_id)
-      response = Typhoeus::Request.delete(build_api_url("activity_definitions/#{activity_definition_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      DELETE_from_badgeville('activity_definitions', activity_definition_id)
     end
 
     ######################################
@@ -79,29 +70,23 @@ module Badgeville
     ######################################
 
     def create_group(options = {})
-      response = Typhoeus::Request.post(build_api_url('groups.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('groups', options)
     end
 
-    def get_group(group_id, options = {})
-      response = Typhoeus::Request.get(build_api_url("groups/#{group_id}.json"), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    def get_group(group_id)
+      GET_from_badgeville('groups', group_id)
     end
 
     def list_groups(options = {})
-      response = Typhoeus::Request.get(build_api_url('groups.json'), 
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('groups', options)
     end
 
     def update_group(group_id, options = {})
-      response = Typhoeus::Request.put(build_api_url("groups/#{group_id}.json"), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      PUT_to_badgeville('groups', group_id, options)
     end
 
     def delete_group(group_id)
-      response = Typhoeus::Request.delete(build_api_url("groups/#{group_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      DELETE_from_badgeville('groups', group_id)
     end
 
     ######################################
@@ -109,29 +94,23 @@ module Badgeville
     ######################################
 
     def create_leaderboard(options = {})
-      response = Typhoeus::Request.post(build_api_url('leaderboards.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('leaderboards', options)
     end
 
     def list_leaderboards(options = {})
-      response = Typhoeus::Request.get(build_api_url('leaderboards.json'), 
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('leaderboards', options)
     end
 
     def get_leaderboard(leaderboard_id)
-      response = Typhoeus::Request.get(build_api_url("leaderboards/#{leaderboard_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_from_badgeville('leaderboards', leaderboard_id)
     end
 
     def update_leaderboard(leaderboard_id, options = {})
-      response = Typhoeus::Request.put(build_api_url("leaderboards/#{leaderboard_id}.json"), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      PUT_to_badgeville('leaderboards', leaderboard_id, options)
     end
 
     def delete_leaderboard(leaderboard_id)
-      response = Typhoeus::Request.delete(build_api_url("leaderboards/#{leaderboard_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      DELETE_from_badgeville('leaderboards', leaderboard_id)
     end
 
     ######################################
@@ -139,8 +118,7 @@ module Badgeville
     ######################################
 
     def create_player(options = {})
-      response = Typhoeus::Request.post(build_api_url('players.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('players', options)
     end
 
     def info_player(site, email)
@@ -149,24 +127,19 @@ module Badgeville
     end
 
     def list_players(options = {})
-      response = Typhoeus::Request.get(build_api_url('players.json'), 
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('players', options)
     end
 
     def get_player(player_id)
-      response = Typhoeus::Request.get(build_api_url("players/#{player_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_from_badgeville('players', player_id)
     end
 
     def update_player(player_id, options = {})
-      response = Typhoeus::Request.put(build_api_url("players/#{player_id}.json"), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      PUT_to_badgeville('players', player_id, options)
     end
 
     def delete_player(player_id)
-      response = Typhoeus::Request.delete(build_api_url("players/#{player_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      DELETE_from_badgeville('players', player_id)
     end
 
     ######################################
@@ -174,24 +147,19 @@ module Badgeville
     ######################################
 
     def create_reward(options = {})
-      response = Typhoeus::Request.post(build_api_url('rewards.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('rewards', options)
     end
 
     def get_reward(reward_id)
-      response = Typhoeus::Request.get(build_api_url("rewards/#{reward_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_from_badgeville('rewards', reward_id)
     end
 
     def list_rewards(options = {})
-      response = Typhoeus::Request.get(build_api_url('rewards.json'),
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('rewards', options)
     end
 
     def delete_reward(reward_id)
-      response = Typhoeus::Request.delete(build_api_url("rewards/#{reward_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      DELETE_from_badgeville('rewards', reward_id)
     end
 
     ######################################
@@ -199,29 +167,23 @@ module Badgeville
     ######################################
 
     def create_reward_definition(options = {})
-      response = Typhoeus::Request.post(build_api_url('reward_definitions.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('reward_definitions', options)
     end
 
     def get_reward_definition(reward_definition_id)
-      response = Typhoeus::Request.get(build_api_url("reward_definitions/#{reward_definition_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_from_badgeville('reward_definitions', reward_definition_id)
     end
 
     def list_reward_definitions(options = {})
-      response = Typhoeus::Request.get(build_api_url('reward_definitions.json'), 
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('reward_definitions', options)
     end
 
     def update_reward_definition(reward_definition_id, options = {})
-      response = Typhoeus::Request.put(build_api_url("reward_definitions/#{reward_definition_id}.json"), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      PUT_to_badgeville('reward_definitions', reward_definition_id, options)
     end
 
     def delete_reward_definition(reward_definition_id)
-      response = Typhoeus::Request.delete(build_api_url("reward_definitions/#{reward_definition_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      DELETE_from_badgeville('reward_definitions', reward_definition_id)
     end
 
     ######################################
@@ -229,29 +191,23 @@ module Badgeville
     ######################################
 
     def create_site(options = {})
-      response = Typhoeus::Request.post(build_api_url('sites.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('sites', options)
     end
 
     def get_site(site_id_or_url)
-      response = Typhoeus::Request.get(build_api_url("sites/#{site_id_or_url}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_from_badgeville('sites', site_id_or_url)
     end
 
     def list_sites(options = {})
-      response = Typhoeus::Request.get(build_api_url('sites.json'),
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('sites', options)
     end
 
     def update_site(site_id_or_url, options = {})
-      response = Typhoeus::Request.put(build_api_url("sites/#{site_id_or_url}.json"), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      PUT_to_badgeville('sites', site_id_or_url, options)
     end
 
     def delete_site(site_id_or_url)
-      response = Typhoeus::Request.delete(build_api_url("sites/#{site_id_or_url}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      DELETE_from_badgeville('sites', site_id_or_url)
     end
 
     ######################################
@@ -259,29 +215,23 @@ module Badgeville
     ######################################
 
     def create_track(options = {})
-      response = Typhoeus::Request.post(build_api_url('tracks.json'), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('tracks', options)
     end
 
     def get_track(track_id)
-      response = Typhoeus::Request.get(build_api_url("tracks/#{track_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_from_badgeville('tracks', track_id)
     end
 
     def list_tracks(options = {})
-      response = Typhoeus::Request.get(build_api_url('tracks.json'),
-        :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_list_from_badgeville('tracks', options)      
     end
 
     def update_track(track_id, options = {})
-      response = Typhoeus::Request.put(build_api_url("tracks/#{track_id}.json"), 
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      PUT_to_badgeville('tracks', track_id, options)
     end
 
     def delete_track(track_id)
-      response = Typhoeus::Request.delete(build_api_url("tracks/#{track_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      DELETE_from_badgeville('tracks', track_id)
     end
 
     ######################################
@@ -289,32 +239,52 @@ module Badgeville
     ######################################
 
     def create_user(options = {})
-      response = Typhoeus::Request.post(build_api_url('users.json'), :params => options,
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      POST_to_badgeville('users', options)
     end
 
     def get_user(email_or_id)
-      response = Typhoeus::Request.get(build_api_url("users/#{email_or_id}.json"), 
-        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+      GET_from_badgeville('users', email_or_id)
     end
 
     def list_users(options = {})
-      response = Typhoeus::Request.get(build_api_url('users.json'), 
+      GET_list_from_badgeville('users', options)
+    end
+
+    def update_user(email_or_id, options = {})
+      PUT_to_badgeville('users', email_or_id, options)
+    end
+
+    def delete_user(email_or_id)
+      DELETE_from_badgeville('users', email_or_id)
+    end
+
+    private
+
+    def GET_from_badgeville(endpoint, id)
+      response = Typhoeus::Request.get(build_api_url("#{endpoint}/#{id}.json"), 
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def GET_list_from_badgeville(endpoint, options = {})
+      response = Typhoeus::Request.get(build_api_url("#{endpoint}.json"), 
         :params => DEFAULT_PAGING_OPTIONS.dup.merge!(options),
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    def update_user(email_or_id, options = {})
-      response = Typhoeus::Request.put(build_api_url("users/#{email_or_id}.json"),
-        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
-    end
-
-    def delete_user(email_or_id)
-      response = Typhoeus::Request.delete(build_api_url("users/#{email_or_id}.json"), 
+    def POST_to_badgeville(endpoint, options = {})
+      response = Typhoeus::Request.post(build_api_url("#{endpoint}.json"), :params => options,
         :headers => DEFAULT_HEADERS, :timeout => @timeout)
     end
 
-    private
+    def PUT_to_badgeville(endpoint, id, options = {})
+      response = Typhoeus::Request.put(build_api_url("#{endpoint}/#{id}.json"),
+        :params => options, :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
+
+    def DELETE_from_badgeville(endpoint, id)
+      response = Typhoeus::Request.delete(build_api_url("#{endpoint}/#{id}.json"), 
+        :headers => DEFAULT_HEADERS, :timeout => @timeout)
+    end
     
     def build_api_url(api_method)
       "#{@api_url}/#{@token}/#{api_method}"
