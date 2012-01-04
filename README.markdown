@@ -59,6 +59,22 @@ badgeville_response = @badgeville.create_reward_definition(
   }
 )
 ```
+ 
+## Create a reward definition with an image
+
+```ruby
+badgeville_response = @badgeville.create_reward_definition(
+  :reward_definition => {
+    :site_id => '4d700bd351c21c1e3c000004',
+    :name => 'API test (V2) reward with image - gem test',
+    :components => '[{"comparator":{"$gte":1},"command":"count","where":{"verb":"api_test_v2_image","user_id":"%user_id","site_id":"%site_id"}}]',
+    :reward_template => '{"message":"Congratulations! You\'ve won the API test V2 badge with an image!"}',
+    :tags => 'API,test,v2',
+    :image => File.new('/this/is/the/path/to/the/image/game_badge.jpg'),
+    :active => true
+  }
+)
+```
 
 ## Submit activity for a player
 
