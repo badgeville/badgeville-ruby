@@ -85,7 +85,13 @@ badgeville_response = @badgeville.create_activity(
 )
 ```
 
+### NOTE
 
+The gem does not attempt to automatically parse the response from Badgeville. You will need to do this in the calling code. Example:
+
+```ruby
+parsed_response = JSON.parse(badgeville_response.body)
+```
 
 # Compatibility
 
