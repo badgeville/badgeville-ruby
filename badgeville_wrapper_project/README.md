@@ -12,6 +12,7 @@ Basic Examples
 --------------
 
 1. ### Add a new site to your network.
+   #### Network ID: Find in the Publisher Module's tabbed menu Develop > Home or contact support [at] badgeville.com
         ```ruby
         new_site = Site.new(  :name => "My Website",
                               :url => "mydomain.com",
@@ -60,6 +61,7 @@ Installation
 -------------
 1. Put this file in the same directory as your Ruby script.
 2. Then include this line near the top of your Ruby script:
+
         ```ruby
         require_relative 'badgeville_wrapper.rb'
         ```
@@ -67,7 +69,6 @@ Installation
 Configuration
 -------------
 * Badgeville Private API Key: This is hardcoded for now.
-* Network ID: Find in the Publisher Module's tabbed menu Develop > Home or contact support [at] badgeville.com
 
 
 Documentation
