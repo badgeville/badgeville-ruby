@@ -19,7 +19,8 @@ Required Gems
 
 Configuration
 -------------
-The Badgeville Private API Key and the network ID are hardcoded for now.
+* Badgeville Private API Key: This is hardcoded for now.
+* Network ID: Find in the Publisher Module's tabbed menu Develop > Home or contact support [at] badgeville.com
 
 
 Documentation
@@ -68,8 +69,8 @@ Basic Example Usage
         ```
 
 
-Acknowledgements
-----------------
+Contributors
+------------
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.
 
 
