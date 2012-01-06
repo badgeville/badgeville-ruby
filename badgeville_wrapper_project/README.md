@@ -12,16 +12,13 @@ Basic Examples
 --------------
 
 1. ### Add a new site to your network.
-   - Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support [at] badgeville.com.
-
-        <pre><code>
+   - Find your network ID the Publisher Module's tabbed menu Develop > Home or contact <support@badgeville.com>.
         ```ruby
         new_site = Site.new(  :name => "My Website",
                               :url => "mydomain.com",
                               :network_id => '4d5dc61ed0c0b32b79000001' )
         success = new_site.save
         ```
-        </pre></code>
 
 2. ### Create a user to add them to your network.
         ```ruby
@@ -71,7 +68,7 @@ Installation
 
 Configuration
 -------------
-* Badgeville Private API Key: This is hardcoded for now.
+Badgeville Private API Key: This is hardcoded for now.
 
 
 Documentation
@@ -83,6 +80,10 @@ Contributors
 ------------
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available [here](https://github.com/badgeville/badgeville-ruby).
 
+
+Feedback
+--------
+Please email your comments to <supraja@badgeville.com>
 
 Copyright
 ---------
