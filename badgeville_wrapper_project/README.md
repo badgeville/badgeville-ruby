@@ -6,19 +6,22 @@ Features
 --------
 * Uses the activeresource (3.0.5) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
 * Uses a logger to print HTTP requests to the standard output stream.
-* The Badgeville Private API Key is hardcoded for the time being.
+
 
 Basic Examples
 --------------
 
 1. ### Add a new site to your network.
-   #### Network ID: Find in the Publisher Module's tabbed menu Develop > Home or contact support [at] badgeville.com
+   - Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support [at] badgeville.com.
+
+        <pre><code>
         ```ruby
         new_site = Site.new(  :name => "My Website",
                               :url => "mydomain.com",
                               :network_id => '4d5dc61ed0c0b32b79000001' )
         success = new_site.save
         ```
+        </pre></code>
 
 2. ### Create a user to add them to your network.
         ```ruby
