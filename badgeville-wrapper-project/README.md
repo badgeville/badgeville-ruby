@@ -78,7 +78,7 @@ For more documentation on how Badgeville works [see here](http://rules.badgevill
 
 Contributors
 ------------
-David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available [here](https://github.com/badgeville/badgeville-ruby).
+David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation are available [here](https://github.com/badgeville/badgeville-ruby).
 
 
 Feedback
