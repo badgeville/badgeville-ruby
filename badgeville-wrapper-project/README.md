@@ -4,9 +4,8 @@ This is a Ruby wrapper for the Badgeville RESTful Berlin API.
 
 Features
 --------
-* Uses the activeresource (3.0.5) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
+* Uses the [activeresource (3.0.5)](http://apidock.com/rails/v3.0.5/ActiveResource/Base) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
 * Uses a logger to print HTTP requests to the standard output stream.
-
 
 Basic Examples
 --------------
