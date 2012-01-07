@@ -34,6 +34,7 @@ Set bucket_max_capacity to 25. Why? This allows the player to create 25 comments
           ```
 
 4. ### Reward definitions define numerous criteria that must be met for a player to earn a reward. Create a reward definition to reward a player when they have made two comments.
+        
         ```ruby
         new_reward_definition =
           RewardDefinition.new( :site_id          => new_site.id,
