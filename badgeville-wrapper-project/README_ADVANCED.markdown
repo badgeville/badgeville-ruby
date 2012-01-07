@@ -21,10 +21,7 @@ This is a Ruby wrapper for the Badgeville RESTful Berlin API.
         success = new_activity_definition.save
         ```
 
-3. ### Update the activity definition to include a rate limit in order to block players from gaming the system. [(more)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-CreatingSimpleBehaviors)
-
-Set bucket_rate_limit to 180 (20 comments per hour). Why? 180 (3600 (number of seconds in an hour) / 20 comments = 180 s. This will drain 1 comment every 3 minutes.
-Set bucket_max_capacity to 25. Why? This allows the player to create 25 comments as fast as they like, after which the bucket will begin to drain.
+3. ### Update the activity definition to include a rate limit in order to block players from gaming the system. [(more)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-CreatingSimpleBehaviors) Set bucket_rate_limit to 180 (20 comments per hour). Why? 180 (3600 (number of seconds in an hour) / 20 comments = 180 s. This will drain 1 comment every 3 minutes. Set bucket_max_capacity to 25. Why? This allows the player to create 25 comments as fast as they like, after which the bucket will begin to drain.
 
           ```ruby
           new_activity_definition.enable_rate_limiting = true
