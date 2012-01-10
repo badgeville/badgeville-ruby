@@ -1,0 +1,3 @@
+module Badgeville
+  VERSION = "0.0.1"
+end
