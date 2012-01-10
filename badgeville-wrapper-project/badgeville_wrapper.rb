@@ -39,7 +39,7 @@ end
 
 
 
-# SUBCLASSING ActiveResource::Errors to be used by BaseResource as Badgeville::Errors
+# # SUBCLASSING ActiveResource::Errors to be used by BaseResource as Badgeville::Errors
 module Badgeville
   class Errors < ActiveResource::Errors
     # Grabs errors from a custom Badgeville-style json response that does
@@ -72,7 +72,7 @@ end
 
 
 
-# SUBCLASSING ActiveResource::Base as BaseResource
+# # SUBCLASSING ActiveResource::Base as BaseResource
 class BaseResource < ActiveResource::Base
 
   # CLASS METHODS
@@ -81,9 +81,8 @@ class BaseResource < ActiveResource::Base
     def primary_key
       @primary_key = '_id'
     end
-  end
 
-  # ADDING accessor methods for a new class attribute apikey
+    # ADDING accessor methods for a new class attribute apikey
     attr_accessor :apikey
   end
 
@@ -114,9 +113,9 @@ class BaseResource < ActiveResource::Base
   self.format = :badgeville_json
   # set a path that goes between the URL and the resource
   #self.prefix = "/api/berlin/007857cd4fb9f360e120589c34fea080/"
+  self.apikey = '007857cd4fb9f360e120589c34fea080'
   self.prefix = "/api/berlin/#{self.apikey}/"
 
-  self.apikey = '007857cd4fb9f360e120589c34fea080'
 end
 
 
