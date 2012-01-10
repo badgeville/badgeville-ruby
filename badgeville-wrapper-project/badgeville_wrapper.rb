@@ -2,9 +2,6 @@ require 'rubygems'
 require 'active_resource'
 require 'logger'
 
-
-
-
 # For custom BadgevilleJson
 require 'active_support/json'
 
@@ -77,11 +74,6 @@ end
 
 # SUBCLASSING ActiveResource::Base as BaseResource
 class BaseResource < ActiveResource::Base
-  self.site = "http://staging.badgeville.com/"
-  self.format = :badgeville_json
-
-  # set a path that goes between the URL and the resource
-  self.prefix = "/api/berlin/007857cd4fb9f360e120589c34fea080/"
 
   # CLASS METHODS
   # OVERRIDING ActiveResource attribute
@@ -89,6 +81,10 @@ class BaseResource < ActiveResource::Base
     def primary_key
       @primary_key = '_id'
     end
+  end
+
+  # ADDING accessor methods for a new class attribute apikey
+    attr_accessor :apikey
   end
 
   # OVERRIDING ActiveResource method in module Validations in order to
@@ -113,6 +109,14 @@ class BaseResource < ActiveResource::Base
     end
   end
 
+  # CONFIGURING BaseResource
+  self.site = "http://staging.badgeville.com/"
+  self.format = :badgeville_json
+  # set a path that goes between the URL and the resource
+  #self.prefix = "/api/berlin/007857cd4fb9f360e120589c34fea080/"
+  self.prefix = "/api/berlin/#{self.apikey}/"
+
+  self.apikey = '007857cd4fb9f360e120589c34fea080'
 end
 
 
