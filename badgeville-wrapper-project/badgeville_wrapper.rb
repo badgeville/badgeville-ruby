@@ -41,6 +41,9 @@ end
 
 # # SUBCLASSING ActiveResource::Errors to be used by BaseResource as Badgeville::Errors
 module Badgeville
+  class Configuration
+  end
+
   class Errors < ActiveResource::Errors
     # Grabs errors from a custom Badgeville-style json response that does
     # not have a root key :errors.
@@ -86,10 +89,6 @@ class BaseResource < ActiveResource::Base
     attr_accessor :apikey
   end
 
-  # ADDING accessor methods for a new class attribute apikey
-    attr_accessor :apikey
-  end
-
   # OVERRIDING ActiveResource method in module Validations in order to
   # call the Badgeville.Errors constructor instead of the
   # ActiveResource::Errors constructor
@@ -117,15 +116,9 @@ class BaseResource < ActiveResource::Base
   self.format = :badgeville_json
   # set a path that goes between the URL and the resource
   #self.prefix = "/api/berlin/007857cd4fb9f360e120589c34fea080/"
-<<<<<<< HEAD
   self.apikey = '007857cd4fb9f360e120589c34fea080'
   self.prefix = "/api/berlin/#{self.apikey}/"
 
-=======
-  self.prefix = "/api/berlin/#{self.apikey}/"
-
-  self.apikey = '007857cd4fb9f360e120589c34fea080'
->>>>>>> b804eab8bd0359e3d891ee5102d5d6312e982ba1
 end
 
 
