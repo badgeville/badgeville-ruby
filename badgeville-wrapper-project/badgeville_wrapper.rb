@@ -41,8 +41,15 @@ end
 
 # # SUBCLASSING ActiveResource::Errors to be used by BaseResource as Badgeville::Errors
 module Badgeville
-  class Configuration
-
+  module Config
+    # ADDING class method to configure BaseResource
+    def config ( target_site, apikey )
+      self.site = target_site
+      self.format = :badgeville_json
+      # set a path that goes between the URL and the resource
+      self.prefix = "/api/berlin/#{apikey}/"
+      #self.apikey = '007857cd4fb9f360e120589c34fea080'
+    end
   end
 
   class Errors < ActiveResource::Errors
@@ -86,23 +93,14 @@ class BaseResource < ActiveResource::Base
       @primary_key = '_id'
     end
 
-    # ADDING accessor methods for a new class attribute apikey
-    attr_accessor :apikey
-
-    # def apikey=(apikeyval)
-    #   puts "Call from apikey="
-    #   @apikey = apikeyval
-    #   puts apikey
+    # # ADDING class method to configure BaseResource
+    # def config ( target_site, apikey )
+    #   self.site = target_site
+    #   self.format = :badgeville_json
+    #   # set a path that goes between the URL and the resource
+    #   self.prefix = "/api/berlin/#{apikey}/"
+    #   #self.apikey = '007857cd4fb9f360e120589c34fea080'
     # end
-    #
-    # ADDING class method to configure BaseResource
-    def config ( target_site, apikey )
-      self.site = target_site
-      self.format = :badgeville_json
-      # set a path that goes between the URL and the resource
-      self.prefix = "/api/berlin/#{apikey}/"
-      #self.apikey = '007857cd4fb9f360e120589c34fea080'
-    end
 
   end
 
