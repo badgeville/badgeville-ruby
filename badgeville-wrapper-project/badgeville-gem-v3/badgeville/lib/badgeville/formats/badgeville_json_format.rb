@@ -1,3 +1,10 @@
+# For custom BadgevilleJson
+require 'active_support/json'
+require "badgeville/version"
+
+
+
+
 #********** ADDING module CustomFormat **********#
 # Handles the fact that a JSON formatted GET response does not meet the
 # ActiveResource standard, and is instead preceded by the root key :data
