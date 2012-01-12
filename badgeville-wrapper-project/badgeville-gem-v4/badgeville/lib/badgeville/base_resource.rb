@@ -14,6 +14,16 @@ class BaseResource < ActiveResource::Base
       # set a path that goes between the URL and the resource
       self.prefix = "/api/berlin/#{apikey}/"
     end
+
+    def config ( options = {} )
+      self.format = :badgeville_json
+      self.site = options[:site]    if options[:site]
+      @api_key = options[:api_key]  if options[:api_key]
+
+      # set a path that goes between the URL and the resource
+      self.prefix = "/api/berlin/#@api_key/"
+    end
+
   end
 
   # OVERRIDING ActiveResource method in module Validations in order to
