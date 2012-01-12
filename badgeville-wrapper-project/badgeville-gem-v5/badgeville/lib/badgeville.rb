@@ -26,15 +26,18 @@ require_relative "badgeville/logger.rb"
 
 
 module Badgeville
-  module Config
-    # ADDING class method to configure BaseResource
-    # def setup ( target_site, apikey )
-    #   self.site = target_site
-    #   self.format = :badgeville_json
-    #   # set a path that goes between the URL and the resource
-    #   self.prefix = "/api/berlin/#{apikey}/"
-    #   #self.apikey = '007857cd4fb9f360e120589c34fea080'
-    # end
+  class Config < BaseResource
+    class << self
+      # ADDING class method to configure BaseResource
+      def conf ( options = {} )
+        BaseResource.format = :badgeville_json
+        BaseResource.site = options[:site]    if options[:site]
+        @api_key = options[:api_key]          if options[:api_key]
+
+        # # set a path that goes between the URL and the resource
+        BaseResource.prefix = "/api/berlin/#@api_key/"
+      end
+    end
   end
 
   # SUBCLASSING ActiveResource::Errors to be used by BaseResource as Badgeville::Errors
