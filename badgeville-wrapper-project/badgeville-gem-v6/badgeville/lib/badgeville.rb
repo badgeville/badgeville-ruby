@@ -1,26 +1,25 @@
-require 'rubygems'
 require 'active_resource'
 
 # ADDING BadgevilleJson custom format
-require_relative "badgeville/formats/badgeville_json_format.rb"
+require "badgeville/formats/badgeville_json_format.rb"
 
 # SUBCLASSING ActiveResource
-require_relative "badgeville/base_resource.rb"
+require "badgeville/base_resource.rb"
 
 # SUBCLASSING for remote resources
-require_relative "badgeville/activity.rb"
-require_relative "badgeville/activity_definition.rb"
-require_relative "badgeville/group.rb"
-require_relative "badgeville/leaderboard.rb"
-require_relative "badgeville/player.rb"
-require_relative "badgeville/reward.rb"
-require_relative "badgeville/reward_definition.rb"
-require_relative "badgeville/site.rb"
-require_relative "badgeville/track.rb"
-require_relative "badgeville/user.rb"
+require "badgeville/activity.rb"
+require "badgeville/activity_definition.rb"
+require "badgeville/group.rb"
+require "badgeville/leaderboard.rb"
+require "badgeville/player.rb"
+require "badgeville/reward.rb"
+require "badgeville/reward_definition.rb"
+require "badgeville/site.rb"
+require "badgeville/track.rb"
+require "badgeville/user.rb"
 
 # ADDING logger to print out HTTP requests and responses
-require_relative "badgeville/logger.rb"
+require "badgeville/logger.rb"
 
 
 
@@ -28,6 +27,7 @@ require_relative "badgeville/logger.rb"
 module Badgeville
   class Config < BaseResource
     class << self
+
       # ADDING class method to configure BaseResource
       def conf ( options = {} )
         BaseResource.format = :badgeville_json
@@ -37,6 +37,7 @@ module Badgeville
         # # set a path that goes between the URL and the resource
         BaseResource.prefix = "/api/berlin/#@api_key/"
       end
+
     end
   end
 

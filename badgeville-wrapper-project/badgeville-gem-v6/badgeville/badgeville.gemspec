@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-   s.add_development_dependency "activeresource"
+   s.add_development_dependency "activeresource", '>= 3.1.3'
    s.add_development_dependency "logger"
   # s.add_runtime_dependency "rest-client"
 end
