@@ -25,26 +25,33 @@ require "badgeville/logger.rb"
 
 
 module Badgeville
+
   class Config < BaseResource
     class << self
 
-      # ADDING class method to configure BaseResource
+      # This class method configures the BaseResource members: format,
+      # site and prefix
+      #
+      # @param [Hash] options the options hash which holds values for the keys `:api_key` and `:site`
       def conf ( options = {} )
         BaseResource.format = :badgeville_json
         BaseResource.site = options[:site]    if options[:site]
         @api_key = options[:api_key]          if options[:api_key]
 
-        # # set a path that goes between the URL and the resource
+        # set a path that goes between the URL and the resource
         BaseResource.prefix = "/api/berlin/#@api_key/"
       end
 
     end
   end
 
-  # SUBCLASSING ActiveResource::Errors to be used by BaseResource as Badgeville::Errors
+  # Subclasses ActiveResource::Errors to be used by BaseResource as Badgeville::Errors.
   class Errors < ActiveResource::Errors
-    # Grabs errors from a custom Badgeville-style json response that does
-    # not have a root key :errors.
+    # Grabs errors originating from the remote model class. The custom JSON error
+    # response format may not have a root key :errors.
+    #
+    # @param [ActiveSupport::JSON] json the JSON response data in custom BadgevilleJsonFormat
+    # @return [Array] error messages associated with the remote model
     def from_badgeville_json(json, save_cache = false)
       #puts "Here is the custom response ", ActiveSupport::JSON.decode(json)
       formatted_json_decoded = Array.new
@@ -59,12 +66,6 @@ module Badgeville
         end
       end
       from_array formatted_json_decoded, save_cache
-    end
-
-    # Grabs errors from a json response.
-    def from_json(json, save_cache = false)
-      array = Array.wrap(ActiveSupport::JSON.decode(json)['errors']) rescue []
-      from_array array, save_cache
     end
 
   end
