@@ -1,4 +1,4 @@
-lib/badgeville.rb 39b3705f2567185ae5123e45f807ae94a0e53050
+lib/badgeville.rb b6034770b02aaf52cd7eb097afb265143293762d
 lib/badgeville/user.rb ba430e00d06b7f6ec9348435807f0e860c38e2b2
 lib/badgeville/site.rb 079ed66740a8b13680d73ef4d34a489ccfeed2f6
 lib/badgeville/track.rb abbcd03e73553a47a672ed0d959b2ed1b93b0f1a
@@ -13,3 +13,4 @@ lib/badgeville/base_resource.rb 858e54985eaf392b29971797928cfc3ec3a0d80e
 lib/badgeville/reward_definition.rb 38d04d80cf4839128496059d86b0e1759906342c
 lib/badgeville/activity_definition.rb e06f02eb1d4bceb2229b4c3dc7c72e3d097f045b
 lib/badgeville/formats/badgeville_json_format.rb e3194e2b4c105280579ccc560d9e0e47f1f762d4
+lib/badgeville/config.rb 9981a899762eae07b648f5a336fdfdec7526f338
