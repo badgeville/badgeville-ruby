@@ -1,25 +1,18 @@
 module Badgeville
 
 
-  # SUBCLASSING ActiveResource::Base as BaseResource
+  # Subclasses ActiveResource::Base as BaseResource
   class BaseResource < ActiveResource::Base
 
-    # CLASS METHODS
-    # OVERRIDING ActiveResource attribute
+
     class << self
+      # This subclass overrides the ActiveResource attribute primary_key
+      # to be '_id' instead of 'id.'
+      #
+      # @return [String] primary key name '_id'
       def primary_key
         @primary_key = '_id'
       end
-
-      def config ( options = {} )
-        self.format = :badgeville_json
-        self.site = options[:site]    if options[:site]
-        @api_key = options[:api_key]  if options[:api_key]
-
-        # set a path that goes between the URL and the resource
-        self.prefix = "/api/berlin/#@api_key/"
-      end
-
     end
 
     # OVERRIDING ActiveResource method in module Validations in order to
