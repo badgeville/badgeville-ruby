@@ -1,11 +1,14 @@
 require 'badgeville'
 require 'rspec'
+require 'ruby-debug'
 require 'fakeweb'
 
 module Badgeville
   describe Config do
     before do
-      base_resource = double("base_resource")
+      debugger
+      base = double("base_resource")
+      #base.send(:method [, args...])
       request_site  = 'http://staging.badgeville.com/'
       my_api_key     = '007857cd4fb9f360e120589c34fea080'
       Config.conf(:site => request_site, :api_key => my_api_key)
