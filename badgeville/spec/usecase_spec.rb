@@ -1,5 +1,6 @@
 require 'badgeville'
 require 'rspec'
+require 'ruby-debug'
 require 'fakeweb'
 require 'open-uri'
 require 'factory_girl'
@@ -17,9 +18,12 @@ module Badgeville
   
   describe 'Config' do
     before do
-       @request_site  = 'http://staging.badgeville.com'
-       @my_api_key    = '007857cd4fb9f360e120589c34fea080'
-       Config.conf(:site => @request_site, :api_key => @my_api_key)
+      debugger
+      base = double("base_resource")
+      #base.send(:method [, args...])
+      request_site  = 'http://staging.badgeville.com/'
+      my_api_key     = '007857cd4fb9f360e120589c34fea080'
+      Config.conf(:site => request_site, :api_key => my_api_key)
     end
 
     it "should assign the user-specified host to BaseResource.site.host" do
