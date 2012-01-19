@@ -41,7 +41,7 @@ module BadgevilleJsonFormat
   #
   # @param [String] the serialized string representation of the resource.
   # @return [Object? BaseResource?] returns an object representing a remote resource?
-  def decode(json)
+  def decode(json)  
     ActiveResource::Formats.remove_root(ActiveSupport::JSON.decode(json))["data"] || ActiveResource::Formats.remove_root(ActiveSupport::JSON.decode(json))
   end
 end

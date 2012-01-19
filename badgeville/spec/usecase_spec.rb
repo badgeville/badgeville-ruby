@@ -6,14 +6,6 @@ require 'open-uri'
 require 'factory_girl'
 require 'ruby-debug'
 
-#placing this here because factories.rb is not read
-FactoryGirl.define do
-  factory :player do
-    email 'supraja220494@badgeville.com'
-    id '4f0b29bca76865329a0000ae'
-  end
-end
-
 module Badgeville
   
   describe 'Config' do
