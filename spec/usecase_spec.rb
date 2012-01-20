@@ -1,16 +1,13 @@
 require 'badgeville'
 require 'rspec'
-require 'ruby-debug'
 require 'fakeweb'
 require 'open-uri'
 require 'factory_girl'
-require 'ruby-debug'
 
 module Badgeville
   
   describe 'Config' do
     before do
-      debugger
       base = double("base_resource")
       #base.send(:method [, args...])
       request_site  = 'http://staging.badgeville.com/'

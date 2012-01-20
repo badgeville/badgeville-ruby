@@ -1,9 +1,8 @@
+require 'rubygems'
 require 'rspec'
-require 'badgeville'
-require 'ruby-debug'
 require 'fakeweb'
 require 'factory_girl'
-require 'factories'
+require_relative '../lib/badgeville'
 
 module Badgeville
   
