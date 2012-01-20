@@ -1,6 +1,5 @@
 require 'rspec'
 require 'badgeville'
-require 'ruby-debug'
 require 'fakeweb'
 require 'factory_girl'
 require 'factories'
