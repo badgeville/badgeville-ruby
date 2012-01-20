@@ -1,6 +1,4 @@
-require 'rspec'
-require 'badgeville'
-require 'ruby-debug'
+require "../spec_helper.rb"
 
 module Badgeville
   describe Config do

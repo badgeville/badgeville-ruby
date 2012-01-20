@@ -1,6 +1,5 @@
-require 'rspec'
-require 'badgeville'
-require 'ruby-debug'
+require "../spec_helper.rb"
+require "ruby-debug"
 
 module Badgeville
   describe BaseResource do

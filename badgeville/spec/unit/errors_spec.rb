@@ -1,6 +1,4 @@
- require 'rspec'
-require 'badgeville'
-require 'ruby-debug'
+require "../spec_helper.rb"
 
 module Badgeville
   describe Errors do
@@ -76,6 +74,7 @@ module Badgeville
       end
     end
 
+
     context "where the JSON string has a root key :errors, but the value at the key is an empty hash" do
       before do
         json_root_val_empty = "{\"errors\": {}"
@@ -91,6 +90,7 @@ module Badgeville
       end
     end
 
+
     context "where the JSON string is an empty" do
       before do
         @empty_string = ''
@@ -104,7 +104,7 @@ module Badgeville
       it "should return a mock_error object with no error messages" do
         @mock_user.errors.messages.should == {}
       end
+    end
 
-      end
   end
 end
