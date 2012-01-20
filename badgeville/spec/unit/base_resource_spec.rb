@@ -33,6 +33,12 @@ module Badgeville
 
   describe BaseResource, "method load_remote_errors()" do
       before do
+        @mock_remote_err_msg = "Failed.  Response code = 422.  Response message = Unprocessable Entity."
+        @mock_remote_errors  = ActiveResource::ResourceInvalid.new(@mock_remote_err_msg)
+
+        @mock_user = User.new
+        ActiveResource::ResourceInvalid.new
+        @mock_user.load_remote_errors(@mock_remote_errors.response.body)
       end
       it do
       end
