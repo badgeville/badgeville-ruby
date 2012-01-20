@@ -1,5 +1,4 @@
 FactoryGirl.define do
-  
   factory :user do
     name "visitor_username"
     network_id "4d5dc61ed0c0b32b79000001"

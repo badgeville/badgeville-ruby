@@ -1,6 +1,3 @@
-require "spec_helper"
-
-
 module Badgeville
   describe 'Create a new user' do
     before do
