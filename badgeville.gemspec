@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
 
   # development-only dependencies  
+  s.add_development_dependency "ruby-debug19"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
   s.add_development_dependency "fakeweb"
