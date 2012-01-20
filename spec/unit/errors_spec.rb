@@ -10,8 +10,6 @@ module Badgeville
 
       # Stub the new method to return the "mock" Errors object
       Errors.stub(:new).and_return(@mock_error);
-
-      # Create a mock MultiJson
     end
 
 
@@ -60,17 +58,6 @@ module Badgeville
 
       it "should return a mock_error object with no error messages" do
           @mock_user.errors.messages.should == {}
-      end
-    end
-
-
-    context "where the JSON string has no root key, but has an inner key :errors" do
-      before do
-        json_inner_key_errors = "{ [ {\"email\":[\"user email is already taken\"] }, {\"errors\":[\"another error message here\" ] } ] }"
-        @mock_error.from_badgeville_json( json_inner_key_errors )
-      end
-      it "should return a mock_error object with error messages appended" do
-        @mock_user.errors.messages.should == '?'
       end
     end
 
