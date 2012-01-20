@@ -1,4 +1,4 @@
-require "../spec_helper.rb"
+require "spec_helper"
 require "ruby-debug"
 
 module Badgeville
@@ -16,7 +16,7 @@ module Badgeville
       debugger
 
       @mock_user_with_errors_object = User.new
-      @mock_user_with_errors_object.errors = "Here is a mock error message string."
+      @mock_user_with_errors_object.errors.add(:base, "Here is a mock error message string.")
       # Figure out the correct way to set a mock error message
     end
   end
