@@ -20,13 +20,15 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
 
-  # development-only dependencies  
+  # development-only dependencies
   s.add_development_dependency "ruby-debug19"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
   s.add_development_dependency "fakeweb"
   s.add_development_dependency "factory_girl"
-  
+  s.add_development_dependency "ZenTest"
+  s.add_development_dependency "autotest"
+  s.add_development_dependency "autotest-growl"
 
   s.add_runtime_dependency "activeresource", '>= 3.1.3'
   s.add_runtime_dependency "logger", ">=1.2.8"
