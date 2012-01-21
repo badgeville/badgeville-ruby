@@ -1,3 +1,5 @@
 # Subclasses BaseResource to represent a remote resource model class.
-class Group < Badgeville::BaseResource
+module Badgeville
+  class Group < Badgeville::BaseResource
+  end
 end
