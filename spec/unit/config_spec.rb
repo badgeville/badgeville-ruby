@@ -7,6 +7,7 @@ module Badgeville
       @my_api_key    = '007857cd4fb9f360e120589c34fea080'
       Config.conf(:site => @request_site, :api_key => @my_api_key)
       @empty_string = ''
+
     end
 
     context "with a non-empty request site a non-empty api key" do
@@ -67,5 +68,6 @@ module Badgeville
     it "should assign the default scheme 'http' to BaseResource.site.scheme" do
       BaseResource.site.scheme.should == 'http'
     end
+
   end
 end
