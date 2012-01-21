@@ -1,39 +1,27 @@
 module Badgeville
   describe 'Create a new user' do
     before do
-      @mock = {
-        :email => 'visitor@emailserver.com',
-        :name => 'visitor_username',
-        :network_id => '4d5dc61ed0c0b32b79000001',
-        :password => 'visitor_password'
-      }
+      @mock = Factory.build(:user)
       @path = ENDPOINTKEY + "/users.json"
       @method = :post
-      @json =  "{\"user\":" + @mock.to_json + "}"
-      @mock_http = MockHTTP.new(@method, @path, {:body => @json, :status => [201, "Created"]})
+      @mock_http = MockHTTP.new(@method, @path, {:body => @mock.to_json, :status => [201, "Created"]})
     end
   
     it "should make the correct http request." do
       @mock_http.request.should_receive(:send)
-        .with(@method, @path, @json, {"Content-Type"=>"application/json"})
+        .with(@method, @path, @mock.to_json, {"Content-Type"=>"application/json"})
         .and_return(@mock_http.response)
       
-      User.new(@mock).save()
+      @mock.save()
     end
   end
   
   describe 'Find a user' do
     before do
-      @mock = {
-        :_id => "4f05ef5ea768651b3500009f",
-        :name => "visitor_username",
-        :created_at => '2012-01-05T10:43:42-08:00',
-        :email => "revised_visitor@emailserver.com"
-      }
-      @path = ENDPOINTKEY + "/users/" + @mock[:_id] + ".json"
+      @mock = Factory.build(:player)
+      @path = ENDPOINTKEY + "/users/" + @mock._id + ".json"
       @method = :get
-      @json =  "{\"user\":" + @mock.to_json + "}"
-      @mock_http = MockHTTP.new(@method, @path, {:body => @json, :status => [200, "Ok"]})
+      @mock_http = MockHTTP.new(@method, @path, {:body => @mock.to_json, :status => [200, "Ok"]})
     end
   
     it "should make the correct http request." do
@@ -41,30 +29,24 @@ module Badgeville
         .with(@method, @path, {"Accept"=>"application/json"})
         .and_return(@mock_http.response)
       
-      User.find(@mock[:_id])
+      User.find(@mock._id)
     end
   end
   
   describe 'Update a user' do
     before do
-      @mock = {
-        :_id => "4f05ef5ea768651b3500009f",
-        :created_at => '2012-01-05T10:43:42-08:00',
-        :email => "revised_visitor@emailserver.com",  
-        :name => "visitor_username"
-      }
-      @path = ENDPOINTKEY + "/users/" + @mock[:_id] + ".json"
+      @mock = Factory.build(:user)
+      @path = ENDPOINTKEY + "/users/" + @mock._id + ".json"
       @method = :put
-      @json =  "{\"user\":" + @mock.to_json + "}"
-      @mock_http = MockHTTP.new(@method, @path, {:body => @json, :status => [200, "Ok"]})
+      @mock_http = MockHTTP.new(@method, @path, {:body => @mock.to_json, :status => [200, "Ok"]})
+      @mock.stub(:persisted?).and_return(true) # Force ActiveResource to use put
     end
   
     it "should make the correct http request." do
       @mock_http.request.should_receive(:send)
-        .with(@method, @path, @json, {"Content-Type"=>"application/json"})
+        .with(@method, @path, @mock.to_json, {"Content-Type"=>"application/json"})
         .and_return(@mock_http.response)
-      
-      User.new(@mock, true).save()
+      @mock.save()
     end
   end
 end
