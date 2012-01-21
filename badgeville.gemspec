@@ -5,7 +5,7 @@ require "badgeville/version"
 Gem::Specification.new do |s|
   s.name        = "badgeville"
   s.version     = Badgeville::VERSION
-  s.authors     = ["Supraja Narasimhan"]
+  s.authors     = ["Jimmy Zhang", "Alex Tran", "Supraja Narasimhan"]
   s.email       = ["supraja.n@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{A Ruby wrapper for the Badgeville RESTful Berlin API.}
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  # specify any dependencies here; for example:
+  # specify any dependencies here
 
   # development-only dependencies
   s.add_development_dependency "ruby-debug19"
