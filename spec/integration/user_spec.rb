@@ -7,7 +7,7 @@ module Badgeville
         :network_id => '4d5dc61ed0c0b32b79000001',
         :password => 'visitor_password'
       }
-      @path = "/api/berlin/007857cd4fb9f360e120589c34fea080/users.json"
+      @path = ENDPOINTKEY + "/users.json"
       @method = :post
       @json =  "{\"user\":" + @mock.to_json + "}"
       @mock_http = MockHTTP.new(@method, @path, {:body => @json, :status => [201, "Created"]})
@@ -17,7 +17,7 @@ module Badgeville
       @mock_http.request.should_receive(:send)
         .with(@method, @path, @json, {"Content-Type"=>"application/json"})
         .and_return(@mock_http.response)
-  
+      
       User.new(@mock).save()
     end
   end
@@ -30,7 +30,7 @@ module Badgeville
         :created_at => '2012-01-05T10:43:42-08:00',
         :email => "revised_visitor@emailserver.com"
       }
-      @path = "/api/berlin/007857cd4fb9f360e120589c34fea080/users/" + @mock[:_id] + ".json"
+      @path = ENDPOINTKEY + "/users/" + @mock[:_id] + ".json"
       @method = :get
       @json =  "{\"user\":" + @mock.to_json + "}"
       @mock_http = MockHTTP.new(@method, @path, {:body => @json, :status => [200, "Ok"]})
@@ -53,7 +53,7 @@ module Badgeville
         :email => "revised_visitor@emailserver.com",  
         :name => "visitor_username"
       }
-      @path = "/api/berlin/007857cd4fb9f360e120589c34fea080/users/" + @mock[:_id] + ".json"
+      @path = ENDPOINTKEY + "/users/" + @mock[:_id] + ".json"
       @method = :put
       @json =  "{\"user\":" + @mock.to_json + "}"
       @mock_http = MockHTTP.new(@method, @path, {:body => @json, :status => [200, "Ok"]})

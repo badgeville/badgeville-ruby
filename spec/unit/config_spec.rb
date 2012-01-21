@@ -1,5 +1,3 @@
-require "spec_helper"
-
 module Badgeville
   describe Config do
     before do

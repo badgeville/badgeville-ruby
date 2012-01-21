@@ -3,6 +3,7 @@ require 'rspec'
 require 'fakeweb'
 require 'factory_girl'
 require_relative '../lib/badgeville'
+require_relative 'factories'
 
 module Badgeville
   
