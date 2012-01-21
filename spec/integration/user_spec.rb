@@ -1,7 +1,6 @@
 module Badgeville
   describe 'Create a new user' do
     before do
-      debugger
       @mock = {
         :email => 'visitor@emailserver.com',
         :name => 'visitor_username',
