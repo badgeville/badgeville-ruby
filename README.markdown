@@ -15,7 +15,7 @@ Badgeville::Config.conf(
   :api_key => "007857cd4fb9f360e120589c34fea080")
 ```
 
-### Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
+### 1. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
 ```ruby
 new_site = Badgeville::Site.new(
   :name       => "My Website",
@@ -69,7 +69,7 @@ success = new_activity.save
 
 ## Documentation
 
-For more documentation on how the Badgeville RESTful Berlin API works, see here [(http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).]
+For more documentation on how the Badgeville RESTful Berlin API works, see [here] (http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
 
 ##Contributors
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available here.
