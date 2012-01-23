@@ -1,14 +1,17 @@
-# badgeville
+# Badgeville RESTful Wrapper for Berlin API (Basic README)
 
-Ruby gem for interacting with the [Badgeville API](http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation)
+This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
 
-# Installation
+## Features
+* Uses the activeresource (3.0.5) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
+* Uses a logger to print HTTP requests to the standard output stream.
 
-`gem install badgeville`
+##Basic Examples
 
-or if you are using a `Gemfile`, use
-
-`gem 'badgeville', '1.0.0'`
+1. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
+```ruby
+new_site = Site.new( :name => "My Website", :url => "mydomain.com", :network_id => '4d5dc61ed0c0b32b79000001' ) success = new_site.save
+```
 
 # Examples
 
