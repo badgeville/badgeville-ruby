@@ -65,7 +65,7 @@ success = new_activity.save
 
 ## Tips
 ### Monitoring HTTP Requests and JSON Responses
-#### Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.
+Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.
 
 ```ruby
 require 'logger'
@@ -75,7 +75,7 @@ Badgeville::BaseResource.logger.level = Logger::DEBUG
 ```
 
 ### Avoiding "Badgeville::"
-#### Encapsulate your script inside a module Badgeville to avoid frequently typing "Badgeville::"
+Encapsulate your script inside a module Badgeville to avoid frequently typing "Badgeville::"
 
 ```ruby
 module Badgeville
