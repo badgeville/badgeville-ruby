@@ -12,16 +12,16 @@ module Badgeville
         BaseResource.format = :badgeville_json
 
         if options[:site] == nil || options[:site].empty?
-            raise ArgumentError.new("Please enter the URL for the Badgeville site where you want to make your request (e.g.).")
+            raise ArgumentError.new("Please enter the URL for the Badgeville site where you want to make your request ( e.g. :site  => 'http://staging.badgeville.com' ).")
         else
           BaseResource.site = options[:site]
           if options[:site].split("://")[1] == nil
-            BaseResource.site.scheme = 'http'
+            raise ArgumentError.new("Please include the scheme for the request site ( e.g. http:// ).")
           end
         end
 
         if options[:api_key] == nil || options[:api_key].empty?
-          raise ArgumentError.new("Please enter a Badgeville API Key.")
+          raise ArgumentError.new("Please enter a Badgeville API Key ( e.g. :api_key  => '[your Badgeville API Key]' ).")
         else
           @api_key = options[:api_key]
         end
