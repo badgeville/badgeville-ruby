@@ -11,8 +11,8 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 ### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
 Badgeville::Config.conf(
-  :site    => "http://staging.badgeville.com",
-  :api_key => "007857cd4fb9f360e120589c34fea080")
+  :site    => "http://sandbox.v2.badgeville.com",
+  :api_key => MY_API_KEY)
 ```
 
 ### 2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
@@ -20,7 +20,7 @@ Badgeville::Config.conf(
 new_site = Badgeville::Site.new(
   :name       => "My Website",
   :url        => "mydomain.com",
-  :network_id => '4d5dc61ed0c0b32b79000001' )
+  :network_id => MY_NETWORK_ID )
 success = new_site.save
 ```
 
@@ -29,7 +29,7 @@ success = new_site.save
 ```ruby
 new_user = Badgeville::User.new(
   :name       => 'visitor_username',
-  :network_id => '4d5dc61ed0c0b32b79000001',
+  :network_id => MY_NETWORK_ID,
   :email      => 'visitor@emailserver.com',
   :password   => 'visitor_password' )
 success = new_user.save
