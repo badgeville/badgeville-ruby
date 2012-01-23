@@ -47,25 +47,23 @@ module Badgeville
     end
 
     context "where conf is called with no parameters" do
-      it "should raise an Argument error with an error message" do
+      it "should raise an ArgumentError with an error message" do
         lambda { Config.conf }.should raise_error(ArgumentError)
       end
     end
 
   end
 
-  describe Config, "where site has no scheme" do
+  describe Config, "where the request site has no scheme" do
     context "where the request site has no scheme (i.e. no 'http')" do
       before do
       @request_site_no_scheme  = 'staging.badgeville.com'
       @my_api_key   = '007857cd4fb9f360e120589c34fea080'
-      Config.conf(:site => @request_site_no_scheme, :api_key => @my_api_key)
       end
     end
 
-    it "should assign the default scheme 'http' to BaseResource.site.scheme" do
-      BaseResource.site.scheme.should == 'http'
+    it "should raise an ArgumentError with an error message" do
+      lambda { Config.conf(:site => @request_site_no_scheme, :api_key => @my_api_key) }.should raise_error(ArgumentError)
     end
-
   end
 end
