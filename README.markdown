@@ -8,14 +8,14 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ##Basic Examples
 
-### Configure the gem to use your Badgeville API Key and the site to which your requests should go.
+### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
 Badgeville::Config.conf(
   :site    => "http://staging.badgeville.com",
   :api_key => "007857cd4fb9f360e120589c34fea080")
 ```
 
-### 1. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
+### 2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
 ```ruby
 new_site = Badgeville::Site.new(
   :name       => "My Website",
@@ -24,7 +24,7 @@ new_site = Badgeville::Site.new(
 success = new_site.save
 ```
 
-### Create a user to add them to your network.
+### 3. Create a user to add them to your network.
 
 ```ruby
 new_user = Badgeville::User.new(
@@ -35,7 +35,7 @@ new_user = Badgeville::User.new(
 success = new_user.save
 ```
 
-### Find the newly created user by ID to update their email address.
+### 4. Find the newly created user by ID to update their email address.
 
 ```ruby
 user_found_by_id       = Badgeville::User.find( new_user.id )
@@ -43,7 +43,7 @@ user_found_by_id.email = 'revised_visitor@emailserver.com'
 success                = user_found_by_id.save
 ```
 
-### Create a player using the user corresponding to the updated email address for the site you created.
+### 5. Create a player using the user corresponding to the updated email address for the site you created.
 
 ```ruby
 new_player = Badgeville::Player.new(
@@ -52,7 +52,7 @@ new_player = Badgeville::Player.new(
 success   = new_player.save
 ```
 
-### Register a player behavior (comment) for the newly created player.
+### 6. Register a player behavior (e.g. comment) for the newly created player.
 
 ```ruby
 new_activity = Badgeville::Activity.new(
