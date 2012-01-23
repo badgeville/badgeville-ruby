@@ -2,9 +2,11 @@
 
 This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
 
+
 ## Features
 * Uses the activeresource (3.0.5) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
 * Uses a logger to print HTTP requests to the standard output stream.
+
 
 ##Basic Examples
 
@@ -38,9 +40,9 @@ success = new_user.save
 ### 4. Find the newly created user by ID to update their email address.
 
 ```ruby
-user_found_by_id       = Badgeville::User.find( new_user.id )
+user_found_by_id = Badgeville::User.find( new_user.id )
 user_found_by_id.email = 'revised_visitor@emailserver.com'
-success                = user_found_by_id.save
+success = user_found_by_id.save
 ```
 
 ### 5. Create a player using the user corresponding to the updated email address for the site you created.
@@ -49,16 +51,35 @@ success                = user_found_by_id.save
 new_player = Badgeville::Player.new(
   :site_id => new_site.id,
   :user_id => new_user.id )
-success   = new_player.save
+success = new_player.save
 ```
 
-### 6. Register a player behavior (e.g. comment) for the newly created player.
+### 6. Register a player behavior (e.g. share) for the newly created player.
 
 ```ruby
 new_activity = Badgeville::Activity.new(
-  :verb      => 'comment',
+  :verb      => 'share',
   :player_id => new_player.id )
 success = new_activity.save
+```
+
+## Tips
+### Monitoring HTTP Requests and JSON Responses
+#### Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.
+
+```ruby
+require 'logger'
+Badgeville::BaseResource.logger       = Logger.new(STDOUT)
+Badgeville::BaseResource.logger.level = Logger::DEBUG
+
+```
+
+### Avoiding "Badgeville::"
+#### Encapsulate your script inside a module Badgeville to avoid frequently typing "Badgeville::"
+
+```ruby
+module Badgeville
+end
 ```
 
 ##Dependencies
@@ -66,6 +87,7 @@ success = new_activity.save
 * logger (1.2.8) - Provides logging to the standard output stream.
 
 ## Installation
+[STILL NEEDS TO BE WRITTEN]
 
 ## Documentation
 
