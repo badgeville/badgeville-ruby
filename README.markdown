@@ -8,11 +8,18 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ##Basic Examples
 
+### Configure the gem to use your Badgeville API Key and the site to which your requests should go.
+```ruby
+Badgeville::Config.conf(
+  :site    => "http://staging.badgeville.com",
+  :api_key => "007857cd4fb9f360e120589c34fea080")
+```
+
 ### Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
 ```ruby
 new_site = Badgeville::Site.new(
-  :name => "My Website",
-  :url => "mydomain.com",
+  :name       => "My Website",
+  :url        => "mydomain.com",
   :network_id => '4d5dc61ed0c0b32b79000001' )
 success = new_site.save
 ```
@@ -20,109 +27,54 @@ success = new_site.save
 ### Create a user to add them to your network.
 
 ```ruby
-new_user = User.new(  :name => 'visitor_username',
-                      :network_id => '4d5dc61ed0c0b32b79000001',
-                      :email => 'visitor@emailserver.com',
-                      :password => 'visitor_password' )
+new_user = Badgeville::User.new(
+  :name       => 'visitor_username',
+  :network_id => '4d5dc61ed0c0b32b79000001',
+  :email      => 'visitor@emailserver.com',
+  :password   => 'visitor_password' )
 success = new_user.save
 ```
 
-# Examples
-
-## Create an instance for interacting with Badgeville
+### Find the newly created user by ID to update their email address.
 
 ```ruby
-@badgeville = Badgeville::API.new('thisisyourbadgevilleapikey')
+user_found_by_id       = Badgeville::User.find( new_user.id )
+user_found_by_id.email = 'revised_visitor@emailserver.com'
+success                = user_found_by_id.save
 ```
 
-## Create a user and then a player for that user
+### Create a player using the user corresponding to the updated email address for the site you created.
 
 ```ruby
-badgeville_response = @badgeville.create_user(
-  :user => {
-    :name => 'Player Name',
-    :email => 'player_name@yoursite.com'
-  }
-)
-
-badgeville_response = @badgeville.create_player(:email => 'player_name@yoursite.com',
-  :site => 'yoursite.com', :player => {:email => 'player_name@yoursite.com'}, :verbose => true)
+new_player = Badgeville::Player.new(
+  :site_id => new_site.id,
+  :user_id => new_user.id )
+success   = new_player.save
 ```
 
-## Create an activity definition
+### Register a player behavior (comment) for the newly created player.
 
 ```ruby
-badgeville_response = @badgeville.create_activity_definition(
-  :activity_definition => {
-    :site_id => '4d700bd351c21c1e3c000004',
-    :name => 'API test (V2) activity - gem test',
-    :selector => '{"verb":"api_test_v2_gem"}',
-    :adjustment => '{"points":5}'
-  }
-)
+new_activity = Badgeville::Activity.new(
+  :verb      => 'comment',
+  :player_id => new_player.id )
+success = new_activity.save
 ```
 
-## Create a reward definition
+##Dependencies
+* activeresource (3.1.3) - Provides Ruby classes to RESTfully interact with remote resources.
+* logger (1.2.8) - Provides logging to the standard output stream.
 
-```ruby
-badgeville_response = @badgeville.create_reward_definition(
-  :reward_definition => {
-    :site_id => '4d700bd351c21c1e3c000004',
-    :name => 'API test (V2) reward - gem test',
-    :components => '[{"comparator":{"$gte":1},"command":"count","where":{"verb":"api_test_v2_gem","user_id":"%user_id","site_id":"%site_id"}}]',
-    :reward_template => '{"message":"Congratulations! You\'ve won the API test V2 badge!"}',
-    :tags => 'API,test,v2',
-    :active => true
-  }
-)
-```
+## Installation
 
-## Create a reward definition with an image
+## Documentation
 
-```ruby
-badgeville_response = @badgeville.create_reward_definition(
-  :reward_definition => {
-    :site_id => '4d700bd351c21c1e3c000004',
-    :name => 'API test (V2) reward with image - gem test',
-    :components => '[{"comparator":{"$gte":1},"command":"count","where":{"verb":"api_test_v2_image","user_id":"%user_id","site_id":"%site_id"}}]',
-    :reward_template => '{"message":"Congratulations! You\'ve won the API test V2 badge with an image!"}',
-    :tags => 'API,test,v2',
-    :image => File.new('/this/is/the/path/to/the/image/game_badge.jpg'),
-    :active => true
-  }
-)
-```
+For more documentation on how the Badgeville RESTful Berlin API works, see here [(http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).]
 
-## Submit activity for a player
+##Contributors
+David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available here.
 
-```ruby
-badgeville_response = @badgeville.create_activity(
-  :player_id => '4ee7bc0c3dc64810b0000157',
-  :activity => {:verb => 'api_test_v2_gem'}
-)
-```
+##Feedback
+Please email your comments to supraja@badgeville.com
 
-### NOTE
-
-The gem does not attempt to automatically parse the response from Badgeville. You will need to do this in the calling code. Example:
-
-```ruby
-parsed_response = JSON.parse(badgeville_response.body)
-```
-
-# Compatibility
-
-The gem has been built under Ruby 1.9.3, but should be fine to use under Ruby 1.9.2 or Ruby 1.8.7.
-
-# Contributing to badgeville
-
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
-
-# Copyright
-
+Copyright (c) 2012 Badgeville.
