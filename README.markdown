@@ -10,11 +10,21 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ### Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
 ```ruby
-new_site = Site.new(
+new_site = Badgeville::Site.new(
   :name => "My Website",
   :url => "mydomain.com",
   :network_id => '4d5dc61ed0c0b32b79000001' )
 success = new_site.save
+```
+
+### Create a user to add them to your network.
+
+```ruby
+new_user = User.new(  :name => 'visitor_username',
+                      :network_id => '4d5dc61ed0c0b32b79000001',
+                      :email => 'visitor@emailserver.com',
+                      :password => 'visitor_password' )
+success = new_user.save
 ```
 
 # Examples
