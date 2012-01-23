@@ -46,5 +46,19 @@ module Badgeville
         @mock.save()
       end
     end
+    
+    describe "Delete a " + klass do
+      before do
+        @mock = Factory.build(klass)
+        @path = ENDPOINTKEY + "/" + klass.pluralize + "/" + @mock._id + ".json"
+        @method = :delete
+        @mock_http = MockHTTP.new(@method, @path, {:body => @mock.to_json, :status => [200, "Ok"]})
+      end
+    
+      it "should make the correct http request." do
+        @mock_http.request.should_receive(:send).with(@method, @path, {"Accept"=>"application/json"}).and_return(@mock_http.response)
+        module_klass.delete(@mock._id)
+      end
+    end
   end
 end
