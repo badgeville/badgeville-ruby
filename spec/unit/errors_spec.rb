@@ -87,10 +87,6 @@ module Badgeville
       it "should return a mock_error object with no error messages" do
         @mock_error.messages.should == {}
       end
-
-      it "should return a mock_error object with no error messages" do
-        @mock_user.errors.messages.should == {}
-      end
     end
 
   end
