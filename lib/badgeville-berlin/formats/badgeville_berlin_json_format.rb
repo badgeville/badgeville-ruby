@@ -1,13 +1,13 @@
-# For custom BadgevilleJson
+# For custom BadgevilleBerlinJson
 require 'active_support/json'
-require "badgeville/version"
+require "badgeville-berlin/version"
 
 
 
 
 # Handles the fact that a JSON formatted GET response does not meet the
 # ActiveResource standard, and is instead preceded by the root key :data.
-module BadgevilleJsonFormat
+module BadgevilleBerlinJsonFormat
   extend self
 
   # Returns the extension 'json' to be added to the HTTP request URL for JSON endpoints.
@@ -26,7 +26,7 @@ module BadgevilleJsonFormat
 
   # Identical to ActiveResource::Format::JsonFormat.encode. Returns the
   # serialized string representation of the remote resource in the
-  # specified format (i.e. BadgevilleJsonFormat). Options depend on the
+  # specified format (i.e. BadgevilleBerlinJsonFormat). Options depend on the
   # configured format.
   #
   # @param [Hash] hash the data hash of key-value pairs representing a remote resource to be converted to the specified encoding format.

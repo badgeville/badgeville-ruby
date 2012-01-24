@@ -2,12 +2,12 @@ require 'rubygems'
 require 'rspec'
 require 'fakeweb'
 require 'factory_girl'
-require_relative '../lib/badgeville'
+require_relative '../lib/badgeville-berlin'
 require_relative 'factories'
 
-module Badgeville
+module BadgevilleBerlin
   
-  HOST = "staging.badgeville.com" 
+  HOST = "staging.badgeville-berlin.com"
   APIKEY = "007857cd4fb9f360e120589c34fea080"
   ENDPOINT = "/api/berlin/"
   ENDPOINTKEY = ENDPOINT + APIKEY

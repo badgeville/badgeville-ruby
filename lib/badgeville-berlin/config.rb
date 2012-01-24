@@ -1,4 +1,4 @@
-module Badgeville
+module BadgevilleBerlin
 
   class Config < BaseResource
     class << self
@@ -9,10 +9,10 @@ module Badgeville
       # @param [Hash] options the options hash which holds values for the keys `:api_key` and `:site`
       def conf ( options = {} )
 
-        BaseResource.format = :badgeville_json
+        BaseResource.format = :badgeville_berlin_json
 
         if options[:site] == nil || options[:site].empty?
-            raise ArgumentError.new("Please enter the URL for the Badgeville site where you want to make your request ( e.g. :site  => 'http://staging.badgeville.com' ).")
+            raise ArgumentError.new("Please enter the URL for the Badgeville site where you want to make your request ( e.g. :site  => 'http://staging.badgeville-berlin.com' ).")
         else
           BaseResource.site = options[:site]
           if options[:site].split("://")[1] == nil

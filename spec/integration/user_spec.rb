@@ -1,3 +1,3 @@
-module Badgeville
+module BadgevilleBerlin
   
 end

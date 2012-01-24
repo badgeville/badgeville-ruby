@@ -1,4 +1,4 @@
-module Badgeville
+module BadgevilleBerlin
 
 
   # Subclasses ActiveResource::Base as BaseResource
@@ -16,11 +16,11 @@ module Badgeville
     end
 
     # OVERRIDING ActiveResource method in module Validations in order to
-    # call the Badgeville.Errors constructor instead of the
+    # call the BadgevilleBerlin.Errors constructor instead of the
     # ActiveResource::Errors constructor
-    # Returns the Badgeville::Errors object that holds all information about attribute error messages.
+    # Returns the BadgevilleBerlin::Errors object that holds all information about attribute error messages.
     def errors
-      @errors ||= Badgeville::Errors.new(self)
+      @errors ||= BadgevilleBerlin::Errors.new(self)
     end
 
     # OVERRIDING ActiveResource method in module Validations in order to
@@ -32,8 +32,8 @@ module Badgeville
         errors.from_xml(remote_errors.response.body, save_cache)
       when ActiveResource::Formats[:json]
         errors.from_json(remote_errors.response.body, save_cache)
-      when ActiveResource::Formats[:badgeville_json]
-          errors.from_badgeville_json(remote_errors.response.body, save_cache)
+      when ActiveResource::Formats[:badgeville_berlin_json]
+          errors.from_badgeville_berlin_json(remote_errors.response.body, save_cache)
       end
     end
 

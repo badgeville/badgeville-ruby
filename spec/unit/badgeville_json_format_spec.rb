@@ -1,11 +1,11 @@
-describe BadgevilleJsonFormat do
+describe BadgevilleBerlinJsonFormat do
 
 
   context do "where root key :data present, value at :data is a single record (hash of a hash)"
     before do
       @json_record_w_root =
         "{\"data\":{\"name\":\"visitor_username\",\"created_at\":\"2012-01-05T10:43:42-08:00\",\"email\":\"revised_visitor@emailserver.com\",\"_id\":\"4f05ef5ea768651b3500009f\"},\"paging\":null}"
-      @decoded_json = BadgevilleJsonFormat.decode(@json_record_w_root)
+      @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_record_w_root)
     end
 
     it "should use the value at the key :data and convert it into a hash" do
@@ -20,7 +20,7 @@ describe BadgevilleJsonFormat do
     #     + "[{\"name\"visitor1,\"_id\":\"4dfa6cbc888bae20b0000016\"},"
     #     # + "{\"name\":visitor2,\"_id\":\"4dfa8908888bae20b50000d1\"}]"
     #     # + "\"paging\":{\"current_page\":1,\"per_page\":10}}"
-    #    @decoded_json = BadgevilleJsonFormat.decode(@json_collection_w_root)
+    #    @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_collection_w_root)
     #
     # end
     # #
@@ -36,7 +36,7 @@ describe BadgevilleJsonFormat do
      before do
         @json_empty_hash_at_data =
           "{\"data\":{},\"paging\":null}"
-        @decoded_json = BadgevilleJsonFormat.decode(@json_empty_hash_at_data)
+        @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_empty_hash_at_data)
       end
 
       it "should return an empty hash" do
@@ -49,7 +49,7 @@ describe BadgevilleJsonFormat do
     before do
       @json_empty_array_at_data =
         "{\"data\":[],\"paging\":null}"
-      @decoded_json = BadgevilleJsonFormat.decode(@json_empty_array_at_data)
+      @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_empty_array_at_data)
     end
 
     it "should return an empty array" do
@@ -61,7 +61,7 @@ describe BadgevilleJsonFormat do
     before do
       @json_w_2_keys_data =
         "{\"data\":{\"name\":\"visitor_username\",\"data\":\"value_of_nested_key_data\"},\"paging\":null}"
-      @decoded_json = BadgevilleJsonFormat.decode(@json_w_2_keys_data)
+      @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_w_2_keys_data)
     end
     it do
       @decoded_json.should == {"name"=>"visitor_username", "data" => "value_of_nested_key_data"}
@@ -73,7 +73,7 @@ describe BadgevilleJsonFormat do
     before do
       @json_record_without_root =
           "{\"name\":\"visitor_username\",\"created_at\":\"2012-01-05T10:43:42-08:00\",\"email\":\"revised_visitor@emailserver.com\",\"_id\":\"4f05ef5ea768651b3500009f\"}"
-      @decoded_json = BadgevilleJsonFormat.decode( @json_record_without_root)
+      @decoded_json = BadgevilleBerlinJsonFormat.decode( @json_record_without_root)
     end
 
     it "should use the entire json string to create a hash" do
@@ -86,7 +86,7 @@ describe BadgevilleJsonFormat do
     before do
       @json_collection_without_root =
           ""
-      @decoded_json = BadgevilleJsonFormat.decode(@json_collection_without_root)
+      @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_collection_without_root)
     end
 
     # it "should use the entire json string to create a hash" do
@@ -97,7 +97,7 @@ describe BadgevilleJsonFormat do
   context do "where the entire json string represents an empty hash"
     before do
       @empty_hash_string = "{}"
-      @decoded_json = BadgevilleJsonFormat.decode( @empty_hash_string )
+      @decoded_json = BadgevilleBerlinJsonFormat.decode( @empty_hash_string )
     end
     it "should return an empty hash" do
       @decoded_json.should == {}
@@ -110,7 +110,7 @@ describe BadgevilleJsonFormat do
       @nil_string = nil
     end
     it "should raise TypeError" do
-      lambda{ @decoded_json = BadgevilleJsonFormat.decode( @nil_string ) }.should raise_error(TypeError)
+      lambda{ @decoded_json = BadgevilleBerlinJsonFormat.decode( @nil_string ) }.should raise_error(TypeError)
     end
   end
 end

@@ -1,7 +1,7 @@
-module Badgeville
+module BadgevilleBerlin
   describe Config do
     before do
-      @request_site  = 'http://staging.badgeville.com'
+      @request_site  = 'http://staging.badgeville-berlin.com'
       @my_api_key    = '007857cd4fb9f360e120589c34fea080'
       Config.conf(:site => @request_site, :api_key => @my_api_key)
       @empty_string = ''
@@ -57,7 +57,7 @@ module Badgeville
   describe Config, "where the request site has no scheme" do
     context "where the request site has no scheme (i.e. no 'http')" do
       before do
-      @request_site_no_scheme  = 'staging.badgeville.com'
+      @request_site_no_scheme  = 'staging.badgeville-berlin.com'
       @my_api_key   = '007857cd4fb9f360e120589c34fea080'
       end
     end

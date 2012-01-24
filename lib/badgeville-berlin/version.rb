@@ -1,3 +1,3 @@
-module Badgeville
+module BadgevilleBerlin
   VERSION = "0.0.6"
 end

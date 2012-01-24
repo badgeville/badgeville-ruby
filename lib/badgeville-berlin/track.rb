@@ -1,5 +1,5 @@
 # Subclasses BaseResource to represent a remote resource model class.
-module Badgeville
-  class Activity < Badgeville::BaseResource
+module BadgevilleBerlin
+  class Track < BadgevilleBerlin::BaseResource
   end
 end

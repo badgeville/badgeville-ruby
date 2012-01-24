@@ -12,14 +12,14 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
-Badgeville::Config.conf(
+BadgevilleBerlin::Config.conf(
   :site    => "http://sandbox.v2.badgeville.com",
   :api_key => MY_API_KEY)
 ```
 
 ### 2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
 ```ruby
-new_site = Badgeville::Site.new(
+new_site = BadgevilleBerlin::Site.new(
   :name       => "My Website",
   :url        => "mydomain.com",
   :network_id => MY_NETWORK_ID )
@@ -29,7 +29,7 @@ success = new_site.save
 ### 3. Create a user to add them to your network.
 
 ```ruby
-new_user = Badgeville::User.new(
+new_user = BadgevilleBerlin::User.new(
   :name       => 'visitor_username',
   :network_id => MY_NETWORK_ID,
   :email      => 'visitor@emailserver.com',
@@ -40,7 +40,7 @@ success = new_user.save
 ### 4. Find the newly created user by ID to update their email address.
 
 ```ruby
-user_found_by_id = Badgeville::User.find( new_user.id )
+user_found_by_id = BadgevilleBerlin::User.find( new_user.id )
 user_found_by_id.email = 'revised_visitor@emailserver.com'
 success = user_found_by_id.save
 ```
@@ -48,7 +48,7 @@ success = user_found_by_id.save
 ### 5. Create a player using the user corresponding to the updated email address for the site you created.
 
 ```ruby
-new_player = Badgeville::Player.new(
+new_player = BadgevilleBerlin::Player.new(
   :site_id => new_site.id,
   :user_id => new_user.id )
 success = new_player.save
@@ -57,7 +57,7 @@ success = new_player.save
 ### 6. Register a player behavior (e.g. share) for the newly created player.
 
 ```ruby
-new_activity = Badgeville::Activity.new(
+new_activity = BadgevilleBerlin::Activity.new(
   :verb      => 'share',
   :player_id => new_player.id )
 success = new_activity.save
@@ -69,16 +69,16 @@ Print HTTP requests and JSON responses by installing the "logger" gem and includ
 
 ```ruby
 require 'logger'
-Badgeville::BaseResource.logger       = Logger.new(STDOUT)
-Badgeville::BaseResource.logger.level = Logger::DEBUG
+BadgevilleBerlin::BaseResource.logger       = Logger.new(STDOUT)
+BadgevilleBerlin::BaseResource.logger.level = Logger::DEBUG
 
 ```
 
-### Avoiding "Badgeville::"
+### Avoiding "BadgevilleBerlin::"
 Encapsulate your code inside a module Badgeville to avoid frequently typing "Badgeville::"
 
 ```ruby
-module Badgeville
+module BadgevilleBerlin
   # your code goes here
 end
 ```

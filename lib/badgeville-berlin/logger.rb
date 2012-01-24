@@ -1,6 +1,6 @@
 require 'logger'
 
-module Badgeville
+module BadgevilleBerlin
 
 # Instantiate a logger so HTTP request and response information will be
 # printed to STDOUT.

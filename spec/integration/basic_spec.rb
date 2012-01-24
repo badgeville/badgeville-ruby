@@ -1,6 +1,6 @@
 require 'active_support/inflector'
 
-module Badgeville
+module BadgevilleBerlin
   [Activity, ActivityDefinition, Group, Leaderboard, Player, Reward, RewardDefinition, Site, Track, User].each do |module_klass|
     klass = module_klass.to_s.split('::')[1].underscore
     

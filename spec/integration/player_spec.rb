@@ -1,6 +1,6 @@
 require "spec_helper"
 
 
-module Badgeville
+module BadgevilleBerlin
 
 end
