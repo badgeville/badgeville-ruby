@@ -79,13 +79,13 @@ describe BadgevilleBerlinJsonFormat do
   end
 
 
-  context do "where root key data is missing, and json string (array of hashes) represents a collection (array of hashes)"
+  context do "where root key data is not :data, and json string represents a collection"
       before do
-         @json_collection_without_root = '{"users":[{"name":"visitor1","_id":"4dfa6cbc888bae20b0000016"},{"name":"visitor2","_id":"4dfa8908888bae20b50000d1"}],"paging":{"current_page":1}}'
-         @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_collection_without_root)
+         @json_collection_with_diff_root = '{"users":[{"name":"visitor1","_id":"4dfa6cbc888bae20b0000016"},{"name":"visitor2","_id":"4dfa8908888bae20b50000d1"}],"paging":{"current_page":1}}'
+         @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_collection_with_diff_root)
       end
 
-      it "should use the value at the key :data and convert it into an array of hashes" do
+      it "should use the entire json string to create a hash with a nested array of hashes" do
           @decoded_json.should  == {"users" =>
                                       [{"name"=>"visitor1", "_id"=>"4dfa6cbc888bae20b0000016"}, {"name"=>"visitor2", "_id"=>"4dfa8908888bae20b50000d1"}],
                                     "paging"=>{ "current_page" => 1 } }
@@ -93,19 +93,19 @@ describe BadgevilleBerlinJsonFormat do
   end
 
 
-  context do "where root key data is missing, and json string (array of hashes) represents a collection (array of hashes)"
+  #********* EXAMPLE FOR ALEX TO REVIEW **********#
+  context do "where root key data is missing, and json string represents a collection (array of hashes)"
       before do
-         @json_collection_without_root = '{"users":[{"name":"visitor1","_id":"4dfa6cbc888bae20b0000016"},{"name":"visitor2","_id":"4dfa8908888bae20b50000d1"}],"paging":{"current_page":1}}'
+         @json_collection_without_root = '[{"name":"visitor1","_id":"4dfa6cbc888bae20b0000016"},{"name":"visitor2","_id":"4dfa8908888bae20b50000d1"}]'
          @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_collection_without_root)
       end
 
       it "should use the value at the key :data and convert it into an array of hashes" # do
-      #           @decoded_json.should  == {"users" =>
-      #                                       [{"name"=>"visitor1", "_id"=>"4dfa6cbc888bae20b0000016"}, {"name"=>"visitor2", "_id"=>"4dfa8908888bae20b50000d1"}],
-      #                                     "paging"=>{ "current_page" => 1 } }
-      #       end
+      #       @decoded_json.should  == [ {"name" => "visitor1", "_id" => "4dfa6cbc888bae20b0000016"},
+      #                                  {"name" => "visitor2", "_id" => "4dfa8908888bae20b50000d1"} ]
+      # end
   end
-  
+
   context do "where the entire json string represents an empty hash"
     before do
       @empty_hash_string = "{}"
