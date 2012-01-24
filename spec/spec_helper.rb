@@ -2,6 +2,7 @@ require 'rubygems'
 require 'rspec'
 require 'fakeweb'
 require 'factory_girl'
+require 'active_support/inflector'
 require_relative '../lib/badgeville-berlin'
 require_relative 'factories'
 
@@ -29,6 +30,5 @@ module BadgevilleBerlin
       # Force Net::HTTP.new to return @request
       Net::HTTP.should_receive(:new).with(HOST, Integer(PORT)).and_return(@request)
     end
-  end 
-  
+  end
 end
