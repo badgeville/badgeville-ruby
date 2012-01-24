@@ -9,7 +9,7 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ##Advanced Examples
 
-### 0. Please check out the [Basic Examples]() first.
+### 0. Please check out the [Basic Examples](https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown) first.
 
 ### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
@@ -35,9 +35,13 @@ new_activity_definition.adjustment.points = 3
 success = new_activity_definition.save
 ```
 
-### 4. Update the activity definition to include a rate limit in order to prevent players from gaming the system. (more) Set bucket_rate_limit to 180 (20 comments per hour). Why? 180 (3600 (number of seconds in an hour) / 20 comments = 180 s. This will drain 1 comment every 3 minutes. Set bucket_max_capacity to 25. Why? This allows the player to create 25 comments as fast as they like, after which the bucket will begin to drain.
+### 4. Update the activity definition to include a rate limit in order to prevent players from gaming the system. (more)
+#### Set bucket_rate_limit to 180 (20 comments per hour).
+##### Why? 180 (3600 (number of seconds in an hour) / 20 comments = 180 s. This will drain 1 comment every 3 minutes.
+### Set bucket_max_capacity to 25.
+#### Why? This allows the player to create 25 comments as fast as they like, after which the bucket will begin to drain.
 ```ruby
-new_activity_definition.enable_rate_limiting = true
+new_activity_definition.enable_rate_limiting   = true
   new_activity_definition.bucket_drain_rate    = 180
   new_activity_definition.bucket_max_capacity  = 25
   new_activity_definition.save
