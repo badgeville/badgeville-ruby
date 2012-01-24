@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "ZenTest"
   s.add_development_dependency "autotest"
   s.add_development_dependency "autotest-growl"
+  s.add_development_dependency "httparty"
 
   s.add_runtime_dependency "activeresource", '= 3.1.3'
   s.add_runtime_dependency "logger", ">=1.2.8"
