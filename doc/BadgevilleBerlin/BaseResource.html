@@ -1,0 +1,462 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: BadgevilleBerlin::BaseResource
+  
+    &mdash; Documentation by YARD 0.7.1
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (B)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../BadgevilleBerlin.html" title="BadgevilleBerlin (module)">BadgevilleBerlin</a></span></span>
+     &raquo; 
+    <span class="title">BaseResource</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: BadgevilleBerlin::BaseResource
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveResource::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveResource::Base</li>
+          
+            <li class="next">BadgevilleBerlin::BaseResource</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/badgeville-berlin/base_resource.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+Subclasses ActiveResource::Base as BaseResource
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="Activity.html" title="BadgevilleBerlin::Activity (class)">Activity</a></span>, <span class='object_link'><a href="ActivityDefinition.html" title="BadgevilleBerlin::ActivityDefinition (class)">ActivityDefinition</a></span>, <span class='object_link'><a href="Config.html" title="BadgevilleBerlin::Config (class)">Config</a></span>, <span class='object_link'><a href="Group.html" title="BadgevilleBerlin::Group (class)">Group</a></span>, <span class='object_link'><a href="Leaderboard.html" title="BadgevilleBerlin::Leaderboard (class)">Leaderboard</a></span>, <span class='object_link'><a href="Player.html" title="BadgevilleBerlin::Player (class)">Player</a></span>, <span class='object_link'><a href="Reward.html" title="BadgevilleBerlin::Reward (class)">Reward</a></span>, <span class='object_link'><a href="RewardDefinition.html" title="BadgevilleBerlin::RewardDefinition (class)">RewardDefinition</a></span>, <span class='object_link'><a href="Site.html" title="BadgevilleBerlin::Site (class)">Site</a></span>, <span class='object_link'><a href="Track.html" title="BadgevilleBerlin::Track (class)">Track</a></span>, <span class='object_link'><a href="User.html" title="BadgevilleBerlin::User (class)">User</a></span></p>
+</div>
+
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#primary_key-class_method" title="primary_key (class method)">+ (String) <strong>primary_key</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Overrides the ActiveResource class method primary_key to be
+&#8216;_id&#8217; instead of &#8216;id.&#8217;.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#errors-instance_method" title="#errors (instance method)">- (BadgevilleBerlin::Errors) <strong>errors</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Overrides the ActiveResource instance method in module Validations in order
+to call the BadgevilleBerlin::Errors constructor instead of the
+ActiveResource::Errors constructor.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_remote_errors-instance_method" title="#load_remote_errors (instance method)">- (Object) <strong>load_remote_errors</strong>(remote_errors, save_cache = false) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Overrides the ActiveResource isntance method in module Validations in order
+to load_remote_errors() for the case where the format is the custom
+BadgevilleJson format.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="primary_key-class_method">
+  
+    + (<tt>String</tt>) <strong>primary_key</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Overrides the ActiveResource class method primary_key to be
+&#8216;_id&#8217; instead of &#8216;id.&#8217;
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+primary key name &#8216;_id&#8217;
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/badgeville-berlin/base_resource.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id primary_key'>primary_key</span>
+  <span class='ivar'>@primary_key</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>_id</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="errors-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Errors.html" title="BadgevilleBerlin::Errors (class)">BadgevilleBerlin::Errors</a></span></tt>) <strong>errors</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Overrides the ActiveResource instance method in module Validations in order
+to call the BadgevilleBerlin::Errors constructor instead of the
+ActiveResource::Errors constructor.
+</p>
+<p>
+errors messages from the remote server and mimics the interface of the
+errors provided by ActiveRecord::Errors.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Errors.html" title="BadgevilleBerlin::Errors (class)">BadgevilleBerlin::Errors</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+object that holds information about
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/badgeville-berlin/base_resource.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='id errors'>errors</span>
+  <span class='ivar'>@errors</span> <span class='op'>||=</span> <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>Errors</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="load_remote_errors-instance_method">
+  
+    - (<tt>Object</tt>) <strong>load_remote_errors</strong>(remote_errors, save_cache = false) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Overrides the ActiveResource isntance method in module Validations in order
+to load_remote_errors() for the case where the format is the custom
+BadgevilleJson format. Loads the set of remote errors into the object???s
+Errors collection based on the content-type of the error-block received.
+</p>
+<p>
+cleared by default
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>remote_errors</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+errors from teh remote server
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>save_cache</span>
+      
+      
+        <span class='type'>(<tt>Object</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+flag that directs the errors cache to be
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/badgeville-berlin/base_resource.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id load_remote_errors'>load_remote_errors</span><span class='lparen'>(</span><span class='id remote_errors'>remote_errors</span><span class='comma'>,</span> <span class='id save_cache'>save_cache</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='rparen'>)</span> <span class='comment'>#:nodoc:
+</span>  <span class='kw'>case</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id format'>format</span>
+  <span class='kw'>when</span> <span class='const'>ActiveResource</span><span class='op'>::</span><span class='const'>Formats</span><span class='lbracket'>[</span><span class='symbol'>:xml</span><span class='rbracket'>]</span>
+    <span class='id errors'>errors</span><span class='period'>.</span><span class='id from_xml'>from_xml</span><span class='lparen'>(</span><span class='id remote_errors'>remote_errors</span><span class='period'>.</span><span class='id response'>response</span><span class='period'>.</span><span class='id body'>body</span><span class='comma'>,</span> <span class='id save_cache'>save_cache</span><span class='rparen'>)</span>
+  <span class='kw'>when</span> <span class='const'>ActiveResource</span><span class='op'>::</span><span class='const'>Formats</span><span class='lbracket'>[</span><span class='symbol'>:json</span><span class='rbracket'>]</span>
+    <span class='id errors'>errors</span><span class='period'>.</span><span class='id from_json'>from_json</span><span class='lparen'>(</span><span class='id remote_errors'>remote_errors</span><span class='period'>.</span><span class='id response'>response</span><span class='period'>.</span><span class='id body'>body</span><span class='comma'>,</span> <span class='id save_cache'>save_cache</span><span class='rparen'>)</span>
+  <span class='kw'>when</span> <span class='const'>ActiveResource</span><span class='op'>::</span><span class='const'>Formats</span><span class='lbracket'>[</span><span class='symbol'>:badgeville_berlin_json</span><span class='rbracket'>]</span>
+      <span class='id errors'>errors</span><span class='period'>.</span><span class='id from_badgeville_berlin_json'>from_badgeville_berlin_json</span><span class='lparen'>(</span><span class='id remote_errors'>remote_errors</span><span class='period'>.</span><span class='id response'>response</span><span class='period'>.</span><span class='id body'>body</span><span class='comma'>,</span> <span class='id save_cache'>save_cache</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Tue Jan 24 14:21:13 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.1 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
