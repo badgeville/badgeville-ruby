@@ -6,8 +6,8 @@ module BadgevilleBerlin
 
 
     class << self
-      # This subclass overrides the ActiveResource attribute primary_key
-      # to be '_id' instead of 'id.'
+      # Overrides the ActiveResource class method primary_key to be '_id'
+      # instead of 'id.'
       #
       # @return [String] primary key name '_id'
       def primary_key
@@ -15,17 +15,26 @@ module BadgevilleBerlin
       end
     end
 
-    # OVERRIDING ActiveResource method in module Validations in order to
-    # call the BadgevilleBerlin.Errors constructor instead of the
-    # ActiveResource::Errors constructor
-    # Returns the BadgevilleBerlin::Errors object that holds all information about attribute error messages.
+    # Overrides the ActiveResource instance method in module Validations
+    # in order to call the BadgevilleBerlin::Errors constructor instead of
+    # the ActiveResource::Errors constructor.
+    #
+    # @return [BadgevilleBerlin::Errors] object that holds information about
+    # errors messages from the remote server and mimics the interface of the
+    # errors provided by ActiveRecord::Errors.
     def errors
       @errors ||= BadgevilleBerlin::Errors.new(self)
     end
 
-    # OVERRIDING ActiveResource method in module Validations in order to
-    # load_remote_errors() for the case where the format is the custom
-    # BadgevilleJson format
+    # Overrides the ActiveResource isntance method in module Validations
+    # in order to load_remote_errors() for the case where the format is
+    # the custom BadgevilleJson format. Loads the set of remote errors into
+    # the object’s Errors collection based on the content-type of the
+    # error-block received.
+    #
+    # @param remote_errors errors from teh remote server
+    # @param [Object] save_cache flag that directs the errors cache to be
+    # cleared by default
     def load_remote_errors(remote_errors, save_cache = false ) #:nodoc:
       case self.class.format
       when ActiveResource::Formats[:xml]

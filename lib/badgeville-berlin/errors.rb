@@ -2,11 +2,14 @@ module BadgevilleBerlin
 
   # Subclasses ActiveResource::Errors to be used by BaseResource as BadgevilleBerlin::Errors.
   class Errors < ActiveResource::Errors
-    # Grabs errors originating from the remote model class. The custom JSON error
-    # response format may not have a root key :errors.
+    # Grabs errors from the :badgeville_berlin_json response remote model
+    # originating from teh remote class. The custom JSON error response
+    # format may not have a root key :errors.
     #
-    # @param [String?] json the JSON response data in custom BadgevilleBerlinJsonFormat
-    # @return [Array] error messages associated with the remote model
+    # @param [String] json the JSON response data in custom
+    # BadgevilleBerlinJsonFormat
+    # @param [Object] save_cache flag that directs the errors cache to be
+    # cleared by default
     def from_badgeville_berlin_json(json, save_cache = false)
       formatted_json_decoded = Array.new
       json_decoded = (ActiveSupport::JSON.decode(json))['errors'] || ActiveSupport::JSON.decode(json) rescue []
