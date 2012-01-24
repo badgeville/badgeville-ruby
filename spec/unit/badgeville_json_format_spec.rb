@@ -15,19 +15,16 @@ describe BadgevilleBerlinJsonFormat do
 
 
   context do "where root key :data present, value at :data is a collection (array of hashes)"
-    # before do
-    #    @json_collection_w_root = "{\"data\":"
-    #     + "[{\"name\"visitor1,\"_id\":\"4dfa6cbc888bae20b0000016\"},"
-    #     # + "{\"name\":visitor2,\"_id\":\"4dfa8908888bae20b50000d1\"}]"
-    #     # + "\"paging\":{\"current_page\":1,\"per_page\":10}}"
-    #    @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_collection_w_root)
-    #
-    # end
-    # #
-    # it "should use the value at the key :data and convert it into an array of hashes" do
-    #       @decoded_json.should  == [ {:name => "visitor1", :_id => "4dfa6cbc888bae20b0000016"},
-    #                                    {:name => "visitor2", :_id => "4dfa8908888bae20b50000d1"} ]
-    # end
+    before do
+       #@json_collection_w_root = "{\"data\":[{\"name\":visitor1,\"_id\":\"4dfa6cbc888bae20b0000016\"},{\"name\":visitor2,\"_id\":\"4dfa8908888bae20b50000d1\"}]\"paging\":{\"current_page\":1,\"per_page\":10}}"
+       @json_collection_w_root = '{"data":[{"name":"visitor1","_id":"4dfa6cbc888bae20b0000016"},{"name":"visitor2","_id":"4dfa8908888bae20b50000d1"}],"paging":{"current_page":1,"per_page":10}}'
+       @decoded_json = BadgevilleBerlinJsonFormat.decode(@json_collection_w_root)
+
+    end
+    it "should use the value at the key :data and convert it into an array of hashes" do
+        @decoded_json.should  == [ {"name" => "visitor1", "_id" => "4dfa6cbc888bae20b0000016"},
+                                   {"name" => "visitor2", "_id" => "4dfa8908888bae20b50000d1"} ]
+    end
 
   end
 
