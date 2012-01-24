@@ -1,4 +1,4 @@
-# Badgeville RESTful Wrapper for Berlin API (Basic README)
+# Badgeville RESTful Wrapper for Berlin API (Advanced README)
 
 This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
 
@@ -7,7 +7,9 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 * Uses the activeresource (3.0.5) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
 * Allows creating, reading (finding), updating and deleting the following classes of remote resources: Site, User, Player, ActivityDefinition, Activity.
 
-##Basic Examples
+##Advanced Examples
+
+### 0. Please check out the [Basic Examples]() first.
 
 ### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
@@ -16,50 +18,29 @@ BadgevilleBerlin::Config.conf(
   :api_key => MY_API_KEY)
 ```
 
-### 2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.
+### 2. Create an activity definition to specify that a player will earn 4 points each time they perform the "comment" behavior.
 ```ruby
-new_site = BadgevilleBerlin::Site.new(
-  :name       => "My Website",
-  :url        => "mydomain.com",
-  :network_id => MY_NETWORK_ID )
-success = new_site.save
-```
-
-### 3. Create a user to add them to your network.
-
-```ruby
-new_user = BadgevilleBerlin::User.new(
-  :name       => 'visitor_username',
-  :network_id => MY_NETWORK_ID,
-  :email      => 'visitor@emailserver.com',
-  :password   => 'visitor_password' )
-success = new_user.save
-```
-
-### 4. Find the newly created user by ID to update their email address.
-
-```ruby
-user_found_by_id = BadgevilleBerlin::User.find( new_user.id )
-user_found_by_id.email = 'revised_visitor@emailserver.com'
-success = user_found_by_id.save
-```
-
-### 5. Create a player using the user corresponding to the updated email address for the site you created.
-
-```ruby
-new_player = BadgevilleBerlin::Player.new(
+new_activity_definition = ActivityDefinition.new(
+  :adjustment => {:points => 4},
+  :name => 'comment_earns_4points',
   :site_id => new_site.id,
-  :user_id => new_user.id )
-success = new_player.save
+  :verb => 'comment' )
+success = new_activity_definition.save
 ```
 
-### 6. Register a player behavior (e.g. share) for the newly created player.
+### 3. Update the activity definition such that a player on your site will earn 3 points rather than 4 each time they perform the "comment" behavior.
 
 ```ruby
-new_activity = BadgevilleBerlin::Activity.new(
-  :verb      => 'share',
-  :player_id => new_player.id )
-success = new_activity.save
+new_activity_definition.adjustment.points = 3
+success = new_activity_definition.save
+```
+
+### 4. Update the activity definition to include a rate limit in order to prevent players from gaming the system. (more) Set bucket_rate_limit to 180 (20 comments per hour). Why? 180 (3600 (number of seconds in an hour) / 20 comments = 180 s. This will drain 1 comment every 3 minutes. Set bucket_max_capacity to 25. Why? This allows the player to create 25 comments as fast as they like, after which the bucket will begin to drain.
+```ruby
+new_activity_definition.enable_rate_limiting = true
+  new_activity_definition.bucket_drain_rate    = 180
+  new_activity_definition.bucket_max_capacity  = 25
+  new_activity_definition.save
 ```
 
 ## Tips
