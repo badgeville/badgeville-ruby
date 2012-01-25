@@ -47,16 +47,25 @@ module BerlinShell
   end
   
   def self.parse_path (path)
+    if path == "/"
+      path = "/Site"
+    end
+    
+    # Handle ../
+    if (path == "../" && BerlinShell.working_path_parts.length > 1)
+      BerlinShell.working_path_parts.pop
+      path = ""
+    end
+    
     if !path.match /^\// # Relative Path
       path = BerlinShell.working_path_parts.join("/") + "/" + path
-    else # Absolute Path
-      path = "Site" + path
+    elsif !path.match /^\/Site/ # Absolute Path w.out /Site
+      path = "/Site" + path
     end
     
     path = path.sub(/^\/*/,"").sub(/\/$/,"") # Trim / 
     parts = path.split("/")
 
-    
     # Handle ..
     if parts[0].match /\.\.$/
       # Needs to be coded
@@ -78,29 +87,34 @@ module BerlinShell
   
   def self.valid_path_parts (parts)
     if parts.length == 1
-      true
+      return true
     end
     
     # Check if path is valid
     
     # Validate site
-    found = false
-    debugger
-    site = get_site(parts[1])
-    if !site
-      say "Invalid site"
+    if !get_site(parts[1])
+      return false
     end
     
-    true
+    # Validate Object
+    if parts[2] && !BerlinShell.bv_objs[parts[2]]
+       return false
+    end
+    
+    return true
   end
   
   def self.get_site (needle)
+    found = false
     BerlinShell.sites.each do |site|
       if site.name == needle || site.id == needle
-        site
+        found = site
       end
     end
+    return found
   end
+
   
   class Commands
     def self.ls (path)
@@ -117,11 +131,11 @@ module BerlinShell
             items.push(name)
           end
         when 3 # List Items
-          BerlinShell.bv_objs[path_parts[1]].find(:all).each do |item|
+          BerlinShell.bv_objs[path_parts[2]].find(:all).each do |item|
             items.push(item.id)
           end
         when 4 # List Details
-        
+          items.push(BerlinShell.bv_objs[path_parts[2]].find(path_parts[3]).to_yaml)
       end
       
       say items.join(SPACER)
