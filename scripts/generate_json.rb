@@ -269,14 +269,14 @@ module BadgevilleBerlin
           self.send "#{klass}_name=", create_hash["name"]
         end
 
-        File.open('test_data.yml', 'a') { |f| f.puts create_hash.to_yaml.gsub("\n","\n  ").gsub("---","valid_#{klass}_create:") }
+        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_create: #{create_response}\n" }
 
         #Generate find json
 
         find_response = `curl '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json' `
-        find_hash = eval(find_response.gsub('":','"=>').gsub("null","\"null\""))
+        #find_hash = eval(find_response.gsub('":','"=>').gsub("null","\"null\""))
 
-        File.open('test_data.yml', 'a') { |f| f.puts find_hash.to_yaml.gsub("\n","\n  ").gsub("---","valid_#{klass}_find:") }
+        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_find: #{find_response}\n"}
     end
 
     [BadgevilleBerlin::Site, BadgevilleBerlin::Group, BadgevilleBerlin::ActivityDefinition, BadgevilleBerlin::Leaderboard,
@@ -308,8 +308,8 @@ module BadgevilleBerlin
 
         update_response = `curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'`
         puts "curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'"
-        update_hash = eval(update_response.gsub('":','"=>').gsub("null","\"null\""))
-        File.open('test_data.yml', 'a') { |f| f.puts update_hash.to_yaml.gsub("\n","\n  ").gsub("---","valid_#{klass}_update:") }
+        #update_hash = eval(update_response.gsub('":','"=>').gsub("null","\"null\""))
+        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_update: #{update_response}\n" }
 
         if klass == "user"
           self.send "#{klass}_email=", update_options[:email]
@@ -318,7 +318,7 @@ module BadgevilleBerlin
         elsif klass == "track" || klass == "player"
           #do nothing
         else
-          self.send "#{klass}_name=", update_hash[:name]
+          self.send "#{klass}_name=", update_options[:name]
         end
     end
 
@@ -330,8 +330,8 @@ module BadgevilleBerlin
         klass = module_klass.to_s.split('::')[1].underscore
         delete_response = `curl -X DELETE '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'`
         puts "curl -X DELETE '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'"
-        delete_hash = eval(delete_response.gsub('":','"=>').gsub("null","\"null\""))
-        File.open('test_data.yml', 'a') { |f| f.puts delete_hash.to_yaml.gsub("\n","\n  ").gsub("---","valid_#{klass}_delete:") }
+        #delete_hash = eval(delete_response.gsub('":','"=>').gsub("null","\"null\""))
+        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_delete: #{delete_response}\n" }
       end
 
   end
