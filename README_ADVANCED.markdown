@@ -14,8 +14,8 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 ### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
 BadgevilleBerlin::Config.conf(
-  :site    => "http://sandbox.v2.badgeville.com",
-  :api_key => MY_API_KEY)
+  :host_name => "http://sandbox.v2.badgeville.com",
+  :api_key   => MY_API_KEY)
 ```
 
 ### 2. Create an activity definition to specify that a player will earn 4 points each time they perform the "comment" behavior.

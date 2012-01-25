@@ -16,7 +16,7 @@ module BadgevilleBerlin
   PORT = "80"
 
   FakeWeb.allow_net_connect = false # Requests to a URI you haven’t registered with #register_uri, a NetConnectNotAllowedError will be raised
-  Config.conf(:site => 'http://' + HOST + '/', :api_key => APIKEY)
+  Config.conf(:host_name => 'http://' + HOST + '/', :api_key => APIKEY)
 
   # Instantiate a logger so HTTP request and response information will be
   # printed to STDOUT.
@@ -37,12 +37,12 @@ module BadgevilleBerlin
       Net::HTTP.should_receive(:new).with(HOST, Integer(PORT)).and_return(@request)
     end
   end
-  
+
   def self.test_attr (mock, mock_json)
     attributes = mock.instance_variable_get("@attributes")
     JSON.parse(mock_json)["data"].each do |key, value|
       value.should == attributes[key]
     end
   end
-  
+
 end
