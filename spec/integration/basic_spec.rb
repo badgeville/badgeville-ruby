@@ -4,7 +4,8 @@ module BadgevilleBerlin
     describe 'Create a new ' + klass do
       before do
         @mock = Factory.build(klass)
-        @mock_json = "{\"data\":{\"name\":\"visitor_username\",\"created_at\":\"2012-01-05T10:43:42-08:00\",\"email\":\"revised_visitor@emailserver.com\",\"_id\":\"4f05ef5ea768651b3500009f\"},\"paging\":null}" #Factory.build(klass + '_json_save')
+        debugger
+        @mock_json = BadgevilleBerlin.response_json["valid_" + klass + "_create"]
         @path = ENDPOINTKEY + "/" + klass.pluralize + ".json"
         @method = :post
         @mock_http = MockHTTP.new(@method, @path, {:body => @mock_json, :status => [201, "Created"]})

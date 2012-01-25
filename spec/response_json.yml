@@ -1,0 +1,460 @@
+validate_site_create: 
+  name: DWYjoJAlLPSVIIXM
+  created_at: "2012-01-25T10:32:41-08:00"
+  url: DWYjoJAlLPSVIIXM.com
+  id: 4f204ac9a7686573bb000379
+  _id: 4f204ac9a7686573bb000379
+  
+validate_site_find: 
+  data: 
+    name: DWYjoJAlLPSVIIXM
+    created_at: "2012-01-25T10:32:41-08:00"
+    url: DWYjoJAlLPSVIIXM.com
+    id: 4f204ac9a7686573bb000379
+    _id: 4f204ac9a7686573bb000379
+  paging: "null"
+  
+validate_group_create: 
+  id: 4f204ac9a7686573bb00037a
+  name: uLOQnJuMPvLkqmNE
+  type: ladder
+  image_url: "null"
+  tip: "null"
+  message: "null"
+  privileges: "null"
+  note: "null"
+  display_priority: 0
+  reward_definitions: []
+  
+  reward_image_url: "null"
+  
+validate_group_find: 
+  data: 
+    id: 4f204ac9a7686573bb00037a
+    name: uLOQnJuMPvLkqmNE
+    type: ladder
+    image_url: "null"
+    tip: "null"
+    message: "null"
+    privileges: "null"
+    note: "null"
+    display_priority: 0
+    reward_definitions: []
+  
+    reward_image_url: "null"
+  paging: "null"
+  
+validate_leaderboard_create: 
+  id: 4f204acaa7686573bb00037b
+  type: Leaderboard
+  name: onFASHXAiydcDySG
+  target_model: Activity
+  command: sum
+  field: "+5"
+  selector: {}
+  
+  label: onFASHXAiydcDySG
+  data: {}
+  
+  
+validate_leaderboard_find: 
+  data: 
+    id: 4f204acaa7686573bb00037b
+    type: Leaderboard
+    name: onFASHXAiydcDySG
+    target_model: Activity
+    command: sum
+    field: "+5"
+    selector: {}
+  
+    label: onFASHXAiydcDySG
+    data: {}
+  
+  paging: "null"
+  
+validate_user_create: 
+  name: YtOBvQkCbxjiDdWW
+  created_at: "2012-01-25T10:32:43-08:00"
+  email: YtOBvQkCbxjiDdWW@badgeville.com
+  _id: 4f204acba7686573aa000391
+  
+validate_user_find: 
+  data: 
+    name: YtOBvQkCbxjiDdWW
+    created_at: "2012-01-25T10:32:43-08:00"
+    email: YtOBvQkCbxjiDdWW@badgeville.com
+    _id: 4f204acba7686573aa000391
+  paging: "null"
+  
+validate_player_create: 
+  _id: 4f204acba7686573bb00037c
+  id: 4f204acba7686573bb00037c
+  name: YtOBvQkCbxjiDdWW
+  first_name: qhGiKWQLDCLuSYQP
+  last_name: qhGiKWQLDCLuSYQP
+  display_name: "null"
+  nick_name: "null"
+  email: YtOBvQkCbxjiDdWW@badgeville.com
+  user_email: YtOBvQkCbxjiDdWW@badgeville.com
+  created_at: "2012-01-25T10:32:43-08:00"
+  user_id: 4f204acba7686573aa000391
+  site_id: 4f204ac9a7686573bb000379
+  site_url: DWYjoJAlLPSVIIXM.com
+  admin: false
+  points_day: 0.0
+  points_week: 0.0
+  points_month: 0.0
+  points_all: 0.0
+  facebook_id: "null"
+  facebook_link: "null"
+  twitter_id: "null"
+  twitter_username: "null"
+  twitter_link: "null"
+  email_notifications: true
+  custom_picture_url: "null"
+  picture_url: "null"
+  preferences: 
+    email_notifications: true
+    hide_notifications: false
+    publish_activity: true
+  tracks: {}
+  
+  units: 
+    points_day: 0.0
+    points_week: 0.0
+    points_month: 0.0
+    points_all: 0.0
+    badges_day: 0
+    badges_week: 0
+    badges_month: 0
+    badges_all: 0
+  
+validate_player_find: 
+  data: 
+    _id: 4f204acba7686573bb00037c
+    id: 4f204acba7686573bb00037c
+    name: YtOBvQkCbxjiDdWW
+    first_name: qhGiKWQLDCLuSYQP
+    last_name: qhGiKWQLDCLuSYQP
+    display_name: "null"
+    nick_name: "null"
+    email: YtOBvQkCbxjiDdWW@badgeville.com
+    user_email: YtOBvQkCbxjiDdWW@badgeville.com
+    created_at: "2012-01-25T10:32:43-08:00"
+    user_id: 4f204acba7686573aa000391
+    site_id: 4f204ac9a7686573bb000379
+    site_url: DWYjoJAlLPSVIIXM.com
+    admin: false
+    points_day: 0.0
+    points_week: 0.0
+    points_month: 0.0
+    points_all: 0.0
+    facebook_id: "null"
+    facebook_link: "null"
+    twitter_id: "null"
+    twitter_username: "null"
+    twitter_link: "null"
+    email_notifications: true
+    custom_picture_url: "null"
+    picture_url: "null"
+    preferences: 
+      email_notifications: true
+      hide_notifications: false
+      publish_activity: true
+    tracks: {}
+  
+    units: 
+      points_day: 0.0
+      points_week: 0.0
+      points_month: 0.0
+      points_all: 0.0
+      badges_day: 0
+      badges_week: 0
+      badges_month: 0
+      badges_all: 0
+  paging: "null"
+  
+validate_reward_definition_create: 
+  type: rewarddefinition
+  name: tsumrBeaoYMHixFU
+  created_at: "2012-01-25T10:32:44-08:00"
+  assignable: false
+  allow_duplicates: false
+  components: "[]"
+  reward_template: {}
+  
+  tags: "null"
+  site_id: 4f204ac9a7686573bb000379
+  image_url: http://staging.badgeville.com/images/misc/missing_badge.png
+  image_file_name: "null"
+  data: {}
+  
+  _id: 4f204acca7686573bb00037d
+  id: 4f204acca7686573bb00037d
+  active: false
+  hint: "null"
+  message: "null"
+  active_start_at: "null"
+  active_end_at: "null"
+  
+validate_reward_definition_find: 
+  data: 
+    type: rewarddefinition
+    name: tsumrBeaoYMHixFU
+    created_at: "2012-01-25T10:32:44-08:00"
+    assignable: false
+    allow_duplicates: false
+    components: "[]"
+    reward_template: {}
+  
+    tags: "null"
+    site_id: 4f204ac9a7686573bb000379
+    image_url: http://staging.badgeville.com/images/misc/missing_badge.png
+    image_file_name: "null"
+    data: {}
+  
+    _id: 4f204acca7686573bb00037d
+    id: 4f204acca7686573bb00037d
+    active: false
+    hint: "null"
+    message: "null"
+    active_start_at: "null"
+    active_end_at: "null"
+  paging: "null"
+  
+validate_reward_create: 
+  name: tsumrBeaoYMHixFU
+  created_at: "2012-01-25T10:32:44-08:00"
+  activity_id: "null"
+  id: 4f204acca7686573aa000394
+  user_id: 4f204acba7686573aa000391
+  site_id: 4f204ac9a7686573bb000379
+  definition: 
+    type: rewarddefinition
+    name: tsumrBeaoYMHixFU
+    created_at: "2012-01-25T10:32:44-08:00"
+    assignable: false
+    allow_duplicates: false
+    components: "[]"
+    reward_template: {}
+  
+    tags: "null"
+    site_id: 4f204ac9a7686573bb000379
+    image_url: http://staging.badgeville.com/images/misc/missing_badge.png
+    image_file_name: "null"
+    data: {}
+  
+    _id: 4f204acca7686573bb00037d
+    id: 4f204acca7686573bb00037d
+    active: false
+    hint: "null"
+    message: "null"
+    active_start_at: "null"
+    active_end_at: "null"
+  image: http://staging.badgeville.com/images/misc/missing_badge.png
+  tags: []
+  
+  status: "null"
+  message: "null"
+  history: "null"
+  next_reward_id: "null"
+  
+validate_reward_find: 
+  data: 
+    name: tsumrBeaoYMHixFU
+    created_at: "2012-01-25T10:32:44-08:00"
+    activity_id: "null"
+    id: 4f204acca7686573aa000394
+    user_id: 4f204acba7686573aa000391
+    site_id: 4f204ac9a7686573bb000379
+    definition: 
+      type: rewarddefinition
+      name: tsumrBeaoYMHixFU
+      created_at: "2012-01-25T10:32:44-08:00"
+      assignable: false
+      allow_duplicates: false
+      components: "[]"
+      reward_template: {}
+  
+      tags: "null"
+      site_id: 4f204ac9a7686573bb000379
+      image_url: http://staging.badgeville.com/images/misc/missing_badge.png
+      image_file_name: "null"
+      data: {}
+  
+      _id: 4f204acca7686573bb00037d
+      id: 4f204acca7686573bb00037d
+      active: false
+      hint: "null"
+      message: "null"
+      active_start_at: "null"
+      active_end_at: "null"
+    image: http://staging.badgeville.com/images/misc/missing_badge.png
+    tags: []
+  
+    status: "null"
+    message: "null"
+    history: "null"
+    next_reward_id: "null"
+  paging: "null"
+  
+validate_activity_definition_create: 
+  _id: 4f204acda7686573aa000395
+  name: fRlNgfEdJoAgFEaW
+  selector: 
+    verb: read
+  adjustment: 
+    points: 5
+  bucket_drain_rate: "null"
+  bucket_max_capacity: "null"
+  limit_per_player: "null"
+  limit_field_scope: "null"
+  site_id: 4f204ac9a7686573bb000379
+  verb: read
+  icon: "null"
+  tool_tip: "null"
+  hide_in_widgets: true
+  enable_rate_limiting: false
+  enable_count_limiting: false
+  enable_site_notification: "null"
+  enable_user_notification: "null"
+  enable_auto_subscription: "null"
+  description: "null"
+  
+validate_activity_definition_find: 
+  data: 
+    _id: 4f204acda7686573aa000395
+    name: fRlNgfEdJoAgFEaW
+    selector: 
+      verb: read
+    adjustment: 
+      points: 5
+    bucket_drain_rate: "null"
+    bucket_max_capacity: "null"
+    limit_per_player: "null"
+    limit_field_scope: "null"
+    site_id: 4f204ac9a7686573bb000379
+    verb: read
+    icon: "null"
+    tool_tip: "null"
+    hide_in_widgets: true
+    enable_rate_limiting: false
+    enable_count_limiting: false
+    enable_site_notification: "null"
+    enable_user_notification: "null"
+    enable_auto_subscription: "null"
+    description: "null"
+  paging: "null"
+  
+validate_activity_create: 
+  _id: 4f204acda7686573aa000396
+  created_at: "2012-01-25T10:32:45-08:00"
+  definition_ids: []
+  
+  deleted_at: "null"
+  internal: false
+  player_id: 4f204acba7686573bb00037c
+  points: 0
+  shard_id: c35db1b5c528bf6bcc828ea408fd5b5c
+  site_id: 4f204ac9a7686573bb000379
+  team_ids: []
+  
+  user_id: 4f204acba7686573aa000391
+  verb: tlPcYpYYMEfCULEM
+  rewards: []
+  
+  contents: []
+  
+  
+validate_activity_find: 
+  data: 
+    _id: 4f204acda7686573aa000396
+    created_at: "2012-01-25T10:32:45-08:00"
+    definition_ids: []
+  
+    deleted_at: "null"
+    internal: false
+    player_id: 4f204acba7686573bb00037c
+    points: 0
+    shard_id: c35db1b5c528bf6bcc828ea408fd5b5c
+    site_id: 4f204ac9a7686573bb000379
+    team_ids: []
+  
+    user_id: 4f204acba7686573aa000391
+    verb: tlPcYpYYMEfCULEM
+    rewards: []
+  
+    contents: []
+  
+  paging: "null"
+  
+validate_track_create: 
+  id: 4f204acea7686573aa000397
+  label: JbRNjOokFgoOHdfG
+  type: Track
+  image_url: "null"
+  hint: "null"
+  missionList: []
+  
+  nextMission: "null"
+  
+validate_track_find: 
+  data: 
+    id: 4f204acea7686573aa000397
+    label: JbRNjOokFgoOHdfG
+    type: Track
+    image_url: "null"
+    hint: "null"
+    missionList: []
+  
+    nextMission: "null"
+  paging: "null"
+  
+validate_site_update: {}
+  
+  
+validate_group_update: {}
+  
+  
+validate_activity_definition_update: {}
+  
+  
+validate_leaderboard_update: {}
+  
+  
+validate_player_update: {}
+  
+  
+validate_reward_definition_update: {}
+  
+  
+validate_track_update: {}
+  
+  
+validate_user_update: {}
+  
+  
+validate_track_delete: {}
+  
+  
+validate_activity_definition_delete: {}
+  
+  
+validate_reward_delete: {}
+  
+  
+validate_reward_definition_delete: {}
+  
+  
+validate_player_delete: {}
+  
+  
+validate_user_delete: {}
+  
+  
+validate_group_delete: {}
+  
+  
+validate_site_delete: {}
+  
+  
