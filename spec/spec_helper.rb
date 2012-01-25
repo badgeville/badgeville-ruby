@@ -3,6 +3,7 @@ require 'rspec'
 require 'fakeweb'
 require 'factory_girl'
 require 'active_support/inflector'
+require 'logger'
 require_relative '../lib/badgeville-berlin'
 require_relative 'factories'
 
@@ -16,6 +17,11 @@ module BadgevilleBerlin
 
   FakeWeb.allow_net_connect = false # Requests to a URI you haven’t registered with #register_uri, a NetConnectNotAllowedError will be raised
   Config.conf(:site => 'http://' + HOST + '/', :api_key => APIKEY)
+
+  # Instantiate a logger so HTTP request and response information will be
+  # printed to STDOUT.
+  BaseResource.logger       = Logger.new(STDOUT)
+  BaseResource.logger.level = Logger::DEBUG
 
   class MockHTTP
     attr_accessor :request, :response

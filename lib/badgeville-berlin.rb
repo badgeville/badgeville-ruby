@@ -20,8 +20,5 @@ require "badgeville-berlin/site.rb"
 require "badgeville-berlin/track.rb"
 require "badgeville-berlin/user.rb"
 
-# Adds logger to print out HTTP requests and responses.
-require "badgeville-berlin/logger.rb"
-
 module BadgevilleBerlin
 end
