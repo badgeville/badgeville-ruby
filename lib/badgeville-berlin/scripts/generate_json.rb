@@ -41,8 +41,16 @@ module BadgevilleBerlin
     @@player_id = 0
     @@player_name = ""
     @@user_id = 0
-    @@user_name = ""
     @@user_email = ""
+    @@reward_definition_id = 0
+    @@reward_definition_name = ""
+    @@reward_id = 0
+    @@reward_name = ""
+    @@activity_definition_id = 0
+    @@activity_definition_name = ""
+    @@activity_id = 0
+    @@track_id = 0
+
     #[Activity, ActivityDefinition, Group, Leaderboard, Player, Reward, RewardDefinition, Site, Track, User].each do |module_klass|
     #curl -d 'leaderboard[network_id]=4d5dc61ed0c0b32b79000001&leaderboard[name]=Underwater Basketweaving Leaderboard&leaderboard[selector]={}&leaderboard[field]=%2B5&leaderboard[command]=5&leaderboard[label]=ubl' 'http://staging.badgeville.com/api/berlin/6f8d6fef49a462279eeca363fa1a30b5/leaderboards.json'
 
@@ -136,17 +144,92 @@ module BadgevilleBerlin
       @@user_email = user_email
     end
 
+    def self.reward_definition_id
+      @@reward_definition_id
+    end
+
+
+    def self.reward_definition_id=(reward_definition_id)
+      @@reward_definition_id = reward_definition_id
+    end
+
+    def self.reward_definition_name
+      @@reward_definition_name
+    end
+
+    def self.reward_definition_name=(reward_definition_name)
+      @@reward_definition_name = reward_definition_name
+    end
+
+    def self.reward_id
+      @@reward_id
+    end
+
+    def self.reward_id=(reward_id)
+      @@reward_id = reward_id
+    end
+
+    def self.reward_name
+      @@reward_name
+    end
+
+    def self.reward_name=(reward_name)
+      @@reward_name = reward_name
+    end
+
+    def self.activity_definition_id
+      @@activity_definition_id
+    end
+    
+    def self.activity_definition_id=(activity_definition_id)
+      @@activity_definition_id = activity_definition_id
+    end
+
+    def self.activity_definition_name
+      @@activity_definition_name
+    end
+
+    def self.activity_definition_name=(activity_definition_name)
+      @@activity_definition_name = activity_definition_name
+    end
+
+    def self.activity_id
+      @@activity_id
+    end
+
+    def self.activity_id=(activity_id)
+      @@activity_id = activity_id
+    end
+
+    def self.activity_name
+      @@activity_name
+    end
+
+    def self.activity_name=(activity_name)
+      @@activity_name = activity_name
+    end
+
+    def self.track_id
+      @@track_id
+    end
+
+    def self.track_id=(track_id)
+      @@track_id = track_id
+    end
 
     def self.yml
       [BadgevilleBerlin::Site, BadgevilleBerlin::Group, BadgevilleBerlin::Leaderboard, BadgevilleBerlin::User,
-       BadgevilleBerlin::Player].each do |module_klass|
+       BadgevilleBerlin::Player, BadgevilleBerlin::RewardDefinition, BadgevilleBerlin::Reward,
+       BadgevilleBerlin::ActivityDefinition, BadgevilleBerlin::Activity, BadgevilleBerlin::Track].each do |module_klass|
 
-        #Create
+        #Generate create json
+
         klass = module_klass.to_s.split('::')[1].underscore
 
         o =  [('a'...'z'),('A'...'Z')].map{|i| i.to_a}.flatten
         string  =  (0..15).map{ o[rand(o.length)]  }.join
 
+        #options hash for create
         case klass
           when "site"
             options = {:name => string, :url => "#{string}.com" }
@@ -160,23 +243,58 @@ module BadgevilleBerlin
             options = {:email! => self.user_email, :site! => "#{self.site_name}.com",
                        :email => self.user_email, :first_name => string,
                        :last_name => string}
+          when "reward_definition"
+            options = {:site_id => self.site_id, :name => string, :reward_template => {},
+                       :active => false, :allow_duplicates => false, :assignable => false}
+          when "reward"
+            options = {:site_id => self.site_id, :player_id => self.player_id, :definition_id => self.reward_definition_id}
+          when "activity_definition"
+            options = {:site_id => self.site_id, :name => string, :selector => "{\"verb\" : \"read\"}", :adjustment => "{\"points\" : 5}" }
+          when "activity"
+            options = {:verb => string, :player_id! => self.player_id}
+          when "track"
+            options = {:site_id => self.site_id, :label => string}
         end
 
-        puts "curl -d '#{build_options(klass,options)}'  '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}.json'"
-        response = `curl -d '#{build_options(klass,options)}'  '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}.json'`
-        puts response
-        create_hash = eval(response.gsub('":','"=>').gsub("null","\"null\""))
+        create_response = `curl -d '#{build_options(klass,options)}'  '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}.json'`
+        create_hash = eval(create_response.gsub('":','"=>').gsub("null","\"null\""))
 
         if klass == "user"
           self.send "#{klass}_id=", create_hash["_id"]
           self.send "#{klass}_email=", create_hash["email"]
+        elsif klass == "activity_definition"
+          self.send "#{klass}_id=", create_hash["_id"]
+          self.send "#{klass}_name=", create_hash["name"]
+        elsif klass == "activity"
+          self.send "#{klass}_id=", create_hash["_id"]
+        elsif klass == "track"
+          self.send "#{klass}_id=", create_hash["id"]
         else
           self.send "#{klass}_id=", create_hash["id"]
+          self.send "#{klass}_name=", create_hash["name"]
         end
 
-        self.send "#{klass}_name=", create_hash["name"]
+        File.open('test_data.yml', 'a') { |f| f.puts create_hash.to_yaml.gsub("\n","\n  ").gsub("---","validate_#{klass}_create:") }
 
-        puts create_hash.to_yaml
+        #Generate find json
+
+        find_response = `curl '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json' `
+        find_hash = eval(find_response.gsub('":','"=>').gsub("null","\"null\""))
+
+        File.open('test_data.yml', 'a') { |f| f.puts find_hash.to_yaml.gsub("\n","\n  ").gsub("---","validate_#{klass}_find:") }
+
+        #Generate update json
+
+        string2 = (0..15).map{ o[rand(o.length)]  }.join
+        case klass
+          when "group"
+            update_options = {:name => string2}
+        end
+
+        update_response = `curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.group_id}.json'`
+        update_hash = eval(update_response.gsub('":','"=>').gsub("null","\"null\""))
+        
+
       end
     end
 
