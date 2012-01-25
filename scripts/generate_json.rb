@@ -269,14 +269,14 @@ module BadgevilleBerlin
           self.send "#{klass}_name=", create_hash["name"]
         end
 
-        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_create: #{create_response}\n" }
+        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_create: \"#{create_response.gsub('"','\"')}\"\n" }
 
         #Generate find json
 
         find_response = `curl '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json' `
         #find_hash = eval(find_response.gsub('":','"=>').gsub("null","\"null\""))
 
-        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_find: #{find_response}\n"}
+        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_find: \"#{find_response.gsub('"','\"')}\"\n"}
     end
 
     [BadgevilleBerlin::Site, BadgevilleBerlin::Group, BadgevilleBerlin::ActivityDefinition, BadgevilleBerlin::Leaderboard,
@@ -309,7 +309,7 @@ module BadgevilleBerlin
         update_response = `curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'`
         puts "curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'"
         #update_hash = eval(update_response.gsub('":','"=>').gsub("null","\"null\""))
-        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_update: #{update_response}\n" }
+        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_update: \"#{update_response.gsub('"','\"')}\"\n" }
 
         if klass == "user"
           self.send "#{klass}_email=", update_options[:email]
@@ -331,7 +331,7 @@ module BadgevilleBerlin
         delete_response = `curl -X DELETE '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'`
         puts "curl -X DELETE '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'"
         #delete_hash = eval(delete_response.gsub('":','"=>').gsub("null","\"null\""))
-        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_delete: #{delete_response}\n" }
+        File.open('test_data.yml', 'a') { |f| f.puts "valid_#{klass}_delete: \"#{delete_response.gsub('"','\"')}\"\n" }
       end
 
   end
