@@ -284,7 +284,6 @@ module BadgevilleBerlin
         #Generate update json
 
         string2 = (0..15).map{ @@o[rand(@@o.length)]  }.join
-        puts "STRING 2 is #{string2} #{self.site_id}"
         klass = module_klass.to_s.split('::')[1].underscore
 
         case klass
@@ -306,7 +305,6 @@ module BadgevilleBerlin
           when "user"
             update_options = {:name => string2, :email => "#{string2}@badgeville.com"}
         end
-        puts "UPDATE RESPONSE #{klass}"
 
         update_response = `curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'`
         puts "curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'"
@@ -314,20 +312,27 @@ module BadgevilleBerlin
         File.open('test_data.yml', 'a') { |f| f.puts update_hash.to_yaml.gsub("\n","\n  ").gsub("---","validate_#{klass}_update:") }
 
         if klass == "user"
-          self.send "#{klass}_id=", update_hash["_id"]
-          self.send "#{klass}_email=", update_hash["email"]
-        elsif klass == "track"
-          self.send "#{klass}_id=", update_hash["id"]
+          self.send "#{klass}_email=", update_options[:email]
         elsif klass == "activity_definition"
-          self.send "#{klass}_id=", update_hash["_id"]
-          self.send "#{klass}_name=", update_hash["name"]
+          self.send "#{klass}_name=", update_options[:name]
+        elsif klass == "track" || klass == "player"
+          #do nothing
         else
-          self.send "#{klass}_id=", update_hash["id"]
-          self.send "#{klass}_name=", update_hash["name"]
+          self.send "#{klass}_name=", update_hash[:name]
         end
     end
 
-    #There is no JSON response when you do update or delete, should I continue?
+      #Clean out all the records which we created
+      [BadgevilleBerlin::Track, BadgevilleBerlin::ActivityDefinition, BadgevilleBerlin::Reward,
+       BadgevilleBerlin::RewardDefinition, BadgevilleBerlin::Player, BadgevilleBerlin::User,
+       BadgevilleBerlin::Group, BadgevilleBerlin::Site].each do |module_klass|
+        
+        klass = module_klass.to_s.split('::')[1].underscore
+        delete_response = `curl -X DELETE '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'`
+        puts "curl -X DELETE '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'"
+        delete_hash = eval(delete_response.gsub('":','"=>').gsub("null","\"null\""))
+        File.open('test_data.yml', 'a') { |f| f.puts delete_hash.to_yaml.gsub("\n","\n  ").gsub("---","validate_#{klass}_delete:") }
+      end
 
   end
 
