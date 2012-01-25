@@ -51,11 +51,6 @@ module BadgevilleBerlin
     @@activity_id = 0
     @@track_id = 0
 
-    #[Activity, ActivityDefinition, Group, Leaderboard, Player, Reward, RewardDefinition, Site, Track, User].each do |module_klass|
-    #curl -d 'leaderboard[network_id]=4d5dc61ed0c0b32b79000001&leaderboard[name]=Underwater Basketweaving Leaderboard&leaderboard[selector]={}&leaderboard[field]=%2B5&leaderboard[command]=5&leaderboard[label]=ubl' 'http://staging.badgeville.com/api/berlin/6f8d6fef49a462279eeca363fa1a30b5/leaderboards.json'
-
-    #attr_accessor :site_id
-
     def self.site_id
       @@site_id
     end
@@ -226,8 +221,8 @@ module BadgevilleBerlin
 
         klass = module_klass.to_s.split('::')[1].underscore
 
-        o =  [('a'...'z'),('A'...'Z')].map{|i| i.to_a}.flatten
-        string  =  (0..15).map{ o[rand(o.length)]  }.join
+        @@o =  [('a'...'z'),('A'...'Z')].map{|i| i.to_a}.flatten
+        string  =  (0..15).map{ @@o[rand(@@o.length)]  }.join
 
         #options hash for create
         case klass
@@ -282,21 +277,59 @@ module BadgevilleBerlin
         find_hash = eval(find_response.gsub('":','"=>').gsub("null","\"null\""))
 
         File.open('test_data.yml', 'a') { |f| f.puts find_hash.to_yaml.gsub("\n","\n  ").gsub("---","validate_#{klass}_find:") }
+    end
 
+    [BadgevilleBerlin::Site, BadgevilleBerlin::Group, BadgevilleBerlin::ActivityDefinition, BadgevilleBerlin::Leaderboard,
+    BadgevilleBerlin::Player, BadgevilleBerlin::RewardDefinition, BadgevilleBerlin::Track, BadgevilleBerlin::User].each do |module_klass|
         #Generate update json
 
-        string2 = (0..15).map{ o[rand(o.length)]  }.join
+        string2 = (0..15).map{ @@o[rand(@@o.length)]  }.join
+        puts "STRING 2 is #{string2} #{self.site_id}"
+        klass = module_klass.to_s.split('::')[1].underscore
+
         case klass
+          when "site"
+            update_options = {:name => string2, :url => "#{string2}.com" }
           when "group"
             update_options = {:name => string2}
+          when "activity_definition"
+            update_options = {:name => string2, :selector => "{\"verb\" : \"write\"}", :adjustment => "{\"points\" : 10}" }
+          when "leaderboard"
+            update_options = {:network_id => NETWORKID, :name => string2, :selector => {}, :field => "%2B22", :command => 11, :label => string2 }
+          when "player"
+            update_options = {:first_name => string2, :last_name => string2}
+          when "reward_definition"
+            update_options = {:name => string2, :reward_template => {},
+                                :active => true, :allow_duplicates => true, :assignable => false}
+          when "track"
+            update_options = {:site_id => self.site_id, :label => string2}
+          when "user"
+            update_options = {:name => string2, :email => "#{string2}@badgeville.com"}
         end
+        puts "UPDATE RESPONSE #{klass}"
 
-        update_response = `curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.group_id}.json'`
+        update_response = `curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'`
+        puts "curl -X PUT -d '#{build_options(klass,update_options)}' '#{HOST}#{ENDPOINTKEY}/#{klass.pluralize}/#{self.send("#{klass}_id")}.json'"
         update_hash = eval(update_response.gsub('":','"=>').gsub("null","\"null\""))
-        
+        File.open('test_data.yml', 'a') { |f| f.puts update_hash.to_yaml.gsub("\n","\n  ").gsub("---","validate_#{klass}_update:") }
 
-      end
+        if klass == "user"
+          self.send "#{klass}_id=", update_hash["_id"]
+          self.send "#{klass}_email=", update_hash["email"]
+        elsif klass == "track"
+          self.send "#{klass}_id=", update_hash["id"]
+        elsif klass == "activity_definition"
+          self.send "#{klass}_id=", update_hash["_id"]
+          self.send "#{klass}_name=", update_hash["name"]
+        else
+          self.send "#{klass}_id=", update_hash["id"]
+          self.send "#{klass}_name=", update_hash["name"]
+        end
     end
+
+    #There is no JSON response when you do update or delete, should I continue?
+
+  end
 
     def self.build_options(klass, opt)
       str = ""
