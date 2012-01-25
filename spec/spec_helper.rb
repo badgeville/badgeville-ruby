@@ -44,10 +44,13 @@ module BadgevilleBerlin
   end
 
   def self.test_attr (mock, mock_json)
-    attributes = mock.instance_variable_get("@attributes")
-    JSON.parse(mock_json)["data"].each do |key, value|
-      value.should == attributes[key]
+    # BadgevilleBerlinJsonFormat::decode(mock_json).each do |key, value|
+    #   value.should == mock.send(key)
+    # end
+    if mock_json != "{}"
+      BadgevilleBerlinJsonFormat::decode(mock_json)["_id"].should == mock.id
     end
+    
   end
 
 end
