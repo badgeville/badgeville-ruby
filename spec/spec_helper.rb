@@ -31,4 +31,12 @@ module BadgevilleBerlin
       Net::HTTP.should_receive(:new).with(HOST, Integer(PORT)).and_return(@request)
     end
   end
+  
+  def self.test_attr (mock, mock_json)
+    attributes = mock.instance_variable_get("@attributes")
+    JSON.parse(mock_json)["data"].each do |key, value|
+      value.should == attributes[key]
+    end
+  end
+  
 end
