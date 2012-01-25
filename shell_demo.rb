@@ -9,7 +9,7 @@ module BerlinShell
   APIKEY = "007857cd4fb9f360e120589c34fea080"
   ENDPOINT = "/api/berlin/"
   SPACER = "\n"
-  BadgevilleBerlin::Config.conf(:site => 'http://' + HOST + '/', :api_key => APIKEY)
+  BadgevilleBerlin::Config.conf(:host_name => 'http://' + HOST + '/', :api_key => APIKEY)
   say "Connected to " + HOST
   
   @@bv_objs = {
@@ -24,8 +24,8 @@ module BerlinShell
     "Track" => BadgevilleBerlin::Track,
     "User" => BadgevilleBerlin::User
   }
-  @@sites = []
-  @@working_path_parts = []
+  @@sites = BadgevilleBerlin::Site.find(:all)
+  @@working_path_parts = ["Site"]
   
   def self.bv_objs
     @@bv_objs
@@ -49,14 +49,13 @@ module BerlinShell
   def self.parse_path (path)
     if !path.match /^\// # Relative Path
       path = BerlinShell.working_path_parts.join("/") + "/" + path
+    else # Absolute Path
+      path = "Site" + path
     end
     
-    path = path.sub(/^\/*/,"").sub(/\/$/,"") # Trim /
-    
+    path = path.sub(/^\/*/,"").sub(/\/$/,"") # Trim / 
     parts = path.split("/")
-    if parts.length == 0
-      parts
-    end
+
     
     # Handle ..
     if parts[0].match /\.\.$/
@@ -78,21 +77,29 @@ module BerlinShell
   end
   
   def self.valid_path_parts (parts)
-    if parts.length == 0
+    if parts.length == 1
       true
     end
     
     # Check if path is valid
     
     # Validate site
-    
-    #site = BadgevilleBerlin::Site.find(parts[0])
-    
-    # if !site
-    #   say "Invalid site"
-    # end
+    found = false
+    debugger
+    site = get_site(parts[1])
+    if !site
+      say "Invalid site"
+    end
     
     true
+  end
+  
+  def self.get_site (needle)
+    BerlinShell.sites.each do |site|
+      if site.name == needle || site.id == needle
+        site
+      end
+    end
   end
   
   class Commands
@@ -100,20 +107,20 @@ module BerlinShell
       path_parts = (path == nil) ? BerlinShell.working_path_parts : BerlinShell.parse_path(path)
       items = []
       case  path_parts.length
-        when 0 # List Sites
+        when 1 # List Sites
           BerlinShell.sites = BadgevilleBerlin::Site.find(:all)
           BerlinShell.sites.each do |site|
             items.push(site.id + " (" + site.name + ")")
           end
-        when 1 # List Objects
+        when 2 # List Objects
           BerlinShell.bv_objs.each do |name, obj|
             items.push(name)
           end
-        when 2 # List Items
+        when 3 # List Items
           BerlinShell.bv_objs[path_parts[1]].find(:all).each do |item|
             items.push(item.id)
           end
-        when 3 # List Details
+        when 4 # List Details
         
       end
       
