@@ -36,10 +36,12 @@ success = new_activity_definition.save
 ```
 
 ### 4. Update the activity definition to include a rate limit in order to prevent players from gaming the system. [(more)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-BehaviorRateLimits)
-* Set bucket_rate_limit to 180 (20 comments per hour). Why?
-* 180 (3600 (number of seconds in an hour) / 20 comments = 180 s. This will drain 1 comment every 3 minutes.
-* Set bucket_max_capacity to 25. Why?
-* This allows the player to create 25 comments as fast as they like, after which the bucket will begin to drain.
+<ul>
+  <li>Set bucket_rate_limit to 180 (20 comments per hour). Why?</li>
+  <li>180 (3600 (number of seconds in an hour) / 20 comments = 180 s. This will drain 1 comment every 3 minutes.</li>
+  <li>Set bucket_max_capacity to 25. Why?</li>
+  <li>This allows the player to create 25 comments as fast as they like, after which the bucket will begin to drain.</li>
+</ul>
 ```ruby
 new_activity_definition.enable_rate_limiting   = true
   new_activity_definition.bucket_drain_rate    = 180
@@ -47,18 +49,17 @@ new_activity_definition.enable_rate_limiting   = true
   new_activity_definition.save
 ```
 
-### 6. Register a player behavior (e.g. comment) for an existing player "new_player."
+### 6. Register a player behavior (e.g. comment) for an existing player.
 ```ruby
 new_activity = BadgevilleBerlin::Activity.new(
-  :verb      => 'share',
+  :verb      => 'comment',
   :player_id => new_player.id )
 success = new_activity.save
 ```
 
 ### 7. Find the number of points the player has earned after making the comment.
 ```ruby
-  # [STILL NEEDS TO BE WRITTEN]
-  new_player.
+  new_player.points_all
 ```
 
 ## Tips
@@ -73,7 +74,7 @@ BadgevilleBerlin::BaseResource.logger.level = Logger::DEBUG
 ```
 
 ### Avoiding "BadgevilleBerlin::"
-Encapsulate your code inside a module Badgeville to avoid frequently typing "Badgeville::"
+Encapsulate your code inside a module to avoid frequently typing "BadgevilleBerlin::"
 
 ```ruby
 module BadgevilleBerlin
