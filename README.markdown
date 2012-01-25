@@ -44,7 +44,7 @@ user_found_by_id.email = 'revised_visitor@emailserver.com'
 success = user_found_by_id.save
 ```
 
-### 5. Create a player using the user corresponding to the updated email address for the site you created.
+### 5. Create a player for the new site, corresponding to the user with the updated email address.
 
 ```ruby
 new_player = BadgevilleBerlin::Player.new(
