@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 module BadgevilleBerlin
-  describe "Basic README use case examples" do
-
-
+  describe "README use case examples" do
     before(:all) do
       # Initializations
       @rand1 = rand(5000)
@@ -14,14 +12,14 @@ module BadgevilleBerlin
       # configured in spec_helper.rb
       FakeWeb.allow_net_connect = true
 
-      # Create a new site
+      # Basic README: Create a new site
       @new_site = BadgevilleBerlin::Site.new(
         :name       => "My Website #{@rand1}",
         :url        => "mydomain#{@rand1}.com" ,
         :network_id => @my_network_id )
       @site_created = @new_site.save
 
-      # Create a new user
+      # Basic README: Create a new user
       @new_user = BadgevilleBerlin::User.new(
         :name       => "visitor#{@rand1}",
         :network_id => @my_network_id,
@@ -29,33 +27,31 @@ module BadgevilleBerlin
         :password   => 'visitor_password' )
       @user_created = @new_user.save
 
-      # Find the newly created user to update their email address
+      # Basic README: Find the newly created user to update their email address
       @user_found_by_id       = BadgevilleBerlin::User.find( @new_user.id )
       @user_found_by_id.email = "visitor#{@rand2}@emailserver.com"
       @user_found = @user_found_by_id.save
 
-      # Create a player
+      # Basic README: Create a player
       @new_player = BadgevilleBerlin::Player.new(
         :site_id => @new_site.id,
         :user_id => @new_user.id )
       @player_created = @new_player.save
 
-      # Create an activity (register a behavior 'share') for the newly created player
+      # Basic README: Create an activity (register a behavior 'share') for the newly created player
       @new_activity = BadgevilleBerlin::Activity.new(
         :verb      => 'share',
         :player_id => @new_player.id )
       @new_activity_created = @new_activity.save
 
-      # Create an activity definition to specify that a player will earn 4
+      # Basic README: Create an activity definition to specify that a player will earn 4
       # points each time they perform the "comment" behavior.
-      # @new_activity_definition = ActivityDefinition.new(
-      #   :adjustment => {:points => 4},
-      #   :name => 'comment_earns_4points',
-      #   :site_id => @new_site.id,
-      #   :verb => 'comment' )
-      # @new_activity_definition_created = @new_activity_definition.save
-
-
+      @new_activity_definition = ActivityDefinition.new(
+        :adjustment => {:points => 4},
+        :name => 'comment_earns_4points',
+        :site_id => @new_site.id,
+        :verb => 'comment' )
+      @new_activity_definition_created = @new_activity_definition.save
     end
 
 

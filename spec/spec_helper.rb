@@ -8,7 +8,7 @@ require_relative '../lib/badgeville-berlin'
 require_relative 'factories'
 
 module BadgevilleBerlin
-  @@response_json = YAML::load(File.open("response_json.yml"))
+  @@response_json = YAML::load(File.open("spec/response_json.yml"))
 
   def self.response_json
     @@response_json
