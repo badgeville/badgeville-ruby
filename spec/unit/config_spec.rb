@@ -1,14 +1,16 @@
 module BadgevilleBerlin
-  describe Config do
+
+  describe Config, ".conf" do
+
     before do
       @host_name  = 'http://staging.badgeville-berlin.com'
       @my_api_key    = '007857cd4fb9f360e120589c34fea080'
       Config.conf(:host_name => @host_name, :api_key => @my_api_key)
       @empty_string = ''
-
     end
 
-    context "with a non-empty host name a non-empty api key" do
+
+    context "where host name and API key are both valid" do
       it "should assign the user-specified scheme to BaseResource.site.scheme" do
         BaseResource.site.scheme.should == @host_name.split('://')[0]
       end
@@ -22,48 +24,42 @@ module BadgevilleBerlin
       end
     end
 
-    context "where the host name is empty, but the api key is valid" do
+
+    context "where host name is empty or not given, but API key is valid" do
       it "should raise an ArgumentError with an error message" do
         lambda { Config.conf(:host_name => @empty_string, :api_key => @my_api_key) }.should raise_error(ArgumentError)
       end
-    end
 
-    context "where the host name is not passed in (is nil), but the api key is valid" do
-      it "should raise an ArgumentError with an error message" do
+      it "should raise ArgumentError" do
         lambda { Config.conf(:api_key => @my_api_key) }.should raise_error(ArgumentError)
       end
     end
 
-    context "where the API Key is empty, but the host name is valid" do
-      it "should raise an ArgumentError with an error message" do
+
+    context "where API Key is empty or not given, but the host name is valid" do
+      it "should raise ArgumentError" do
         lambda { Config.conf(:host_name => @host_name, :api_key => @empty_string) }.should raise_error(ArgumentError)
       end
-    end
 
-    context "where the API Key is not passed in (is nil), but the host name is valid" do
-      it "should raise an ArgumentError with an error message" do
+      it "should raise ArgumentError" do
         lambda { Config.conf(:host_name => @host_name) }.should raise_error(ArgumentError)
       end
     end
 
-    context "where conf is called with no parameters" do
-      it "should raise an ArgumentError with an error message" do
+
+    context "where neither host name or API key are given" do
+      it "should raise ArgumentError" do
         lambda { Config.conf }.should raise_error(ArgumentError)
       end
     end
 
-  end
 
-  describe Config, "where the host name has no scheme" do
     context "where the :host_name has no scheme (i.e. no 'http')" do
-      before do
-      @host_name_no_scheme  = 'staging.badgeville-berlin.com'
-      @my_api_key   = '007857cd4fb9f360e120589c34fea080'
+      it "should raise ArgumentError" do
+        @host_name_no_scheme  = 'staging.badgeville-berlin.com'
+        lambda { Config.conf(:host_name => @host_name_no_scheme, :api_key => @my_api_key) }.should raise_error(ArgumentError)
       end
     end
 
-    it "should raise an ArgumentError with an error message" do
-      lambda { Config.conf(:host_name => @host_name_no_scheme, :api_key => @my_api_key) }.should raise_error(ArgumentError)
-    end
   end
 end
