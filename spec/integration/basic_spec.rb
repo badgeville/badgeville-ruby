@@ -13,11 +13,7 @@ module BadgevilleBerlin
       it "should make the correct http request and return the correct object." do
         @mock_http.request.should_receive(:send).with(@method, @path, @mock.to_json, {"Content-Type"=>"application/json"}).and_return(@mock_http.response)
         @mock.save()
-        # Match Attributes
-        attributes = @mock.instance_variable_get("@attributes")
-        JSON.parse(@mock_json)["data"].each do |key, value|
-          value.should eq(attributes[key])
-        end
+        BadgevilleBerlin.test_attr(@mock, @mock_json)
       end
     end
     
@@ -33,11 +29,7 @@ module BadgevilleBerlin
       it "should make the correct http request and return the correct object." do
         @mock_http.request.should_receive(:send).with(@method, @path, {"Accept"=>"application/json"}).and_return(@mock_http.response)
         @mock = module_klass.find(@mock._id)
-        # Match Attributes
-        attributes = @mock.instance_variable_get("@attributes")
-        JSON.parse(@mock_json)["data"].each do |key, value|
-          value.should eq(attributes[key])
-        end
+        BadgevilleBerlin.test_attr(@mock, @mock_json)
       end
     end
     
@@ -54,11 +46,7 @@ module BadgevilleBerlin
       it "should make the correct http request." do
         @mock_http.request.should_receive(:send).with(@method, @path, @mock.to_json, {"Content-Type"=>"application/json"}).and_return(@mock_http.response)
         @mock.save()
-        # Match Attributes
-        attributes = @mock.instance_variable_get("@attributes")
-        JSON.parse(@mock_json)["data"].each do |key, value|
-          value.should eq(attributes[key])
-        end
+        BadgevilleBerlin.test_attr(@mock, @mock_json)
       end
     end
     
