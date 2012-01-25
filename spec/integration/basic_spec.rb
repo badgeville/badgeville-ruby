@@ -5,7 +5,7 @@ module BadgevilleBerlin
       before do
         @mock = Factory.build(klass)
         debugger
-        @mock_json = BadgevilleBerlin.response_json["valid_" + klass + "_create"]
+        @mock_json = BadgevilleBerlin.response_json["valid_" + klass + "_create"].to_json
         @path = ENDPOINTKEY + "/" + klass.pluralize + ".json"
         @method = :post
         @mock_http = MockHTTP.new(@method, @path, {:body => @mock_json, :status => [201, "Created"]})
