@@ -39,6 +39,13 @@ module BadgevilleBerlinJsonFormat
   # Converts a serialized string representation of  a remote resource into
   # a Ruby object, whether or not it has a root key :data.
   def decode(json)
-    ActiveResource::Formats.remove_root(ActiveSupport::JSON.decode(json))["data"] || ActiveResource::Formats.remove_root(ActiveSupport::JSON.decode(json))
+    return unless json
+    json = ActiveResource::Formats.remove_root(ActiveSupport::JSON.decode(json))
+    if json.kind_of?(Array)
+      json
+    else
+      json.has_key?('data') ? json['data'] : json
+    end
+
   end
 end

@@ -4,7 +4,7 @@ module BadgevilleBerlin
     class << self
 
       # This class method configures the BaseResource members: format,
-      # site and prefix
+      # site and prefix.
       #
       # @param [Hash] options the options hash which holds values for the keys `:api_key` and `:site`
       def conf ( options = {} )
