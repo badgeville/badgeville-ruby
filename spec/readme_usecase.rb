@@ -46,6 +46,16 @@ module BadgevilleBerlin
         :player_id => @new_player.id )
       @new_activity_created = @new_activity.save
 
+      # Create an activity definition to specify that a player will earn 4
+      # points each time they perform the "comment" behavior.
+      # @new_activity_definition = ActivityDefinition.new(
+      #   :adjustment => {:points => 4},
+      #   :name => 'comment_earns_4points',
+      #   :site_id => @new_site.id,
+      #   :verb => 'comment' )
+      # @new_activity_definition_created = @new_activity_definition.save
+
+
     end
 
 
@@ -67,6 +77,10 @@ module BadgevilleBerlin
 
     it "should have created a new activity" do
        @new_activity_created.should == true
+    end
+
+    it "should have created a new activity definition" do
+       @new_activity_definition_created.should == true
     end
 
   end

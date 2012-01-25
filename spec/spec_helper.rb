@@ -8,12 +8,12 @@ require_relative '../lib/badgeville-berlin'
 require_relative 'factories'
 
 module BadgevilleBerlin
-  @@response_json = YAML::load(File.open("spec/response_json.yml"))
-  
+  @@response_json = YAML::load(File.open("response_json.yml"))
+
   def self.response_json
     @@response_json
   end
-  
+
   HOST = "staging.badgeville.com"
   APIKEY = "007857cd4fb9f360e120589c34fea080"
   ENDPOINT = "/api/berlin/"
