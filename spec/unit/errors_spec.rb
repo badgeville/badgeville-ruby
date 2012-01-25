@@ -1,7 +1,7 @@
 require "spec_helper"
 
 module BadgevilleBerlin
-  describe Errors do
+  describe Errors, ".from_badgeville_berlin_json" do
     before do
 
       # Create a player and a Errors object for that player
@@ -13,7 +13,7 @@ module BadgevilleBerlin
     end
 
 
-    context "where the JSON string is missing the root key :errors" do
+    context "where JSON string is missing root key 'errors'" do
       before do
         json_no_root_key = "{\"email\":[\"user email is already taken\"]}"
         @mock_error.from_badgeville_berlin_json( json_no_root_key )
@@ -29,7 +29,7 @@ module BadgevilleBerlin
     end
 
 
-    context "where the JSON string has a root key :errors" do
+    context "where JSON string has a root key 'errors'" do
       before do
         json_w_root_key = "{\"errors\": {\"email\":[\"user email is already taken\"]}}"
         @mock_error.from_badgeville_berlin_json( json_w_root_key )
@@ -46,7 +46,7 @@ module BadgevilleBerlin
 
     #   #(ActiveSupport::JSON.decode(json))['errors']
     #   #MultiJson::DecodeError Exception: 710: unexpected token at '{"errors": {"errors":["user email is already taken"]}'
-    context "where the JSON string has a root key :errors, and a nested key :errors" do
+    context "where  JSON string has root key 'errors', and a nested key 'errors'" do
       before do
         @json_two_errors_keys = "{\"errors\": {\"errors\":[\"user email is already taken\"]}"
         @mock_error.from_badgeville_berlin_json( @json_two_errors_keys )
@@ -62,7 +62,7 @@ module BadgevilleBerlin
     end
 
 
-    context "where the JSON string has a root key :errors, but the value at the key is an empty hash" do
+    context "where JSON string has root key 'errors', but the value at the key is an empty hash" do
       before do
         json_root_val_empty = "{\"errors\": {}"
         @mock_error.from_badgeville_berlin_json( json_root_val_empty )
