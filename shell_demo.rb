@@ -181,7 +181,6 @@ module BerlinShell
                 items.push((item.attributes["_id"] || item.attributes["id"]) + (item.attributes["email"] ? " (" + item.attributes["email"] + ")" : (item.attributes["name"] ? " (" + item.attributes["name"] + ")" : "") ))
               end
           end
-
         when 4 # List Details
           items.push(BerlinShell.bv_objs[path_parts[2]].find(path_parts[3]).to_yaml)
       end
@@ -202,7 +201,7 @@ module BerlinShell
     end
     
     def self.touch 
-    
+      #write touch
     end
     
     def self.rm (id)
@@ -210,28 +209,21 @@ module BerlinShell
           say ("Missing argument.")
       end
 
-      #check that record still exists remotely (race condition)
       path_parts = BerlinShell.working_path_parts
-      case  path_parts.length
-        when 1 # delete a site
-          begin
-            site = BadgevilleBerlin::Site.find(id)
-            valid_id = true
-          rescue
-            say("You passed in an invalid site id or url.")
-          end
-          BadgevilleBerlin::Site.delete(id) unless valid_id.nil?
-          puts "Successfully deleted site #{id}" unless valid_id.nil?
-        when 2 # List Objects
-          #BerlinShell.bv_objs.each do |name, obj|
-          #  items.push(name)
-          #end
-        when 3 # List Items
-          #BerlinShell.bv_objs[path_parts[2]].find(:all).each do |item|
-          #  items.push(item.id)
-          #end
-        when 4 # List Details
-          #items.push(BerlinShell.bv_objs[path_parts[2]].find(path_parts[3]).to_yaml)
+      part = path_parts[path_parts.length-1]
+
+      if path_parts.length == 4
+        puts "You cannot delete attributes on a record"
+      else
+        begin
+          #check that record still exists remotely (race condition)
+          object = "BadgevilleBerlin::#{part}".constantize.find(id)
+          valid_id = true
+        rescue
+          say("You passed in an invalid #{part} id or property.")
+        end
+        "BadgevilleBerlin::#{part}".constantize.delete(id) unless valid_id.nil?
+        puts "Successfully deleted #{part} #{id}" unless valid_id.nil?
       end
     end
 
