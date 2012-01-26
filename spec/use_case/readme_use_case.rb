@@ -13,14 +13,14 @@ module BadgevilleBerlin
       FakeWeb.allow_net_connect = true
 
       # # Basic README: Create a new site
-      @new_site = BadgevilleBerlin::Site.new(
+      @new_site = Site.new(
         :name       => "My Website #{@rand1}",
         :url        => "mydomain#{@rand1}.com" ,
         :network_id => @my_network_id )
       @site_created = @new_site.save
 
       # # Basic README: Create a new user
-      @new_user = BadgevilleBerlin::User.new(
+      @new_user = User.new(
         :name       => "visitor#{@rand1}",
         :network_id => @my_network_id,
         :email      => "visitor#{@rand1}@emailserver.com",
@@ -33,13 +33,13 @@ module BadgevilleBerlin
       @user_found = @user_found_by_id.save
 
       # Basic README: Create a player
-      @new_player = BadgevilleBerlin::Player.new(
+      @new_player = Player.new(
         :site_id => @new_site.id,
         :user_id => @new_user.id )
       @player_created = @new_player.save
 
       # Advanced README: Create an activity (register a behavior 'share') for the newly created player
-      @share_activity = BadgevilleBerlin::Activity.new(
+      @share_activity = Activity.new(
         :verb      => "share#{@rand1}",
         :player_id => @new_player.id )
       @share_activity_created = @share_activity.save
@@ -68,12 +68,10 @@ module BadgevilleBerlin
 
       # Advanced README: Register a player behavior (e.g. comment) for an
       # existing player.
-      @comment_activity = BadgevilleBerlin::Activity.new(
+      @comment_activity = Activity.new(
         :verb      => "comment#{@rand1}",
         :player_id => @new_player.id )
       @comment_activity_created = @comment_activity.save
-
-
     end
 
 
@@ -101,7 +99,7 @@ module BadgevilleBerlin
       @new_activity_definition.verb.should == "comment#{@rand1}"
     end
 
-    it "should have updated the activity definition points for comment" do
+    it "should have updated the activity definition points for comment#{@rand1}" do
       @new_activity_definition.adjustment.points.should == 3
     end
 
@@ -115,8 +113,8 @@ module BadgevilleBerlin
       @comment_activity.verb.should == "comment#{@rand1}"
     end
 
-    it "should have added 3 points to the player" # do
-    #       @new_player.points_all.should == 3
-    #     end
+    it "should have added 3 points to @new_player" # do
+        #   @new_player.points_all.should == 3
+        # end
   end
 end
