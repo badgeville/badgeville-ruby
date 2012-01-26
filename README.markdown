@@ -74,7 +74,7 @@ BadgevilleBerlin::BaseResource.logger.level = Logger::DEBUG
 ```
 
 ### Avoiding "BadgevilleBerlin::"
-Encapsulate your code inside a module Badgeville to avoid frequently typing "Badgeville::"
+Encapsulate your code inside a module to avoid frequently typing "BadgevilleBerlin::"
 
 ```ruby
 module BadgevilleBerlin
