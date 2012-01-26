@@ -80,7 +80,7 @@ success = new_activity.save
 
 
 ## Dependencies, Installation & Documentation
-Please see the [Basic README]((https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown)).
+Please see the [Basic README](https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown) for details.
 
 ## Contributors
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available here.
