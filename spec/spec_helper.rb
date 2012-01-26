@@ -18,8 +18,8 @@ module BadgevilleBerlin
     @@response_json
   end
 
-  HOST = "staging.badgeville.com"
-  APIKEY = "007857cd4fb9f360e120589c34fea080"
+  HOST = "example.com"
+  APIKEY = "fakeapikey"
   ENDPOINT = "/api/berlin/"
   ENDPOINTKEY = ENDPOINT + APIKEY
   PORT = "80"

@@ -12,6 +12,9 @@ module BadgevilleBerlin
       # configured in spec_helper.rb
       FakeWeb.allow_net_connect = true
 
+      # Configure the gem
+      Config.conf(:host_name => 'http://staging.badgeville.com', :api_key => '007857cd4fb9f360e120589c34fea080')
+
       # Basic README: Create a new site
       @new_site = Site.new(
         :name       => "My Website #{@rand1}",
