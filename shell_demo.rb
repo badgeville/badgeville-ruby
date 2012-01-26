@@ -26,6 +26,14 @@ module BerlinShell
   }
   @@sites = BadgevilleBerlin::Site.find(:all)
   @@working_path_parts = ["Site"]
+  @@item = nil
+  
+  def self.item
+    @@item
+  end
+  def self.item=(item)
+    @@item = item
+  end
   
   def self.bv_objs
     @@bv_objs
@@ -34,6 +42,7 @@ module BerlinShell
   def self.sites
     @@sites
   end
+  
   def self.sites=(sites)
     @@sites = sites
   end
@@ -65,11 +74,6 @@ module BerlinShell
     
     path = path.sub(/^\/*/,"").sub(/\/$/,"") # Trim / 
     parts = path.split("/")
-
-    # Handle ..
-    if parts[0].match /\.\.$/
-      # Needs to be coded
-    end
     
     parts
   end
@@ -90,8 +94,6 @@ module BerlinShell
       return true
     end
     
-    # Check if path is valid
-    
     # Validate site
     if !get_site(parts[1])
       return false
@@ -100,6 +102,11 @@ module BerlinShell
     # Validate Object
     if parts[2] && !BerlinShell.bv_objs[parts[2]]
        return false
+    end
+    
+    # Validate item
+    if parts[3]
+      # needs to be coded
     end
     
     return true
@@ -120,6 +127,10 @@ module BerlinShell
     def self.ls (path)
       path_parts = (path == nil) ? BerlinShell.working_path_parts : BerlinShell.parse_path(path)
       items = []
+      if !BerlinShell.valid_path_parts(path_parts)
+        say "Path is not valid."
+        return
+      end
       case  path_parts.length
         when 1 # List Sites
           BerlinShell.sites = BadgevilleBerlin::Site.find(:all)
@@ -132,7 +143,8 @@ module BerlinShell
           end
         when 3 # List Items
           BerlinShell.bv_objs[path_parts[2]].find(:all).each do |item|
-            items.push(item.id)
+            # Use ID, but try to add email then name if available
+            items.push((item.attributes["_id"] || item.attributes["id"]) + (item.attributes["email"] ? " (" + item.attributes["email"] + ")" : (item.attributes["name"] ? " (" + item.attributes["name"] + ")" : "") ))
           end
         when 4 # List Details
           items.push(BerlinShell.bv_objs[path_parts[2]].find(path_parts[3]).to_yaml)
