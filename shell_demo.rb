@@ -115,7 +115,7 @@ module BerlinShell
   def self.get_site (needle)
     found = false
     BerlinShell.sites.each do |site|
-      if site.name == needle || site.id == needle
+      if site.url == needle || site.id == needle
         found = site
       end
     end
@@ -154,10 +154,34 @@ module BerlinShell
             items.push(name)
           end
         when 3 # List Items
-          BerlinShell.bv_objs[path_parts[2]].find(:all).each do |item|
-            # Use ID, but try to add email then name if available
-            items.push((item.attributes["_id"] || item.attributes["id"]) + (item.attributes["email"] ? " (" + item.attributes["email"] + ")" : (item.attributes["name"] ? " (" + item.attributes["name"] + ")" : "") ))
+
+          params = {}
+          case path_parts[2]
+            when "User"
+              page = 1
+              while true
+                users = BadgevilleBerlin::User.find(:all, :params => {:page => page, :per_page => 50 })
+                if users.empty?
+                  break
+                else
+                  users.each do|user|
+                    items.push("#{user.attributes["_id"]} (#{user.attributes["email"]}) #{user.attributes["name"]}")
+                  end
+                  page = page + 1
+                end
+              end
+
+              BerlinShell.sites.each do |site|
+                items.push(site.id + " (" + site.url + ")")
+              end
+            else
+              params[:site] = path_parts[1]
+              BerlinShell.bv_objs[path_parts[2]].find(:all, params).each do |item|
+                # Use ID, but try to add email then name if available
+                items.push((item.attributes["_id"] || item.attributes["id"]) + (item.attributes["email"] ? " (" + item.attributes["email"] + ")" : (item.attributes["name"] ? " (" + item.attributes["name"] + ")" : "") ))
+              end
           end
+
         when 4 # List Details
           items.push(BerlinShell.bv_objs[path_parts[2]].find(path_parts[3]).to_yaml)
       end
