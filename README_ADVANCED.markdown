@@ -86,6 +86,6 @@ Please see the [Basic README]((https://github.com/badgeville/badgeville-ruby/blo
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available here.
 
 ##Feedback
-Please email your comments to supraja@badgeville.com
+Please email your comments to <supraja@badgeville.com>.
 
 Copyright (c) 2012 Badgeville.
