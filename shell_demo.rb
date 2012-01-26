@@ -7,6 +7,7 @@ require "highline/import"
 module BerlinShell
   HOST = "staging.badgeville.com"
   APIKEY = "007857cd4fb9f360e120589c34fea080"
+  NETWORK_ID = "4d5dc61ed0c0b32b79000001"
   ENDPOINT = "/api/berlin/"
   SPACER = "\n"
   BadgevilleBerlin::Config.conf(:host_name => 'http://' + HOST + '/', :api_key => APIKEY)
@@ -131,6 +132,7 @@ module BerlinShell
         say "Path is not valid."
         return
       end
+
       case  path_parts.length
         when 1 # List Sites
           page = 1
@@ -158,6 +160,7 @@ module BerlinShell
           params = {}
           case path_parts[2]
             when "User"
+              puts "ls user"
               page = 1
               while true
                 users = BadgevilleBerlin::User.find(:all, :params => {:page => page, :per_page => 50 })
@@ -169,10 +172,6 @@ module BerlinShell
                   end
                   page = page + 1
                 end
-              end
-
-              BerlinShell.sites.each do |site|
-                items.push(site.id + " (" + site.url + ")")
               end
             else
               params[:site] = path_parts[1]
@@ -191,6 +190,7 @@ module BerlinShell
     def self.cd (path)
       if (path == nil)
           say ("Missing argument.")
+          return
       end
       path_parts = BerlinShell.parse_path(path)
       if BerlinShell.valid_path_parts(path_parts)
@@ -200,8 +200,47 @@ module BerlinShell
       end
     end
     
-    def self.touch 
+    def self.touch(args)
+      
       #write touch
+      begin
+        param_hash = eval(args)
+      rescue
+        say "Arguments for touch must be a hash (e.g. {\"name\" => \"site\", \"url\" => \"url.com\"})"
+        return
+      end
+
+      path_parts = BerlinShell.working_path_parts
+      part = path_parts[path_parts.length-1]
+
+      merged_hash = {}
+
+      case part
+        when "User"
+          merged_hash = {:network_id => NETWORK_ID}
+          merged_hash = merged_hash.merge(param_hash)
+      end
+
+      if path_parts.length == 4
+        say "You cannot create an attribute on a record"
+      elsif path_parts.length == 2
+        say "Have to be inside a model dir to create a record."
+      else
+        begin
+          object = "BadgevilleBerlin::#{part}".constantize.new(merged_hash)
+          success = object.save
+        rescue
+          say("You passed invalid arguments to create a #{part}.")
+          return
+        end
+
+        if success
+          puts object
+          say "Successfully created #{part} with arguments #{args}"
+        else
+          say "Failed to create #{part}."
+        end
+      end
     end
     
     def self.rm (id)
@@ -235,7 +274,11 @@ module BerlinShell
 
   while true
     inputs = ask(@@working_path_parts.join("/") +  "/ >> " ).split(" ", 2)
-  
+
+    if inputs.empty?
+      next
+    end
+
     case inputs[0].downcase
     when "exit"
       abort("Goodbye!")
@@ -245,8 +288,10 @@ module BerlinShell
       Commands.cd(inputs[1])
     when "rm"
       Commands.rm(inputs[1])
+    when "touch"
+      Commands.touch(inputs[1])
     when "pwd"
-      Command.pwd
+      Commands.pwd
     else
     end
   end
