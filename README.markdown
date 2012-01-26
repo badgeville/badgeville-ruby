@@ -30,7 +30,7 @@ success = new_site.save
 
 ### 3. Create a user on your network.
 <ul>
-  <li>See the [API Explorer](http://staging.badgeville.com/devcenter/api_explorer/details) for required and optional parameters.</li>
+  <li>See the <a href="http://staging.badgeville.com/devcenter/api_explorer/details">API Explorer</a> for required and optional parameters.</li>
 </ul>
 
 ```ruby
@@ -45,7 +45,7 @@ success = new_user.save
 ### 4. Find a user to update user properties.
 <ul>
   <li>Here we find the newly created user by ID to update their email address.</li>
-  <li>See the [API Explorer](http://staging.badgeville.com/devcenter/api_explorer/details) for a full list of user properties to update.</li>
+  <li>See the <a href="http://staging.badgeville.com/devcenter/api_explorer/details">API Explorer</a> for a full list of user properties to update.</li>
 </ul>
 ```ruby
 user_found_by_id = BadgevilleBerlin::User.find( new_user.id )
@@ -56,7 +56,7 @@ success = user_found_by_id.save
 ### 5. Create a player.
 <ul>
   <li>Here we create a player for the new site, corresponding to the user with the updated email address.</li>
-  <li>See the [API Explorer](http://staging.badgeville.com/devcenter/api_explorer/details) for required and optional parameters.</li>
+  <li>See the <a href="http://staging.badgeville.com/devcenter/api_explorer/details">API Explorer</a> for required and optional parameters.</li>
 </ul>
 ```ruby
 new_player = BadgevilleBerlin::Player.new(
@@ -68,7 +68,7 @@ success = new_player.save
 ### 6. Register a player behavior.
 <ul>
   <li>Here we record the fact that the newly created player performed a "share" behavior.</li>
-  <li>See the [API Explorer](http://staging.badgeville.com/devcenter/api_explorer/details) for required and optional parameters.</li>
+  <li>See the <a href="http://staging.badgeville.com/devcenter/api_explorer/details">API Explorer</a> for required and optional parameters.</li>
 </ul>
 ```ruby
 new_activity = BadgevilleBerlin::Activity.new(
