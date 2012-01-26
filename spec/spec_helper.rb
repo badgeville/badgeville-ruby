@@ -7,6 +7,10 @@ require 'logger'
 require_relative '../lib/badgeville-berlin'
 require_relative 'factories'
 
+RSpec.configure do |c|
+  c.filter_run_excluding :affects_bv_server => true
+end
+
 module BadgevilleBerlin
   @@response_json = YAML::load(File.open("spec/response_json.yml"))
 

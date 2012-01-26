@@ -81,81 +81,81 @@ module BadgevilleBerlin
     end
 
     # CREATE Site
-    it "should have created a new site" do
+    it "should have created a new site", :affects_bv_server => true do
        @site_created.should == true
     end
 
-    it "should have a new site with the name:  My Website #{@rand1}" do
+    it "should have a new site with the name:  My Website #{@rand1}", :affects_bv_server => true do
       @new_site.name.should == "My Website #{@rand1}"
     end
 
 
     # CREATE User
-    it "should have created a new user" do
+    it "should have created a new user", :affects_bv_server => true do
         @user_created.should == true
     end
 
-    it "should have a new user with the name: visitor#{@rand1}" do
+    it "should have a new user with the name: visitor#{@rand1}", :affects_bv_server => true do
       @new_user.name.should == "visitor#{@rand1}"
     end
 
 
     # UPDATE User
-    it "should have updated the newly created user" do
+    it "should have updated the newly created user", :affects_bv_server => true do
       @user_updated.should == true
     end
 
-    it "should have found the newly created user by ID to update their email address" do
+    it "should have found the newly created user by ID to update their email address", :affects_bv_server => true do
       @user_found_by_id.email.should == "visitor#{@rand2}@emailserver.com"
     end
 
 
     # CREATE Player
-    it "should have created a new player" do
+    it "should have created a new player", :affects_bv_server => true do
         @player_created.should == true
     end
 
-    it "should have a new player with user ID for @new_user" do
+    it "should have a new player with user ID for @new_user", :affects_bv_server => true do
       @new_player.user_id.should == @new_user.id
     end
 
 
     # CREATE Activity (share)
-    it "should have created a new share activity" do
+    it "should have created a new share activity", :affects_bv_server => true do
       @share_activity_created.should == true
     end
 
-    it "should have registered a new share#{@rand1} activity" do
+    it "should have registered a new share#{@rand1} activity", :affects_bv_server => true do
       @share_activity.verb.should == "share#{@rand1}"
     end
 
 
     # CREATE ActivityDefinition
-    it "should have created a new activity definition" do
+    it "should have created a new activity definition", :affects_bv_server => true do
       @new_activity_defn_created.should == true
     end
 
-    it "should have a new activity definition for comment#{@rand1}" do
+    it "should have a new activity definition for comment#{@rand1}", :affects_bv_server => true do
       @new_activity_definition.verb.should == "comment#{@rand1}"
     end
 
 
     # UPDATE ActivityDefinition (points)
-    it "should have updated the activity definition a 1st time" do
+    it "should have updated the activity definition a 1st time", :affects_bv_server => true do
       @new_activity_defn_updated.should == true
     end
 
-    it "should have updated the activity definition points for comment#{@rand1}" do
+    it "should have updated the activity definition points for comment#{@rand1}", :affects_bv_server => true do
       @new_activity_definition.adjustment.points.should == 3
     end
 
 
     # UPDATE ActivityDefinition (rate-limiting)
-    it "should have updated the activity definition a 2nd time" do
+    it "should have updated the activity definition a 2nd time", :affects_bv_server => true do
       @new_activity_defn_updated.should == true
     end
 
-    it "should have updated the activity definition to enable rate limiting" do
+    it "should have updated the activity definition to enable rate limiting", :affects_bv_server => true do
       @new_activity_definition.enable_rate_limiting.should == true
       @new_activity_definition.bucket_drain_rate.should    == 180
       @new_activity_definition.bucket_max_capacity.should  == 25
@@ -163,15 +163,15 @@ module BadgevilleBerlin
 
 
     # CREATE Activity (comment)
-    it "should have created a new comment activity" do
+    it "should have created a new comment activity", :affects_bv_server => true do
       @comment_activity_created.should == true
     end
 
-    it "should have registered a new comment#{@rand1} activity" do
+    it "should have registered a new comment#{@rand1} activity", :affects_bv_server => true do
       @comment_activity.verb.should == "comment#{@rand1}"
     end
 
-    it "should have added 3 points to @new_player" # do
+    it "should have added 3 points to @new_player", :affects_bv_server => true # do
     #       @updated_player.points_all.should == 3
     #     end
   end
