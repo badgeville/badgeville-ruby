@@ -64,12 +64,11 @@ new_activity_definition.enable_rate_limiting   = true
 ```ruby
 new_activity = BadgevilleBerlin::Activity.new(
   :verb      => 'comment',
-  :points    => 3,
   :player_id => new_player.id )
 success = new_activity.save
 ```
 
-### 7. Find the player properties after registering a behavior.
+### 6. Find the player properties after registering a behavior.
 <ul>
   <li>Here we record the fact that the newly created player performed a "comment" behavior.</li>
   <li>Print out the BadgevilleBerlin::Player object (i.e. updated_player) to get a full list of player properties.</li>
@@ -80,10 +79,10 @@ success = new_activity.save
 ```
 
 
-##Dependencies, Installation & Documentation
-Please see the [Basic README]((https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown))
+## Dependencies, Installation & Documentation
+Please see the [Basic README]((https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown)).
 
-##Contributors
+## Contributors
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available here.
 
 ##Feedback
