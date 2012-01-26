@@ -4,43 +4,50 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 
 ## Features
-* Uses the activeresource (3.0.5) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
+* Uses the activeresource (3.1.3) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
 * Allows creating, reading (finding), updating and deleting the following classes of remote resources: Site, User, Player, ActivityDefinition, Activity.
 
 ##Advanced Examples
 
-### 0. Please check out the [Basic Examples](https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown) first.
+### 0. Please see Basic Examples in the [Basic README](https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown) first.
 
 ### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
 BadgevilleBerlin::Config.conf(
-  :host_name => "http://sandbox.v2.badgeville.com",
+  :host_name => "http://example.com",
   :api_key   => MY_API_KEY)
 ```
 
-### 2. Create an activity definition to specify that a player will earn 4 points each time they perform the "comment" behavior.
+### 2. Create an activity definition.
+<ul>
+  <li>Create an activity definition to store additional information you want to use in rewards determination. [(more)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-CreatingAdvancedBehaviors)</li>
+  <li>Here we create an activity definition to specify that a player will earn 4 points each time they perform the "comment" behavior.</li>
+  <li>See the [API Explorer](http://staging.badgeville.com/devcenter/api_explorer/details) for required and optional parameters.</li>
+</ul>
 ```ruby
 new_activity_definition = ActivityDefinition.new(
   :adjustment => {:points => 4},
-  :name => 'comment_earns_4points',
+  :name => 'A Cool Comment Behavior',
   :site_id => new_site.id,
   :verb => 'comment' )
 success = new_activity_definition.save
 ```
 
-### 3. Update the activity definition such that a player on your site will earn 3 points rather than 4 each time they perform the "comment" behavior.
-
+### 3. Update the properties of activity definition: points. [(more on points)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-CreatingSimpleBehaviors)
+<ul>
+  <li>Here we update the activity definition so that a player on our site will earn 3 points rather than 4 each time they perform the "comment" behavior.
+  </li>
+  <li>See the [API Explorer](http://staging.badgeville.com/devcenter/api_explorer/details) for a full list of activity definition properties to update.</li>
+</ul>
 ```ruby
 new_activity_definition.adjustment.points = 3
 success = new_activity_definition.save
 ```
 
-### 4. Update the activity definition to include a rate limit in order to prevent players from gaming the system. [(more)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-BehaviorRateLimits)
+### 4. Update the properties of activity definition: enable rate-limiting. [(more on rate-limiting)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-BehaviorRateLimits)
 <ul>
-  <li>Set bucket_rate_limit to 180 (20 comments per hour). Why?</li>
-  <li>180 (3600 (number of seconds in an hour) / 20 comments = 180 s. This will drain 1 comment every 3 minutes.</li>
-  <li>Set bucket_max_capacity to 25. Why?</li>
-  <li>This allows the player to create 25 comments as fast as they like, after which the bucket will begin to drain.</li>
+  <li>Here we update the activity definition to make it rate-limiting to prevent players from gaming the system.</li>
+  <li>See the [API Explorer](http://staging.badgeville.com/devcenter/api_explorer/details) for a full list of activity definition properties to update.</li>
 </ul>
 ```ruby
 new_activity_definition.enable_rate_limiting   = true
@@ -49,7 +56,11 @@ new_activity_definition.enable_rate_limiting   = true
   new_activity_definition.save
 ```
 
-### 6. Register a player behavior (e.g. comment) for an existing player.
+### 5. Register a player behavior.
+<ul>
+  <li>Here we record the fact that the newly created player performed a "comment" behavior.</li>
+  <li>See the [API Explorer](http://staging.badgeville.com/devcenter/api_explorer/details) for required and optional parameters.</li>
+</ul>
 ```ruby
 new_activity = BadgevilleBerlin::Activity.new(
   :verb      => 'comment',
@@ -58,41 +69,19 @@ new_activity = BadgevilleBerlin::Activity.new(
 success = new_activity.save
 ```
 
-### 7. Find the number of points the player has earned after making the comment.
+### 7. Find the player properties after registering a behavior.
+<ul>
+  <li>Here we record the fact that the newly created player performed a "comment" behavior.</li>
+  <li>Print out the BadgevilleBerlin::Player object (i.e. updated_player) to get a full list of player properties.</li>
+</ul>
 ```ruby
-  new_player.points_all
+  updated_player = BadgevilleBerlin::Player.find(new_player.id)
+  updated_player.points_all
 ```
 
-## Tips
-### Monitoring HTTP Requests and JSON Responses
-Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.
 
-```ruby
-require 'logger'
-BadgevilleBerlin::BaseResource.logger       = Logger.new(STDOUT)
-BadgevilleBerlin::BaseResource.logger.level = Logger::DEBUG
-
-```
-
-### Avoiding "BadgevilleBerlin::"
-Encapsulate your code inside a module to avoid frequently typing "BadgevilleBerlin::"
-
-```ruby
-module BadgevilleBerlin
-  # your code goes here
-end
-```
-
-##Dependencies
-* activeresource (3.1.3) - Provides Ruby classes to RESTfully interact with remote resources.
-* logger (1.2.8) - Provides logging to the standard output stream.
-
-## Installation
-[STILL NEEDS TO BE WRITTEN]
-
-## Documentation
-
-For more documentation on how the Badgeville RESTful Berlin API works, see [here] (http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
+##Dependencies, Installation & Documentation
+Please see the [Basic README]((https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown))
 
 ##Contributors
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available here.
