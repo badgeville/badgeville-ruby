@@ -53,6 +53,7 @@ new_activity_definition.enable_rate_limiting   = true
 ```ruby
 new_activity = BadgevilleBerlin::Activity.new(
   :verb      => 'comment',
+  :points    => 3,
   :player_id => new_player.id )
 success = new_activity.save
 ```
