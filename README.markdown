@@ -18,7 +18,7 @@ BadgevilleBerlin::Config.conf(
 
 ### 2. Add a new site to your network.
 <ul>
-  <li>Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.</li>
+  <li>Find your network ID the Publisher Module's tabbed menu Develop > Home or contact <support@badgeville.com>.</li>
 </ul>
 ```ruby
 new_site = BadgevilleBerlin::Site.new(
