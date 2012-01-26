@@ -61,7 +61,7 @@ module BerlinShell
     end
     
     # Handle ../
-    if (path == "../" && BerlinShell.working_path_parts.length > 1)
+    if ((path == "../" || path == "..") && BerlinShell.working_path_parts.length > 1)
       BerlinShell.working_path_parts.pop
       path = ""
     end
@@ -133,9 +133,21 @@ module BerlinShell
       end
       case  path_parts.length
         when 1 # List Sites
-          BerlinShell.sites = BadgevilleBerlin::Site.find(:all)
+          page = 1
+          while true
+            sites = BadgevilleBerlin::Site.find(:all, :params => {:page => page, :per_page => 50 })
+            if sites.empty?
+              break
+            else
+              sites.each do|site|
+                BerlinShell.sites.push(site)
+              end
+              page = page + 1
+            end
+          end
+
           BerlinShell.sites.each do |site|
-            items.push(site.id + " (" + site.name + ")")
+            items.push(site.id + " (" + site.url + ")")
           end
         when 2 # List Objects
           BerlinShell.bv_objs.each do |name, obj|
@@ -169,8 +181,40 @@ module BerlinShell
     
     end
     
-    def self.rm
+    def self.rm (id)
+      if (id == nil)
+          say ("Missing argument.")
+      end
+
+      #check that record still exists remotely (race condition)
+      path_parts = BerlinShell.working_path_parts
+      case  path_parts.length
+        when 1 # delete a site
+          begin
+            site = BadgevilleBerlin::Site.find(id)
+            valid_id = true
+          rescue
+            say("You passed in an invalid site id or url.")
+          end
+          BadgevilleBerlin::Site.delete(id) unless valid_id.nil?
+          puts "Successfully deleted site #{id}" unless valid_id.nil?
+        when 2 # List Objects
+          #BerlinShell.bv_objs.each do |name, obj|
+          #  items.push(name)
+          #end
+        when 3 # List Items
+          #BerlinShell.bv_objs[path_parts[2]].find(:all).each do |item|
+          #  items.push(item.id)
+          #end
+        when 4 # List Details
+          #items.push(BerlinShell.bv_objs[path_parts[2]].find(path_parts[3]).to_yaml)
+      end
     end
+
+    def self.pwd
+      say( BerlinShell.working_path_parts.join("/") + "/")
+    end
+
   end
 
   while true
@@ -183,6 +227,10 @@ module BerlinShell
       Commands.ls(inputs[1])
     when "cd"
       Commands.cd(inputs[1])
+    when "rm"
+      Commands.rm(inputs[1])
+    when "pwd"
+      Command.pwd
     else
     end
   end
