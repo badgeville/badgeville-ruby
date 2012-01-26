@@ -70,8 +70,11 @@ module BadgevilleBerlin
       # existing player.
       @comment_activity = Activity.new(
         :verb      => "comment#{@rand1}",
+        :points    => 3,
         :player_id => @new_player.id )
       @comment_activity_created = @comment_activity.save
+      
+      @updated_player = Player.find(@new_player.id)
     end
 
 
@@ -113,8 +116,8 @@ module BadgevilleBerlin
       @comment_activity.verb.should == "comment#{@rand1}"
     end
 
-    it "should have added 3 points to @new_player" # do
-        #   @new_player.points_all.should == 3
-        # end
+    it "should have added 3 points to @new_player" do
+      @updated_player.points_all.should == 3
+    end
   end
 end
