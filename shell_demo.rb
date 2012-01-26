@@ -214,12 +214,13 @@ module BerlinShell
       part = path_parts[path_parts.length-1]
 
       merged_hash = {}
-
-      case part
-        when "User"
-          merged_hash = {:network_id => NETWORK_ID}
-          merged_hash = merged_hash.merge(param_hash)
+      if part == "User" || part == "Site"
+        merged_hash = {:network_id => NETWORK_ID}
+      elsif part == "Player" || part == "ActivityDefinition" || part == "RewardDefinition"
+        merged_hash = {:site_id => path_parts[1]}
       end
+      param_hash = param_hash.merge(merged_hash)
+      
 
       if path_parts.length == 4
         say "You cannot create an attribute on a record"
@@ -227,7 +228,7 @@ module BerlinShell
         say "Have to be inside a model dir to create a record."
       else
         begin
-          object = "BadgevilleBerlin::#{part}".constantize.new(merged_hash)
+          object = "BadgevilleBerlin::#{part}".constantize.new(param_hash)
           success = object.save
         rescue
           say("You passed invalid arguments to create a #{part}.")
