@@ -5,7 +5,7 @@ require "badgeville-berlin/version"
 Gem::Specification.new do |s|
   s.name        = "badgeville-berlin"
   s.version     = BadgevilleBerlin::VERSION
-  s.authors     = ["Jimmy Zhang", "Alex Tran", "Supraja Narasimhan"]
+  s.authors     = ["Andrija Perovic", "Alex Tran", "Jimmy Zhang", "Supraja Narasimhan"]
   s.email       = ["supraja.n@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{A Ruby wrapper for the Badgeville RESTful Berlin API.}
