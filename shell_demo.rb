@@ -216,7 +216,7 @@ module BerlinShell
       merged_hash = {}
       if part == "User" || part == "Site"
         merged_hash = {:network_id => NETWORK_ID}
-      elsif part == "Player" || part == "ActivityDefinition" || part == "RewardDefinition"
+      elsif part == "Player" || part == "ActivityDefinition" || part == "RewardDefinition" || part == "Track" || part == "Group"
         merged_hash = {:site_id => path_parts[1]}
       end
       param_hash = param_hash.merge(merged_hash)
