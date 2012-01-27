@@ -63,11 +63,14 @@ module BadgevilleBerlin
     end
 
     def store(args)
-      klass = self.attributes[:selector].class.to_s
-      if klass.include?("Selector") || klass.include?("Adjustment")
-        self.attributes[:selector] = self.attributes[:selector].attributes
-        self.attributes[:adjustment] = self.attributes[:adjustment].attributes
-      end
+      #type = self.send(caller[28].split("`")[1][0..-3])
+      #if !type.class.to_s.include?("Selector") && !type.class.to_s.include?("Adjustment")
+        klass = self.attributes[:selector].class.to_s
+        if klass.include?("Selector") || klass.include?("Adjustment")
+          self.attributes[:selector] = self.attributes[:selector].attributes
+          self.attributes[:adjustment] = self.attributes[:adjustment].attributes
+        end
+      #end
     end
   end
 end

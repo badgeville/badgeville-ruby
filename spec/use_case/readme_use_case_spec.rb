@@ -61,8 +61,8 @@ module BadgevilleBerlin
       # Advanced README: Update the activity definition such that a player
       # on your site will earn 3 points rather than 4 each time they
       # perform the "comment" behavior.
-      # @new_activity_definition.adjustment.points = 3
-      #       @new_activity_defn_updated = @new_activity_definition.save
+      #@new_activity_definition.adjustment = '{"points" : 3}'
+      #@new_activity_defn_updated = @new_activity_definition.save
 
 
        # Advanced README: Update the activity definition to include a rate
