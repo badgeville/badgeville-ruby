@@ -3,6 +3,21 @@ require "ruby-debug"
 require "badgeville-berlin"
 require "highline/import"
 
+# We created a shell using the Berlin Gem.  In other words, we have created a terminal for the publisher module.
+# 
+# 1.
+#   P: A client needs a list of sites within their network.
+#   A: ls /
+# 
+# 2.
+#   P: A client needs a list of players within a site.
+#   A: cd /staging.widgets.badgeville.com/Player
+#   P: To get player details
+#   A: ls 4d8bb5e8d0c0b35cd7000002
+# 
+# 3.
+#   P: A client may also list leaderboards
+#   A: ls
 
 module BerlinShell
   HOST = "staging.badgeville.com"
