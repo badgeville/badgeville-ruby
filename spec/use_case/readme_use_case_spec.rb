@@ -58,18 +58,16 @@ module BadgevilleBerlin
         )
       @new_activity_defn_created = @new_activity_definition.save
 
-
+      debugger
       # Advanced README: Update the activity definition such that a player
       # on your site will earn 3 points rather than 4 each time they
       # perform the "comment" behavior.
       # @new_activity_definition.adjustment.points = 3
       #       @new_activity_defn_updated = @new_activity_definition.save
-      #
-
-      #  # Advanced README: Update the activity definition to include a rate
-      #  # limit in order to prevent players from gaming the system.
 
 
+       # Advanced README: Update the activity definition to include a rate
+       # limit in order to prevent players from gaming the system.
        @new_activity_definition.enable_rate_limiting = true
        @new_activity_definition.bucket_drain_rate = 180
        @new_activity_definition.bucket_max_capacity = 25
@@ -149,8 +147,8 @@ module BadgevilleBerlin
 
     # UPDATE ActivityDefinition (points)
     it "should have updated the activity definition a 1st time", :affects_bv_server => true # do
-    #       @new_activity_defn_updated.should == true
-    # end
+    #               @new_activity_defn_updated.should == true
+    #         end
 
     it "should have updated the activity definition points for comment#{@rand1}", :affects_bv_server => true # do
     #       @new_activity_definition.adjustment.points.should == 3
@@ -158,9 +156,9 @@ module BadgevilleBerlin
 
 
     # UPDATE ActivityDefinition (rate-limiting)
-    it "should have updated the activity definition a 2nd time", :affects_bv_server => true # do
-    #       @new_activity_defn_updated.should == true
-    #     end
+    it "should have updated the activity definition a 2nd time", :affects_bv_server => true do
+        @new_activity_defn_updated_again.should == true
+    end
 
     it "should have updated the activity definition to enable rate limiting", :affects_bv_server => true do
       @new_activity_definition.enable_rate_limiting.should == true
