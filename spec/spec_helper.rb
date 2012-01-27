@@ -7,6 +7,10 @@ require 'logger'
 require_relative '../lib/badgeville-berlin'
 require_relative 'factories'
 
+RSpec.configure do |c|
+  c.filter_run_excluding :affects_bv_server => true
+end
+
 module BadgevilleBerlin
   @@response_json = YAML::load(File.open("spec/response_json.yml"))
 
@@ -14,8 +18,8 @@ module BadgevilleBerlin
     @@response_json
   end
 
-  HOST = "staging.badgeville.com"
-  APIKEY = "007857cd4fb9f360e120589c34fea080"
+  HOST = "example.com"
+  APIKEY = "fakeapikey"
   ENDPOINT = "/api/berlin/"
   ENDPOINTKEY = ENDPOINT + APIKEY
   PORT = "80"

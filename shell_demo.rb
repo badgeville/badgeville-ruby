@@ -26,7 +26,7 @@ module BerlinShell
     "User" => BadgevilleBerlin::User
   }
   @@sites = BadgevilleBerlin::Site.find(:all)
-  @@working_path_parts = ["Site"]
+  @@working_path_parts = ["Staging"]
   @@item = nil
   
   def self.item
@@ -58,7 +58,7 @@ module BerlinShell
   
   def self.parse_path (path)
     if path == "/"
-      path = "/Site"
+      path = "/Staging"
     end
     
     # Handle ../
@@ -69,8 +69,8 @@ module BerlinShell
     
     if !path.match /^\// # Relative Path
       path = BerlinShell.working_path_parts.join("/") + "/" + path
-    elsif !path.match /^\/Site/ # Absolute Path w.out /Site
-      path = "/Site" + path
+    elsif !path.match /^\/Staging/ # Absolute Path w.out /Site
+      path = "/Staging" + path
     end
     
     path = path.sub(/^\/*/,"").sub(/\/$/,"") # Trim / 
@@ -274,7 +274,7 @@ module BerlinShell
   end
 
   while true
-    inputs = ask(@@working_path_parts.join("/") +  "/ >> " ).split(" ", 2)
+    inputs = ask("/" + @@working_path_parts.join("/") +  "/ >> " ).split(" ", 2)
 
     if inputs.empty?
       next
@@ -284,7 +284,11 @@ module BerlinShell
     when "exit"
       abort("Goodbye!")
     when "ls"
-      Commands.ls(inputs[1])
+      begin
+        Commands.ls(inputs[1])
+      rescue
+        say("Unable to ls.")
+      end
     when "cd"
       Commands.cd(inputs[1])
     when "rm"
