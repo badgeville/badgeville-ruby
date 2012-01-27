@@ -284,7 +284,11 @@ module BerlinShell
     when "exit"
       abort("Goodbye!")
     when "ls"
-      Commands.ls(inputs[1])
+      begin
+        Commands.ls(inputs[1])
+      rescue
+        say("Unable to ls.")
+      end
     when "cd"
       Commands.cd(inputs[1])
     when "rm"
