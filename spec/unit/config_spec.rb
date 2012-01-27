@@ -3,8 +3,8 @@ module BadgevilleBerlin
   describe Config, ".conf" do
 
     before do
-      @host_name  = 'http://staging.badgeville-berlin.com'
-      @my_api_key    = '007857cd4fb9f360e120589c34fea080'
+      @host_name  = 'http://example.com'
+      @my_api_key    = 'fakeapikey'
       Config.conf(:host_name => @host_name, :api_key => @my_api_key)
       @empty_string = ''
     end
