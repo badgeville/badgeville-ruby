@@ -58,7 +58,6 @@ module BadgevilleBerlin
         )
       @new_activity_defn_created = @new_activity_definition.save
 
-      debugger
       # Advanced README: Update the activity definition such that a player
       # on your site will earn 3 points rather than 4 each time they
       # perform the "comment" behavior.
