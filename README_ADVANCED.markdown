@@ -21,10 +21,10 @@ BadgevilleBerlin::Config.conf(
 ### 2. Create an activity definition to specify that a player will earn 4 points each time they perform the "comment" behavior.
 ```ruby
 new_activity_definition = ActivityDefinition.new(
-  :adjustment => {:points => 4},
-  :name => 'comment_earns_4points',
+  :adjustment => '{"points": 5}',
+  :name => 'comment',
   :site_id => new_site.id,
-  :verb => 'comment' )
+  :selector => '{"verb":"vote"}' )
 success = new_activity_definition.save
 ```
 
