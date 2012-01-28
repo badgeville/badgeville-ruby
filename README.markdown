@@ -16,7 +16,7 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
           :api_key   => MY_API_KEY)
 ```
 
-### 2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact <support@badgeville.com>
+### 2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu ( Develop > Home ) or contact <support@badgeville.com>
 ```ruby
         new_site = BadgevilleBerlin::Site.new(
           :name       => "My Website",
@@ -96,7 +96,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
         success = new_activity.save
 ```
 
-API Explorer
 ## Monitoring HTTP Requests and JSON Responses
 Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.
 

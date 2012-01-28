@@ -20,7 +20,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
           :api_key   => MY_API_KEY)
 ```
 
-
 ### 2. Create an activity definition. [(more on activity definition)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-CreatingAdvancedBehaviors)
 <ul>
   <li>Create an activity definition to store additional information you want to use in rewards determination.</li>
@@ -36,7 +35,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
         success = new_activity_definition.save
 ```
 
-
 ### 3. Update the properties of activity definition: points. [(more on points)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-CreatingSimpleBehaviors)
 <ul>
   <li>Here we update the activity definition so that a player on our site will earn 3 points rather than 4 each time they perform the "comment" behavior.
@@ -50,7 +48,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
         activity_def_points_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
         puts activity_def_points_updated.points # 3.0
 ```
-
 
 ### 4. Update the properties of activity definition: enable rate-limiting. [(more on rate-limiting)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-BehaviorRateLimits)
 <ul>
@@ -66,7 +63,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
         activity_def_rate_limit_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
         puts activity_def_rate_limit_updated.enable_rate_limiting # true
 ```
-
 
 ### 5. Create a reward definition. [(more on rewards)](http://rules.badgeville.com/display/doc/Creating+and+Managing+DGE+Rewards)
 <ul>
@@ -84,7 +80,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
         new_reward_def_created = new_reward_def.save
 ```
 
-
 ### 6. Register a player behavior.
 <ul>
   <li>Here we record the fact that the newly created player performed a "comment" behavior.</li>
@@ -96,7 +91,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
           :player_id => new_player.id )
         success = new_activity.save
 ```
-
 
 ### 7. Find the updated player to verify properties and rewards.
 <ul>
@@ -111,7 +105,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
         puts player_specific_rewards[0].name # "Comment Rockstar"
 
 ```
-
 
 ## Dependencies, Installation & Documentation
 Please see the [Basic README](https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown) for details.
