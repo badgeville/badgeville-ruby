@@ -11,18 +11,18 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
-BadgevilleBerlin::Config.conf(
-  :host_name => "http://example.com",
-  :api_key   => MY_API_KEY)
+        BadgevilleBerlin::Config.conf(
+          :host_name => "http://example.com",
+          :api_key   => MY_API_KEY)
 ```
 
 ### 2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact <support@badgeville.com>
 ```ruby
-new_site = BadgevilleBerlin::Site.new(
-  :name       => "My Website",
-  :url        => "mydomain.com",
-  :network_id => MY_NETWORK_ID )
-success = new_site.save
+        new_site = BadgevilleBerlin::Site.new(
+          :name       => "My Website",
+          :url        => "mydomain.com",
+          :network_id => MY_NETWORK_ID )
+        success = new_site.save
 ```
 
 ### 3. Create a user on your network.
@@ -31,12 +31,12 @@ success = new_site.save
 </ul>
 
 ```ruby
-new_user = BadgevilleBerlin::User.new(
-  :name       => 'visitor_username',
-  :network_id => MY_NETWORK_ID,
-  :email      => 'visitor@emailserver.com',
-  :password   => 'visitor_password' )
-success = new_user.save
+        new_user = BadgevilleBerlin::User.new(
+          :name       => 'visitor_username',
+          :network_id => MY_NETWORK_ID,
+          :email      => 'visitor@emailserver.com',
+          :password   => 'visitor_password' )
+        success = new_user.save
 ```
 
 ### 4. See error messages from the remote server.
@@ -46,15 +46,15 @@ success = new_user.save
 </ul>
 
 ```ruby
-new_user2 = BadgevilleBerlin::User.new(
-  :name       => 'visitor_username',
-  :network_id => MY_NETWORK_ID,
-  :email      => 'visitor@emailserver.com',
-  :password   => 'visitor_password' )
-success = new_user2.save
+        new_user2 = BadgevilleBerlin::User.new(
+          :name       => 'visitor_username',
+          :network_id => MY_NETWORK_ID,
+          :email      => 'visitor@emailserver.com',
+          :password   => 'visitor_password' )
+        success = new_user2.save
 
-puts new_user2.errors.messages # {:email=>["user email is already taken"]}
-puts new_user2.errors[:email]  # ["user email is already taken"]
+        puts new_user2.errors.messages # {:email=>["user email is already taken"]}
+        puts new_user2.errors[:email]  # ["user email is already taken"]
 
 ```
 
@@ -64,12 +64,12 @@ puts new_user2.errors[:email]  # ["user email is already taken"]
   <li>See the API Explorer for a full list of user properties to update.</li>
 </ul>
 ```ruby
-user_found_by_id = BadgevilleBerlin::User.find( new_user.id )
-user_found_by_id.email = 'revised_visitor@emailserver.com'
-success = user_found_by_id.save
+        user_found_by_id = BadgevilleBerlin::User.find( new_user.id )
+        user_found_by_id.email = 'revised_visitor@emailserver.com'
+        success = user_found_by_id.save
 
-updated_user = BadgevilleBerlin::User.find( new_user.id )
-puts updated_user.email # revised_visitor@emailserver.com
+        updated_user = BadgevilleBerlin::User.find( new_user.id )
+        puts updated_user.email # revised_visitor@emailserver.com
 ```
 
 ### 6. Create a player.
@@ -78,10 +78,10 @@ puts updated_user.email # revised_visitor@emailserver.com
   <li>See the API Explorer for required and optional parameters.</li>
 </ul>
 ```ruby
-new_player = BadgevilleBerlin::Player.new(
-  :site_id => new_site.id,
-  :user_id => new_user.id )
-success = new_player.save
+        new_player = BadgevilleBerlin::Player.new(
+          :site_id => new_site.id,
+          :user_id => new_user.id )
+        success = new_player.save
 ```
 
 ### 7. Register a player behavior.
@@ -90,10 +90,10 @@ success = new_player.save
   <li>See the API Explorer for required and optional parameters.</li>
 </ul>
 ```ruby
-new_activity = BadgevilleBerlin::Activity.new(
-  :verb      => 'share',
-  :player_id => new_player.id )
-success = new_activity.save
+        new_activity = BadgevilleBerlin::Activity.new(
+          :verb      => 'share',
+          :player_id => new_player.id )
+        success = new_activity.save
 ```
 
 API Explorer
@@ -101,10 +101,9 @@ API Explorer
 Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.
 
 ```ruby
-require 'logger'
-BadgevilleBerlin::BaseResource.logger       = Logger.new(STDOUT)
-BadgevilleBerlin::BaseResource.logger.level = Logger::DEBUG
-
+        require 'logger'
+        BadgevilleBerlin::BaseResource.logger       = Logger.new(STDOUT)
+        BadgevilleBerlin::BaseResource.logger.level = Logger::DEBUG
 ```
 
 ## Dependencies

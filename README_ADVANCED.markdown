@@ -15,9 +15,9 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
 ```ruby
-BadgevilleBerlin::Config.conf(
-  :host_name => "http://example.com",
-  :api_key   => MY_API_KEY)
+        BadgevilleBerlin::Config.conf(
+          :host_name => "http://example.com",
+          :api_key   => MY_API_KEY)
 ```
 
 
@@ -28,12 +28,12 @@ BadgevilleBerlin::Config.conf(
   <li>See the API Explorer for required and optional parameters.</li>
 </ul>
 ```ruby
-new_activity_definition = ActivityDefinition.new(
-  :adjustment => '{"points": 5}',
-  :name => 'A Cool Comment Behavior',
-  :site_id => new_site.id,
-  :selector => '{"verb":"vote"}' )
-success = new_activity_definition.save
+        new_activity_definition = ActivityDefinition.new(
+          :adjustment => '{"points": 5}',
+          :name => 'A Cool Comment Behavior',
+          :site_id => new_site.id,
+          :selector => '{"verb":"vote"}' )
+        success = new_activity_definition.save
 ```
 
 
@@ -44,11 +44,11 @@ success = new_activity_definition.save
   <li>See the API Explorer for a full list of activity definition properties to update.</li>
 </ul>
 ```ruby
-new_activity_definition.adjustment.points = 3
-success = new_activity_definition.save
+        new_activity_definition.adjustment.points = 3
+        success = new_activity_definition.save
 
-activity_def_points_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
-puts activity_def_points_updated.points # 3.0
+        activity_def_points_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
+        puts activity_def_points_updated.points # 3.0
 ```
 
 
@@ -58,15 +58,15 @@ puts activity_def_points_updated.points # 3.0
   <li>See the API Explorer for a full list of activity definition properties to update.</li>
 </ul>
 ```ruby
-  activity_def_points_updated.enable_rate_limiting   = true
-  activity_def_points_updated.bucket_drain_rate      = 180
-  activity_def_points_updated.bucket_max_capacity    = 25
-  activity_def_points_updated.save
+        activity_def_points_updated.enable_rate_limiting   = true
+        activity_def_points_updated.bucket_drain_rate      = 180
+        activity_def_points_updated.bucket_max_capacity    = 25
+        activity_def_points_updated.save
 
-activity_def_rate_limit_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
-puts activity_def_rate_limit_updated.enable_rate_limiting # true
-puts activity_def_rate_limit_updated.bucket_drain_rate    # 180
-puts activity_def_rate_limit_updated.bucket_max_capacity  # 25
+        activity_def_rate_limit_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
+        puts activity_def_rate_limit_updated.enable_rate_limiting # true
+        puts activity_def_rate_limit_updated.bucket_drain_rate    # 180
+        puts activity_def_rate_limit_updated.bucket_max_capacity  # 25
 ```
 
 
@@ -77,13 +77,13 @@ puts activity_def_rate_limit_updated.bucket_max_capacity  # 25
   <li>See the API Explorer for required and optional parameters.</li>
 </ul>
 ```ruby
-new_reward_def = BadgevilleBerlin::RewardDefinition.new(
-  :site_id          => new_site.id,
-  :name             => 'Comment Rockstar',
-  :reward_template  => '{"message":"Congrats, you are a Comment Rockstar!"}',
-  :components       => '[{"comparator":{"$gte":1},"where":{"verb":"comment","player_id":"%player_id"},"command":"count"}]',
-  :active           => true )
-new_reward_def_created = new_reward_def.save
+        new_reward_def = BadgevilleBerlin::RewardDefinition.new(
+          :site_id          => new_site.id,
+          :name             => 'Comment Rockstar',
+          :reward_template  => '{"message":"Congrats, you are a Comment Rockstar!"}',
+          :components       => '[{"comparator":{"$gte":1},"where":{"verb":"comment","player_id":"%player_id"},"command":"count"}]',
+          :active           => true )
+        new_reward_def_created = new_reward_def.save
 ```
 
 
@@ -93,10 +93,10 @@ new_reward_def_created = new_reward_def.save
   <li>See the API Explorer for required and optional parameters.</li>
 </ul>
 ```ruby
-new_activity = BadgevilleBerlin::Activity.new(
-  :verb      => 'comment',
-  :player_id => new_player.id )
-success = new_activity.save
+        new_activity = BadgevilleBerlin::Activity.new(
+          :verb      => 'comment',
+          :player_id => new_player.id )
+        success = new_activity.save
 ```
 
 
@@ -106,11 +106,11 @@ success = new_activity.save
   <li>Print out the BadgevilleBerlin::Player object (i.e. updated_player) to get a full list of player properties.</li>
 </ul>
 ```ruby
-  updated_player = BadgevilleBerlin::Player.find(new_player.id)
-  puts updated_player.points_all # 3.0
+        updated_player = BadgevilleBerlin::Player.find(new_player.id)
+        puts updated_player.points_all # 3.0
 
-  player_specific_rewards = BadgevilleBerlin::Reward.find(:all, :params => {:player_id => @new_player.id})
-  puts player_specific_rewards[0].name # "Comment Rockstar"
+        player_specific_rewards = BadgevilleBerlin::Reward.find(:all, :params => {:player_id => @new_player.id})
+        puts player_specific_rewards[0].name # "Comment Rockstar"
 
 ```
 
