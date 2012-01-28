@@ -65,8 +65,6 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
         activity_def_rate_limit_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
         puts activity_def_rate_limit_updated.enable_rate_limiting # true
-        puts activity_def_rate_limit_updated.bucket_drain_rate    # 180
-        puts activity_def_rate_limit_updated.bucket_max_capacity  # 25
 ```
 
 
