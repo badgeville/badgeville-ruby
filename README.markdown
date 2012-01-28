@@ -69,7 +69,7 @@ user_found_by_id.email = 'revised_visitor@emailserver.com'
 success = user_found_by_id.save
 
 updated_user = BadgevilleBerlin::User.find( new_user.id )
-puts updated_user.email # 'revised_visitor@emailserver.com'
+puts updated_user.email # revised_visitor@emailserver.com
 ```
 
 ### 6. Create a player.
@@ -119,7 +119,7 @@ gem install badgevilleberlin
 For more documentation on how the Badgeville RESTful Berlin API works, see [here] (http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
 
 ## Contributors
-David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available here.
+David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.
 
 ## Feedback
 Please email your comments to <supraja@badgeville.com>.

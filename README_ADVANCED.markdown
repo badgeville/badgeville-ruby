@@ -101,8 +101,8 @@ success = new_activity.save
   updated_player = BadgevilleBerlin::Player.find(new_player.id)
   puts updated_player.points_all # 3.0
 
-  collection_of_rewards = Reward.find(:all, :params => {:player_id => @new_player.id})
-  puts collection_of_rewards[0].name # "Comment Rockstar"
+  player_specific_rewards = Reward.find(:all, :params => {:player_id => @new_player.id})
+  puts player_specific_rewards[0].name # "Comment Rockstar"
 
 ```
 
@@ -111,7 +111,7 @@ success = new_activity.save
 Please see the [Basic README](https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown) for details.
 
 ## Contributors
-David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper. David's gem and supporting documentation is available here.
+David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.
 
 ##Feedback
 Please email your comments to <supraja@badgeville.com>.
