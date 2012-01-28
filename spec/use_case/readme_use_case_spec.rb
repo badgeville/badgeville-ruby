@@ -174,13 +174,13 @@ module BadgevilleBerlin
 
 
        # UPDATE ActivityDefinition (points)
-       # it "should have updated the activity definition a 1st time", :affects_bv_server => true # do
-       # #               @new_activity_defn_updated.should == true
-       # #         end
-       #
-       # it "should have updated the activity definition points for comment", :affects_bv_server => true # do
-       # #       @new_activity_definition.adjustment.points.should == 3
-       # #     end
+       it "should have updated the activity definition a 1st time", :affects_bv_server => true do
+         @new_activity_defn_updated.should == true
+       end
+
+       it "should have updated the activity definition points for comment", :affects_bv_server => true do
+         @new_activity_definition.adjustment.points.should == 3
+       end
 
 
        # UPDATE ActivityDefinition (rate-limiting)
