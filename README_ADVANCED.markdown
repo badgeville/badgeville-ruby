@@ -46,6 +46,9 @@ success = new_activity_definition.save
 ```ruby
 new_activity_definition.adjustment.points = 3
 success = new_activity_definition.save
+
+activity_def_points_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
+puts activity_def_points_updated.points # 3.0
 ```
 
 
@@ -55,10 +58,15 @@ success = new_activity_definition.save
   <li>See the API Explorer for a full list of activity definition properties to update.</li>
 </ul>
 ```ruby
-new_activity_definition.enable_rate_limiting   = true
-  new_activity_definition.bucket_drain_rate    = 180
-  new_activity_definition.bucket_max_capacity  = 25
-  new_activity_definition.save
+  activity_def_points_updated.enable_rate_limiting   = true
+  activity_def_points_updated.bucket_drain_rate      = 180
+  activity_def_points_updated.bucket_max_capacity    = 25
+  activity_def_points_updated.save
+
+activity_def_rate_limit_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
+puts activity_def_rate_limit_updated.enable_rate_limiting # true
+puts activity_def_rate_limit_updated.bucket_drain_rate    # 180
+puts activity_def_rate_limit_updated.bucket_max_capacity  # 25
 ```
 
 
@@ -101,7 +109,7 @@ success = new_activity.save
   updated_player = BadgevilleBerlin::Player.find(new_player.id)
   puts updated_player.points_all # 3.0
 
-  player_specific_rewards = Reward.find(:all, :params => {:player_id => @new_player.id})
+  player_specific_rewards = BadgevilleBerlin::Reward.find(:all, :params => {:player_id => @new_player.id})
   puts player_specific_rewards[0].name # "Comment Rockstar"
 
 ```

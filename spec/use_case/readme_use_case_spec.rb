@@ -70,8 +70,8 @@ module BadgevilleBerlin
       # Advanced README: Update the activity definition such that a player
       # on your site will earn 3 points rather than 4 each time they
       # perform the "comment" behavior.
-      #@new_activity_definition.adjustment = '{"points" : 3}'
-      #@new_activity_defn_updated = @new_activity_definition.save
+      @new_activity_definition.adjustment.points = 3
+      @new_activity_defn_updated = @new_activity_definition.save
 
        # Advanced README: Update the activity definition to include a rate
        # limit in order to prevent players from gaming the system.
@@ -179,7 +179,8 @@ module BadgevilleBerlin
        end
 
        it "should have updated the activity definition points for comment", :affects_bv_server => true do
-         @new_activity_definition.adjustment.points.should == 3
+         @updated_activity_definition = ActivityDefinition.find(@new_activity_definition.id)
+         @updated_activity_definition.adjustment.points.should == 3
        end
 
 
@@ -200,7 +201,7 @@ module BadgevilleBerlin
            @new_reward_defn_created.should == true
        end
 
-       it "should have a new reward definition with the name 'Comment Roockstar'", :affects_bv_server => true do
+       it "should have a new reward definition with the name 'Comment Rockstar'", :affects_bv_server => true do
            @new_reward_defn.name.should == 'Comment Rockstar'
        end
 
@@ -214,9 +215,9 @@ module BadgevilleBerlin
          @comment_activity.verb.should == "comment"
        end
 
-       it "should have added 3 points to the new player", :affects_bv_server => true # do
-       #          @updated_player.points_all.should == 3
-       #        end
+       it "should have added 3 points to the new player", :affects_bv_server => true do
+         @updated_player.points_all.should == 3
+       end
 
        it "should have added 1 reward to the new player", :affects_bv_server => true do
          Reward.find(:all, :params => {:player_id => @new_player.id})[0].name.should == "Comment Rockstar"

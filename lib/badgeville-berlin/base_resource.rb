@@ -19,7 +19,6 @@ module BadgevilleBerlin
     # objects to nested-json hash (e.g. BadgevilleBerlin::ActivityDefinition::Selector)
     # to allow for 200 OK response on PUT
     def encode(options={})
-
       valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass"]
       self.attributes.values.each_with_index do |k,index|
         if !valid_types.include?(self.attributes[self.attributes.keys[index]].class.to_s)
