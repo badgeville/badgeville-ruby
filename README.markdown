@@ -27,7 +27,7 @@ success = new_site.save
 
 ### 3. Create a user on your network.
 <ul>
-  <li>See the <a href="http://staging.badgeville.com/devcenter/api_explorer/details">API Explorer</a> for required and optional parameters.</li>
+  <li>See the API Explorer for required and optional parameters.</li>
 </ul>
 
 ```ruby
@@ -39,21 +39,43 @@ new_user = BadgevilleBerlin::User.new(
 success = new_user.save
 ```
 
-### 4. Find a user to update user properties.
+### 4. See error messages from the remote server.
+<ul>
+  <li>Here we attempt to create a second user on the network with the same email as the first user.</li>
+  <li>See the API Explorer for required and optional parameters.</li>
+</ul>
+
+```ruby
+new_user2 = BadgevilleBerlin::User.new(
+  :name       => 'visitor_username',
+  :network_id => MY_NETWORK_ID,
+  :email      => 'visitor@emailserver.com',
+  :password   => 'visitor_password' )
+success = new_user2.save
+
+puts new_user2.errors.messages # {:email=>["user email is already taken"]}
+puts new_user2.errors[:email]  # ["user email is already taken"]
+
+```
+
+### 5. Find a user to update user properties.
 <ul>
   <li>Here we find the newly created user by ID to update their email address.</li>
-  <li>See the <a href="http://staging.badgeville.com/devcenter/api_explorer/details">API Explorer</a> for a full list of user properties to update.</li>
+  <li>See the API Explorer for a full list of user properties to update.</li>
 </ul>
 ```ruby
 user_found_by_id = BadgevilleBerlin::User.find( new_user.id )
 user_found_by_id.email = 'revised_visitor@emailserver.com'
 success = user_found_by_id.save
+
+updated_user = BadgevilleBerlin::User.find( new_user.id )
+puts updated_user.email # 'revised_visitor@emailserver.com'
 ```
 
-### 5. Create a player.
+### 6. Create a player.
 <ul>
   <li>Here we create a player for the new site, corresponding to the user with the updated email address.</li>
-  <li>See the <a href="http://staging.badgeville.com/devcenter/api_explorer/details">API Explorer</a> for required and optional parameters.</li>
+  <li>See the API Explorer for required and optional parameters.</li>
 </ul>
 ```ruby
 new_player = BadgevilleBerlin::Player.new(
@@ -62,10 +84,10 @@ new_player = BadgevilleBerlin::Player.new(
 success = new_player.save
 ```
 
-### 6. Register a player behavior.
+### 7. Register a player behavior.
 <ul>
   <li>Here we record the fact that the newly created player performed a "share" behavior.</li>
-  <li>See the <a href="http://staging.badgeville.com/devcenter/api_explorer/details">API Explorer</a> for required and optional parameters.</li>
+  <li>See the API Explorer for required and optional parameters.</li>
 </ul>
 ```ruby
 new_activity = BadgevilleBerlin::Activity.new(
@@ -74,7 +96,7 @@ new_activity = BadgevilleBerlin::Activity.new(
 success = new_activity.save
 ```
 
-
+API Explorer
 ## Monitoring HTTP Requests and JSON Responses
 Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.
 
