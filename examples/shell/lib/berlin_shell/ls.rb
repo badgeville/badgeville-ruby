@@ -17,7 +17,7 @@ module BadgevilleBerlin::Shell
       elsif path_parts[:item] == nil
         items = self.get_items(path_parts)
       else
-        items = self.get_details
+        items = self.get_details(path_parts)
       end
 
       say items.join(@@spacer)

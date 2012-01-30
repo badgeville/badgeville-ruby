@@ -25,8 +25,6 @@ module BadgevilleBerlin::Shell
     abort 'Connection failed, verify host or key.'
   end
   
-  Core.sites =  BadgevilleBerlin::Site.find(:all)
-
   say 'Connected!'
   
   # Wait for a command

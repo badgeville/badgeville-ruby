@@ -2,11 +2,12 @@ module BadgevilleBerlin::Shell
   class Core
     
     class << self
-      attr_accessor 'sites', 'working_path_parts'
+      attr_accessor 'sites', 'working_path_parts', 'cache'
     end
     
     self.sites = []
     self.working_path_parts = {:site => nil, :object => nil, :item => nil}
+    self.cache = {:site => nil, :item => nil}
     
     @@objects = {
       "Activity" => BadgevilleBerlin::Activity,
@@ -31,7 +32,6 @@ module BadgevilleBerlin::Shell
           path += Core.working_path_parts[index] + "/"
         end
       end
-      
       return path
     end
     
@@ -70,29 +70,48 @@ module BadgevilleBerlin::Shell
       if path_parts[:site] == nil
         return true
       end
+      
       # Validate site
-      if !get_site(path_parts[:site] )
-        return false
+      site = self.is_site_cached(path_parts[:site])
+      if !site
+        begin
+          site = BadgevilleBerlin::Site.find(path_parts[:site])
+          self.cache[:site] = site
+        rescue
+          return false
+        end
       end
+      
       # Validate Object
       if path_parts[:object] != nil && !Core.objects[path_parts[:object]]
          return false
       end
+      
       # Validate item
-      if path_parts[:item] != nil 
-        # needs to be coded
-      end
-      return true
-    end
-
-    def self.get_site (needle)
-      found = false
-      Core.sites.each do |site|
-        if site.url == needle || site.id == needle
-          found = site
+      if path_parts[:item] != nil && !self.is_item_cached(path_parts[:item])
+        begin
+          item = Core.objects[path_parts[:object]].find(path_parts[:item]) # currently only works for id
+          self.cache[:item] = item
+        rescue
+          return false
         end
       end
-      return found
+      
+      return true
+    end
+    
+    def self.is_site_cached (site)
+      if self.cache[:site] == nil
+        return false
+      end
+      return (self.cache[:site].attributes[:url] == site || self.cache[:site].attributes[:_id] == site) ? self.cache[:site] : false
+    end
+    
+    def self.is_item_cached (item)
+      if self.cache[:item] == nil
+        return false
+      end
+      return (cache[:item].attributes[:email] == item || cache[:item].attributes[:_id] == item) ? cache[:item] : false
     end
     
   end
