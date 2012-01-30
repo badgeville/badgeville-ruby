@@ -15,6 +15,20 @@ module BadgevilleBerlin
       end
     end
 
+    # Overrides encode call to prevent to_json from converting non-valid type
+    # objects to nested-json hash (e.g. BadgevilleBerlin::ActivityDefinition::Selector)
+    # to allow for 200 OK response on PUT
+    def encode(options={})
+      valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass"]
+      self.attributes.values.each_with_index do |k,index|
+        if !valid_types.include?(self.attributes[self.attributes.keys[index]].class.to_s)
+          self.attributes[self.attributes.keys[index]] = self.attributes[self.attributes.keys[index]].attributes.to_json
+        end
+      end
+
+      send("to_#{self.class.format.extension}", options)
+    end
+
     # Overrides the ActiveResource instance method in module Validations
     # in order to call the BadgevilleBerlin::Errors constructor instead of
     # the ActiveResource::Errors constructor.

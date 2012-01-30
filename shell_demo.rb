@@ -231,7 +231,7 @@ module BerlinShell
       merged_hash = {}
       if part == "User" || part == "Site"
         merged_hash = {:network_id => NETWORK_ID}
-      elsif part == "Player" || part == "ActivityDefinition" || part == "RewardDefinition"
+      elsif part == "Player" || part == "ActivityDefinition" || part == "RewardDefinition" || part == "Track" || part == "Group"
         merged_hash = {:site_id => path_parts[1]}
       end
       param_hash = param_hash.merge(merged_hash)
@@ -243,18 +243,23 @@ module BerlinShell
         say "Have to be inside a model dir to create a record."
       else
         begin
-          object = "BadgevilleBerlin::#{part}".constantize.new(param_hash)
+          obj = part
+          if part == "Staging"
+            obj = "Site"
+          end
+
+          object = "BadgevilleBerlin::#{obj}".constantize.new(param_hash)
           success = object.save
         rescue
-          say("You passed invalid arguments to create a #{part}.")
+          say("You passed invalid arguments to create a #{obj}.")
           return
         end
 
         if success
           puts object
-          say "Successfully created #{part} with arguments #{args}"
+          say "Successfully created #{obj} with arguments #{args}"
         else
-          say "Failed to create #{part}."
+          say "Failed to create #{obj}."
         end
       end
     end
@@ -272,13 +277,18 @@ module BerlinShell
       else
         begin
           #check that record still exists remotely (race condition)
-          object = "BadgevilleBerlin::#{part}".constantize.find(id)
+          obj = part
+          if part == "Staging"
+            obj = "Site"
+          end
+
+          object = "BadgevilleBerlin::#{obj}".constantize.find(id)
           valid_id = true
         rescue
-          say("You passed in an invalid #{part} id or property.")
+          say("You passed in an invalid #{obj} id or property.")
         end
-        "BadgevilleBerlin::#{part}".constantize.delete(id) unless valid_id.nil?
-        puts "Successfully deleted #{part} #{id}" unless valid_id.nil?
+        "BadgevilleBerlin::#{obj}".constantize.delete(id) unless valid_id.nil?
+        puts "Successfully deleted #{obj} #{id}" unless valid_id.nil?
       end
     end
 
