@@ -2,9 +2,13 @@ FactoryGirl.define do
   factory :activity, :class =>  BadgevilleBerlin::Activity do
     _id '4f0b435ea768656ca400001b'
   end
-  
+
   factory :activity_definition, :class =>  BadgevilleBerlin::ActivityDefinition do
     _id '4f0b435ea768656ca400001b'
+    name 'A Cool Comment Behavior'
+    site_id '4f079a04a76865329a000087'
+    selector '{"verb" : "comment"}'
+    adjustment '{"points" : 5}'
   end
   
   factory :group, :class => BadgevilleBerlin::Group do
