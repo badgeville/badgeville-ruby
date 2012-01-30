@@ -5,7 +5,7 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ## Features
 * Uses the activeresource (3.1.3) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.
-* Allows creating, reading (finding), updating and deleting the following classes of remote resources: Site, User, Player, ActivityDefinition, Activity.
+* Allows creating, reading (finding), updating and deleting the following classes of remote resources: Site, User, Player, ActivityDefinition, Activity, Reward and RewardDefinition.
 
 ##Basic Examples
 
