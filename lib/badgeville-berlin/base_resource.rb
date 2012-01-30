@@ -19,14 +19,17 @@ module BadgevilleBerlin
     # objects to nested-json hash (e.g. BadgevilleBerlin::ActivityDefinition::Selector)
     # to allow for 200 OK response on PUT
     def encode(options={})
+      sanitize_request
+      send("to_#{self.class.format.extension}", options)
+    end
+
+    def sanitize_request
       valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass"]
       self.attributes.values.each_with_index do |k,index|
         if !valid_types.include?(self.attributes[self.attributes.keys[index]].class.to_s)
           self.attributes[self.attributes.keys[index]] = self.attributes[self.attributes.keys[index]].attributes.to_json
         end
       end
-
-      send("to_#{self.class.format.extension}", options)
     end
 
     # Overrides the ActiveResource instance method in module Validations
