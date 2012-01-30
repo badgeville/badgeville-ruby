@@ -24,8 +24,9 @@ module BadgevilleBerlin::Shell
   rescue
     abort 'Connection failed, verify host or key.'
   end
-  Core.parse_path('/1/../2////')
-  debugger
+  
+  Core.sites =  BadgevilleBerlin::Site.find(:all)
+
   say 'Connected!'
   
   # Wait for a command

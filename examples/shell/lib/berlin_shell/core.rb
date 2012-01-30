@@ -6,9 +6,9 @@ module BadgevilleBerlin::Shell
     end
     
     self.sites = []
-    self.working_path_parts = []
+    self.working_path_parts = {:site => nil, :object => nil, :item => nil}
     
-    @@objs = {
+    @@objects = {
       "Activity" => BadgevilleBerlin::Activity,
       "ActivityDefinition" => BadgevilleBerlin::ActivityDefinition,
       "Group" => BadgevilleBerlin::Group,
@@ -20,13 +20,24 @@ module BadgevilleBerlin::Shell
       "User" => BadgevilleBerlin::User
     }
     
-    def self.objs
-      @@objs
+    def self.objects
+      @@objects
+    end
+    
+    def self.working_path
+      path = "/"
+      [:site, :object, :item].each do |index|
+        if Core.working_path_parts[index] != nil
+          path += Core.working_path_parts[index] + "/"
+        end
+      end
+      
+      return path
     end
     
     def self.parse_path (path)
       if !path.match /^\// # Relative Path
-        path = BerlinShell.working_path_parts.join("/") + "/" + path
+        path = Core.working_path + path
       end
       path = path.sub(/^\/*/,"").sub(/\/$/,"") # Trim / 
       parts = path.split("/")
@@ -41,7 +52,7 @@ module BadgevilleBerlin::Shell
         end
       end
       
-      return parts_clean
+      return {:site => parts_clean[0], :object => parts_clean[1], :item => parts_clean[2]}
     end
 
     def self.find_prefix (prefix, list)
@@ -55,26 +66,22 @@ module BadgevilleBerlin::Shell
       end
     end
 
-    def self.valid_path_parts (parts)
-      if parts.length == 1
+    def self.valid_path_parts (path_parts)
+      if path_parts[:site] == nil
         return true
       end
-
       # Validate site
-      if !get_site(parts[1])
+      if !get_site(path_parts[:site] )
         return false
       end
-
       # Validate Object
-      if parts[2] && !Core.objs[parts[2]]
+      if path_parts[:object] != nil && !Core.objects[path_parts[:object]]
          return false
       end
-
       # Validate item
-      if parts[3]
+      if path_parts[:item] != nil 
         # needs to be coded
       end
-
       return true
     end
 

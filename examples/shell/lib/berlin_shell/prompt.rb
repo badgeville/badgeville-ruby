@@ -1,7 +1,7 @@
 module BadgevilleBerlin::Shell
   class Prompt
-    def self.listen 
-      instructions = ask(Core.working_path_parts.join("/") +  "/ >> " ).split(" ", 2)
+    def self.listen
+      instructions = ask(Core.working_path + " >> " ).split(" ", 2)
 
       if instructions.empty?
         return true
@@ -14,13 +14,13 @@ module BadgevilleBerlin::Shell
           
         when 'ls'
           begin
-            Commands.ls(instructions[1])
+            LS.execute(instructions[1])
           rescue
             say('ls failed')
           end
           
         when 'cd'
-          Commands.cd(instructions[1])
+          CD.execute(instructions[1])
           
         when 'rm'
           Commands.rm(instructions[1])
