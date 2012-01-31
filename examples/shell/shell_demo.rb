@@ -4,30 +4,30 @@ require "badgeville-berlin"
 require "highline/import"
 
 # We created a shell using the Berlin Gem.  In other words, we have created a terminal for the publisher module.
-# 
+#
 # 1.
 #   P: A client needs a list of sites within their network.
 #   A: ls /
-# 
+#
 # 2.
 #   P: A client needs a list of players within a site.
 #   A: cd /staging.widgets.badgeville.com/Player
 #   P: To get player details
 #   A: ls 4d8bb5e8d0c0b35cd7000002
-# 
+#
 # 3.
 #   P: A client may also list leaderboards
 #   A: ls
 
 module BerlinShell
-  HOST = "staging.badgeville.com"
-  APIKEY = "007857cd4fb9f360e120589c34fea080"
-  NETWORK_ID = "4d5dc61ed0c0b32b79000001"
+  HOST = "hostname"
+  APIKEY = "api_key"
+  NETWORK_ID = "network_id"
   ENDPOINT = "/api/berlin/"
   SPACER = "\n"
   BadgevilleBerlin::Config.conf(:host_name => 'http://' + HOST + '/', :api_key => APIKEY)
   say "Connected to " + HOST
-  
+
   @@bv_objs = {
     "Activity" => BadgevilleBerlin::Activity,
     "ActivityDefinition" => BadgevilleBerlin::ActivityDefinition,
@@ -43,26 +43,26 @@ module BerlinShell
   @@sites = BadgevilleBerlin::Site.find(:all)
   @@working_path_parts = ["Staging"]
   @@item = nil
-  
+
   def self.item
     @@item
   end
   def self.item=(item)
     @@item = item
   end
-  
+
   def self.bv_objs
     @@bv_objs
   end
-  
+
   def self.sites
     @@sites
   end
-  
+
   def self.sites=(sites)
     @@sites = sites
   end
-  
+
   # Site/Object/ID, touch ABC.COM/player/; touch {email: name: etc,}
   def self.working_path_parts
      @@working_path_parts
@@ -70,27 +70,27 @@ module BerlinShell
   def self.working_path_parts=(parts)
     @@working_path_parts = parts
   end
-  
+
   def self.parse_path (path)
     if path == "/"
       path = "/Staging"
     end
-    
+
     # Handle ../
     if ((path == "../" || path == "..") && BerlinShell.working_path_parts.length > 1)
       BerlinShell.working_path_parts.pop
       path = ""
     end
-    
+
     if !path.match /^\// # Relative Path
       path = BerlinShell.working_path_parts.join("/") + "/" + path
     elsif !path.match /^\/Staging/ # Absolute Path w.out /Site
       path = "/Staging" + path
     end
-    
-    path = path.sub(/^\/*/,"").sub(/\/$/,"") # Trim / 
+
+    path = path.sub(/^\/*/,"").sub(/\/$/,"") # Trim /
     parts = path.split("/")
-    
+
     parts
   end
 
@@ -104,30 +104,30 @@ module BerlinShell
       end
     end
   end
-  
+
   def self.valid_path_parts (parts)
     if parts.length == 1
       return true
     end
-    
+
     # Validate site
     if !get_site(parts[1])
       return false
     end
-    
+
     # Validate Object
     if parts[2] && !BerlinShell.bv_objs[parts[2]]
        return false
     end
-    
+
     # Validate item
     if parts[3]
       # needs to be coded
     end
-    
+
     return true
   end
-  
+
   def self.get_site (needle)
     found = false
     BerlinShell.sites.each do |site|
@@ -138,7 +138,7 @@ module BerlinShell
     return found
   end
 
-  
+
   class Commands
     def self.ls (path)
       path_parts = (path == nil) ? BerlinShell.working_path_parts : BerlinShell.parse_path(path)
@@ -198,10 +198,10 @@ module BerlinShell
         when 4 # List Details
           items.push(BerlinShell.bv_objs[path_parts[2]].find(path_parts[3]).to_yaml)
       end
-      
+
       say items.join(SPACER)
     end
-    
+
     def self.cd (path)
       if (path == nil)
           say ("Missing argument.")
@@ -214,9 +214,9 @@ module BerlinShell
         say "Path is not valid."
       end
     end
-    
+
     def self.touch(args)
-      
+
       #write touch
       begin
         param_hash = eval(args)
@@ -235,7 +235,7 @@ module BerlinShell
         merged_hash = {:site_id => path_parts[1]}
       end
       param_hash = param_hash.merge(merged_hash)
-      
+
 
       if path_parts.length == 4
         say "You cannot create an attribute on a record"
@@ -258,7 +258,7 @@ module BerlinShell
         end
       end
     end
-    
+
     def self.rm (id)
       if (id == nil)
           say ("Missing argument.")
