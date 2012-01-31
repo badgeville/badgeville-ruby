@@ -13,8 +13,9 @@ module BadgevilleBerlin
       FakeWeb.allow_net_connect = true
 
       # Configure the gem with the host site and the API Key
-      my_api_key     = '007857cd4fb9f360e120589c34fea080'
-      Config.conf(:host_name => "http://staging.badgeville.com", :api_key => my_api_key)
+      my_api_key     = "myapikey"
+      my_hostname = "http://myhostname.com"
+      Config.conf(:host_name => my_hostname, :api_key => my_api_key)
 
       # Basic README: Create a new site
       @new_site = Site.new(
