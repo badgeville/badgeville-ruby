@@ -8,10 +8,6 @@ describe BadgevilleBerlinJsonFormat, ".decode" do
     BadgevilleBerlinJsonFormat.decode(nil).should == nil
   end
 
-  #   it "should raise TypeError when JSON string is nil" do
-  #     lambda{ @decoded_json = BadgevilleBerlinJsonFormat.decode( @nil_string ) }.should raise_error(TypeError)
-  #   end
-
 
   context "with a single object" do
 
@@ -36,6 +32,13 @@ describe BadgevilleBerlinJsonFormat, ".decode" do
 
       BadgevilleBerlinJsonFormat.decode(@json_record_without_root).should ==
         {"name"=>"visitor_username", "created_at"=>"2012-01-05T10:43:42-08:00", "email"=>"revised_visitor@emailserver.com", "_id"=>"4f05ef5ea768651b3500009f"}
+    end
+
+    it "should return entire hash when there is an empty hash at root key 'data'" do
+        @json_record_data_empty =
+          "{\"data\":{}, \"name\":\"visitor_username\",\"created_at\":\"2012-01-05T10:43:42-08:00\",\"email\":\"revised_visitor@emailserver.com\",\"_id\":\"4f05ef5ea768651b3500009f\"}"
+        BadgevilleBerlinJsonFormat.decode(@json_record_data_empty).should ==
+          {"data"=>{}, "name"=>"visitor_username", "created_at"=>"2012-01-05T10:43:42-08:00", "email"=>"revised_visitor@emailserver.com", "_id"=>"4f05ef5ea768651b3500009f"}
     end
 
   end
