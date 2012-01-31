@@ -108,7 +108,7 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ### 8. Delete a reward definition.
 ```ruby
-        BadgevilleBerlin::RewardDefinition.delete(@new_reward_defn.id)
+        BadgevilleBerlin::RewardDefinition.delete(new_reward_def.id)
 ```
 ## Dependencies, Installation & Documentation
 Please see the [Basic README](https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown) for details.
