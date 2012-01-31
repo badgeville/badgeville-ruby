@@ -80,7 +80,7 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 ```ruby
         new_player = BadgevilleBerlin::Player.new(
           :site_id => new_site.id,
-          :user_id => new_user.id )
+          :user_id => user_found_by_id.id )
         success = new_player.save
 ```
 

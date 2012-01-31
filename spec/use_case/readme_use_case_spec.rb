@@ -40,11 +40,6 @@ module BadgevilleBerlin
       @user_creation_failed = @new_user2.save
       @attr_specific_err = @new_user2.errors[:email]
 
-      # Basic README: Find the newly created user to update their email address
-      @user_found_by_id       = BadgevilleBerlin::User.find( @new_user.id )
-      @user_found_by_id.email = "visitor#{@rand2}@emailserver.com"
-      @user_updated           = @user_found_by_id.save
-
       # Basic README: Create a player
       @new_player = Player.new(
         :site_id      => @new_site.id,
@@ -99,159 +94,168 @@ module BadgevilleBerlin
 
     end
 
-
-
-
     # CREATE Site
     it "should have created a new site", :affects_bv_server => true do
-          @site_created.should == true
-       end
+      @site_created.should == true
+    end
 
-       it "should have a new site with the name:  My Website #{@rand1}", :affects_bv_server => true do
-         @new_site.name.should == "My Website #{@rand1}"
-       end
+    it "should have a new site with the name:  My Website #{@rand1}", :affects_bv_server => true do
+      @new_site.name.should == "My Website #{@rand1}"
+    end
 
+    # CREATE User
+    it "should have created a new user", :affects_bv_server => true do
+      @user_created.should == true
+    end
 
-       # CREATE User
-       it "should have created a new user", :affects_bv_server => true do
-           @user_created.should == true
-       end
+    it "should have a new user with the name: visitor#{@rand1}", :affects_bv_server => true do
+      @new_user.name.should == "visitor#{@rand1}"
+    end
 
-       it "should have a new user with the name: visitor#{@rand1}", :affects_bv_server => true do
-         @new_user.name.should == "visitor#{@rand1}"
-       end
+    # CREATE User: See remote errors
+    it "should produce an error message from the remote server", :affects_bv_server => true do
+      @new_user2.errors.messages.should == {:email=>["user email is already taken"]}
+    end
 
+    it "should produce anattribute-specific error message from the remote server", :affects_bv_server => true do
+      @attr_specific_err.should == ["user email is already taken"]
+    end
 
-       # CREATE User: See remote errors
-       it "should produce an error message from the remote server", :affects_bv_server => true do
-         @new_user2.errors.messages.should == {:email=>["user email is already taken"]}
-       end
+    # CREATE Player
+    it "should have created a new player", :affects_bv_server => true do
+      @player_created.should == true
+    end
 
-       it "should produce anattribute-specific error message from the remote server", :affects_bv_server => true do
-         @attr_specific_err.should == ["user email is already taken"]
-       end
+    it "should have a new player with user ID for @new_user", :affects_bv_server => true do
+      @new_player.user_id.should == @new_user.id
+    end
 
+    # CREATE Activity (share)
+    it "should have created a 1st activity", :affects_bv_server => true do
+      @share_activity_created.should == true
+    end
 
-       # UPDATE User
-       it "should have updated the newly created user", :affects_bv_server => true do
-         @user_updated.should == true
-       end
+    it "should have registered a new share activity", :affects_bv_server => true do
+      @share_activity.verb.should == "share"
+    end
 
-       it "should have found the newly created user by ID to update their email address", :affects_bv_server => true do
-         @user_found_by_id.email.should == "visitor#{@rand2}@emailserver.com"
-       end
+    # CREATE ActivityDefinition
+    it "should have created a new activity definition", :affects_bv_server => true do
+      @new_activity_defn_created.should == true
+    end
 
+    it "should have a new activity definition for comment", :affects_bv_server => true do
+      @new_activity_definition.verb.should == "comment"
+    end
 
-       # CREATE Player
-       it "should have created a new player", :affects_bv_server => true do
-           @player_created.should == true
-       end
+    # CREATE Activity (comment)
+    it "should have created a 2nd activity", :affects_bv_server => true do
+      @comment_activity_created.should == true
+    end
 
-       it "should have a new player with user ID for @new_user", :affects_bv_server => true do
-         @new_player.user_id.should == @new_user.id
-       end
+    it "should have registered a new comment activity", :affects_bv_server => true do
+      @comment_activity.verb.should == "comment"
+    end
 
+    it "should have added 3 points to the new player", :affects_bv_server => true do
+      @updated_player = Player.find(@new_player.id)
+      @updated_player.points_all.should == 3
+    end
 
-       # CREATE Activity (share)
-       it "should have created a 1st activity", :affects_bv_server => true do
-         @share_activity_created.should == true
-       end
+    it "should have added 1 reward to the new player", :affects_bv_server => true do
+      Reward.find(:all, :params => {:player_id => @new_player.id})[0].name.should == "Comment Rockstar"
+    end
 
-       it "should have registered a new share activity", :affects_bv_server => true do
-         @share_activity.verb.should == "share"
-       end
+    # CREATE RewardDefinition
+    it "should have created a new reward definition", :affects_bv_server => true do
+      @new_reward_defn_created.should == true
+    end
 
+    it "should have a new reward definition with the name 'Comment Rockstar'", :affects_bv_server => true do
+      @new_reward_defn.name.should == 'Comment Rockstar'
+    end
 
-       # CREATE ActivityDefinition
-       it "should have created a new activity definition", :affects_bv_server => true do
-         @new_activity_defn_created.should == true
-       end
+    #UPDATE User
+    it "should update the user", :affects_bv_server => true do
+      # Basic README: Find the newly created user to update their email address
+      @user_found_by_id       = User.find( @new_user.id )
+      @user_found_by_id.email = "visitor#{@rand2}@emailserver.com"
+      @user_updated           = @user_found_by_id.save
 
-       it "should have a new activity definition for comment", :affects_bv_server => true do
-         @new_activity_definition.verb.should == "comment"
-       end
+      User.find(@new_user.id).email.should == "visitor#{@rand2}@emailserver.com"
+      @user_updated.should == true
+    end
 
+    # UPDATE ActivityDefinition (points)
+    it "should have updated the activity definition a 1st time", :affects_bv_server => true do
+      @new_activity_defn_updated.should == true
+    end
 
-       # UPDATE ActivityDefinition (points)
-       it "should have updated the activity definition a 1st time", :affects_bv_server => true do
-         @new_activity_defn_updated.should == true
-       end
+    it "should have updated the activity definition points for comment", :affects_bv_server => true do
+      @updated_activity_definition = ActivityDefinition.find(@new_activity_definition.id)
+      @updated_activity_definition.adjustment.points.should == 3
+    end
 
-       it "should have updated the activity definition points for comment", :affects_bv_server => true do
-         @updated_activity_definition = ActivityDefinition.find(@new_activity_definition.id)
-         @updated_activity_definition.adjustment.points.should == 3
-       end
+    # UPDATE ActivityDefinition (rate-limiting)
+    it "should have updated the activity definition a 2nd time", :affects_bv_server => true do
+      @new_activity_defn_updated_again.should == true
+    end
 
+    it "should have updated the activity definition to enable rate limiting", :affects_bv_server => true do
+      @new_activity_definition.enable_rate_limiting.should == true
+      @new_activity_definition.bucket_drain_rate.should    == 180
+      @new_activity_definition.bucket_max_capacity.should  == 25
+    end
 
-       # UPDATE ActivityDefinition (rate-limiting)
-       it "should have updated the activity definition a 2nd time", :affects_bv_server => true do
-           @new_activity_defn_updated_again.should == true
-       end
+    # UPDATE Player
+    it "should update the player with the display name \"Mitt Romney\"", :affects_bv_server => true do
+      @new_player.display_name = "Mitt Romney"
+      @new_player.save
+      Player.find(@new_player.id).display_name.should == "Mitt Romney"
+    end
 
-       it "should have updated the activity definition to enable rate limiting", :affects_bv_server => true do
-         @new_activity_definition.enable_rate_limiting.should == true
-         @new_activity_definition.bucket_drain_rate.should    == 180
-         @new_activity_definition.bucket_max_capacity.should  == 25
-       end
+    # UPDATE RewardDefinition
+    it "should update the reward definition with the name \"Coment Superstar\"", :affects_bv_server => true do
+      @new_reward_defn.name = "Comment Superstar"
+      @new_reward_defn.save
+      RewardDefinition.find(@new_reward_defn.id).name.should == "Comment Superstar"
+    end
 
+    #UPDATE Site
+    it "should update the site", :affects_bv_server => true do
+      @new_site.name = "New Site Name"
+      @new_site.save
+      Site.find(@new_site.id).name.should == "New Site Name"
+    end
 
-       # CREATE RewardDefinition
-       it "should have created a new reward definition", :affects_bv_server => true do
-           @new_reward_defn_created.should == true
-       end
+    # DELETE RewardDefinition
+    it "should have deleted a reward definition", :affects_bv_server => true do
+      RewardDefinition.delete(@new_reward_defn.id)
+      lambda { RewardDefinition.find(@new_reward_defn.id) }.should raise_error(ActiveResource::ResourceNotFound)
+    end
 
-       it "should have a new reward definition with the name 'Comment Rockstar'", :affects_bv_server => true do
-           @new_reward_defn.name.should == 'Comment Rockstar'
-       end
+    # DELETE ActivityDefinition
+    it "should have deleted an activity definition", :affects_bv_server => true do
+      ActivityDefinition.delete(@new_activity_definition.id)
+      lambda { ActivityDefinition.find(@new_activity_definition.id) }.should raise_error(ActiveResource::ResourceNotFound)
+    end
 
+    # DELETE Player
+    it "should have deleted a player", :affects_bv_server => true do
+      Player.delete(@new_player.id)
+      lambda { Player.find(@new_player.id) }.should raise_error(ActiveResource::ResourceNotFound)
+    end
 
-       # CREATE Activity (comment)
-       it "should have created a 2nd activity", :affects_bv_server => true do
-         @comment_activity_created.should == true
-       end
+    # DELETE User
+    it "should have deleted a user", :affects_bv_server => true do
+      User.delete(@new_user.id)
+      lambda { User.find(@new_user.id) }.should raise_error(ActiveResource::ResourceNotFound)
+    end
 
-       it "should have registered a new comment activity", :affects_bv_server => true do
-         @comment_activity.verb.should == "comment"
-       end
-
-       it "should have added 3 points to the new player", :affects_bv_server => true do
-         @updated_player = Player.find(@new_player.id)
-         @updated_player.points_all.should == 3
-       end
-
-       it "should have added 1 reward to the new player", :affects_bv_server => true do
-         Reward.find(:all, :params => {:player_id => @new_player.id})[0].name.should == "Comment Rockstar"
-       end
-
-        # DELETE RewardDefinition
-        it "should have deleted a reward definition", :affects_bv_server => true do
-          RewardDefinition.delete(@new_reward_defn.id)
-          lambda { RewardDefinition.find(@new_reward_defn.id) }.should raise_error(ActiveResource::ResourceNotFound)
-        end
-
-        # DELETE ActivityDefinition
-        it "should have deleted an activity definition", :affects_bv_server => true do
-          ActivityDefinition.delete(@new_activity_definition.id)
-          lambda { ActivityDefinition.find(@new_activity_definition.id) }.should raise_error(ActiveResource::ResourceNotFound)
-        end
-
-        # DELETE Player
-        it "should have deleted a player", :affects_bv_server => true do
-          Player.delete(@new_player.id)
-          lambda { Player.find(@new_player.id) }.should raise_error(ActiveResource::ResourceNotFound)
-        end
-
-        # DELETE User
-        it "should have deleted a user", :affects_bv_server => true do
-          User.delete(@user_found_by_id.id)
-          lambda { User.find(@user_found_by_id.id) }.should raise_error(ActiveResource::ResourceNotFound)
-        end
-
-        # DELETE Site
-        it "should have deleted a site", :affects_bv_server => true do
-          Site.delete(@new_site.id)
-          lambda { Site.find(@new_site.id) }.should raise_error(ActiveResource::ResourceNotFound)
-        end
-
+    # DELETE Site
+    it "should have deleted a site", :affects_bv_server => true do
+      Site.delete(@new_site.id)
+      lambda { Site.find(@new_site.id) }.should raise_error(ActiveResource::ResourceNotFound)
+    end
   end
 end

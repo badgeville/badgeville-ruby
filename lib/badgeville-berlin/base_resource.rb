@@ -24,7 +24,7 @@ module BadgevilleBerlin
     end
 
     def sanitize_request
-      valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass"]
+      valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass", "Float"]
       self.attributes.values.each_with_index do |k,index|
         if !valid_types.include?(self.attributes[self.attributes.keys[index]].class.to_s)
           self.attributes[self.attributes.keys[index]] = self.attributes[self.attributes.keys[index]].attributes.to_json
