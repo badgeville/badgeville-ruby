@@ -248,7 +248,7 @@ module BadgevilleBerlin
         end
 
         # DELETE Site
-        it "should deleted a site", :affects_bv_server => true do
+        it "should have deleted a site", :affects_bv_server => true do
           Site.delete(@new_site.id)
           lambda { Site.find(@new_site.id) }.should raise_error(ActiveResource::ResourceNotFound)
         end

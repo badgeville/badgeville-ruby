@@ -9,7 +9,7 @@ This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](
 
 ##Basic Examples
 
-### 1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.
+### 1. Configure the gem to use your Badgeville Private API Key and the site to which your requests should go.
 ```ruby
         BadgevilleBerlin::Config.conf(
           :host_name => "http://example.com",
