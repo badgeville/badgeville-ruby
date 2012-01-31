@@ -13,7 +13,8 @@ module BadgevilleBerlin
       FakeWeb.allow_net_connect = true
 
       # Configure the gem with the host site and the API Key
-      #Config.conf(:host_name => HOST_URL, :api_key => API_KEY)
+      my_api_key     = '007857cd4fb9f360e120589c34fea080'
+      Config.conf(:host_name => "http://staging.badgeville.com", :api_key => my_api_key)
 
       # Basic README: Create a new site
       @new_site = Site.new(
@@ -95,8 +96,6 @@ module BadgevilleBerlin
          :verb      => "comment",
          :player_id => @new_player.id )
        @comment_activity_created = @comment_activity.save
-
-       @updated_player = Player.find(@new_player.id)
 
     end
 
@@ -216,12 +215,43 @@ module BadgevilleBerlin
        end
 
        it "should have added 3 points to the new player", :affects_bv_server => true do
+         @updated_player = Player.find(@new_player.id)
          @updated_player.points_all.should == 3
        end
 
        it "should have added 1 reward to the new player", :affects_bv_server => true do
          Reward.find(:all, :params => {:player_id => @new_player.id})[0].name.should == "Comment Rockstar"
        end
+
+        # DELETE RewardDefinition
+        it "should have deleted a reward definition", :affects_bv_server => true do
+          RewardDefinition.delete(@new_reward_defn.id)
+          lambda { RewardDefinition.find(@new_reward_defn.id) }.should raise_error(ActiveResource::ResourceNotFound)
+        end
+
+        # DELETE ActivityDefinition
+        it "should have deleted an activity definition", :affects_bv_server => true do
+          ActivityDefinition.delete(@new_activity_definition.id)
+          lambda { ActivityDefinition.find(@new_activity_definition.id) }.should raise_error(ActiveResource::ResourceNotFound)
+        end
+
+        # DELETE Player
+        it "should have deleted a player", :affects_bv_server => true do
+          Player.delete(@new_player.id)
+          lambda { Player.find(@new_player.id) }.should raise_error(ActiveResource::ResourceNotFound)
+        end
+
+        # DELETE User
+        it "should have deleted a user", :affects_bv_server => true do
+          User.delete(@user_found_by_id.id)
+          lambda { User.find(@user_found_by_id.id) }.should raise_error(ActiveResource::ResourceNotFound)
+        end
+
+        # DELETE Site
+        it "should deleted a site", :affects_bv_server => true do
+          Site.delete(@new_site.id)
+          lambda { Site.find(@new_site.id) }.should raise_error(ActiveResource::ResourceNotFound)
+        end
 
   end
 end
