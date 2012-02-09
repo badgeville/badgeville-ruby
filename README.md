@@ -1,6 +1,6 @@
 # Badgeville RESTful Wrapper for Berlin API -- Basic README
 
-This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
+This is an open source Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
 
 
 ## Features
@@ -115,6 +115,12 @@ gem install badgeville_berlin
 
 ## Documentation
 For more documentation on how the Badgeville RESTful Berlin API works, see [here] (http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
+
+
+## Submitting an Issue
+You can use the [GitHub issue tracker](https://github.com/badgeville/badgeville-ruby/issues) to report bugs:
+1. Please ensure that the bug has not already been submitted.
+2. Include a gist a that includes a stack trace and details needed to reproduce the bug: including gem version, Ruby version and operating system.
 
 ## Contributors
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.

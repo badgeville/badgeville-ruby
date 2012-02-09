@@ -1,6 +1,6 @@
 # Badgeville RESTful Wrapper for Berlin API -- Advanced README
 
-This is a Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
+This is an open-source Ruby wrapper for interacting with the [Badgeville RESTful Berlin API](http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).
 
 
 ## Features
