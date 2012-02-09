@@ -127,12 +127,17 @@ You can use the [GitHub issue tracker](https://github.com/badgeville/badgeville-
 ## Submitting a Pull Request
 1. Click the GitHub "Fork" button to fork this project.
 2. Clone the repository for a local copy:
+
         git clone git@github.com:username/badgeville-ruby.git
 3. Create a topic branch:
+
         git checkout -b my_bug_fix_or_feature_branch
+
 4. Add documentation and specs for your bug fix or feature.
 5. Implement your bug fix or feature.
-6. Run the following command to ensure your tests cover your changes.
+6. Run the following command to ensure your tests cover your changes:
+
+        bundle exec rake spec
 7. Commit and push your changes.
 8. Click the GitHub "Pull Request" to submit a pull request. Please do not include changes to the gemspec, version or history file.
 
