@@ -110,7 +110,7 @@ Print HTTP requests and JSON responses by installing the "logger" gem and includ
 
 
 ## Installation
-gem install badgevilleberlin
+gem install badgeville_berlin
 
 
 ## Documentation
@@ -119,7 +119,5 @@ For more documentation on how the Badgeville RESTful Berlin API works, see [here
 ## Contributors
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.
 
-## Feedback
-Please email your comments to <supraja@badgeville.com>.
 
 Copyright (c) 2012 Badgeville.

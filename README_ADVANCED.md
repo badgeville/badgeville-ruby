@@ -116,7 +116,5 @@ Please see the [Basic README](https://github.com/badgeville/badgeville-ruby/blob
 ## Contributors
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.
 
-##Feedback
-Please email your comments to <supraja@badgeville.com>.
 
 Copyright (c) 2012 Badgeville.
