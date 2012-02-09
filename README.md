@@ -118,9 +118,10 @@ For more documentation on how the Badgeville RESTful Berlin API works, see [here
 
 
 ## Submitting an Issue
-You can use the [GitHub issue tracker](https://github.com/badgeville/badgeville-ruby/issues) to report bugs:
-1. Please ensure that the bug has not already been submitted.
-2. Include a gist a that includes a stack trace and details needed to reproduce the bug: including gem version, Ruby version and operating system.
+You can use the [GitHub issue tracker](https://github.com/badgeville/badgeville-ruby/issues) to report bugs. After ensuring that the bug has not already been submitted, include:
+
+1. A [gist](https://gist.github.com/) a that contains a stack trace.
+2. Details needed to reproduce the bug, including gem version, Ruby version and operating system.
 
 ## Contributors
 David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.
