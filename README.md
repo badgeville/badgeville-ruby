@@ -118,7 +118,7 @@ For more documentation on how the Badgeville RESTful Berlin API works, see [here
 
 
 ## Submitting an Issue
-You can use the [GitHub issue tracker](https://github.com/badgeville/badgeville-ruby/issues) to report bugs. After ensuring that the bug has not already been submitted, include:
+You can use the [GitHub issue tracker](https://github.com/badgeville/badgeville-ruby/issues) to report bugs. After ensuring that the bug has not already been submitted, please submit:
 
 1. A [gist](https://gist.github.com/) a that contains a stack trace.
 2. Details needed to reproduce the bug, including gem version, Ruby version and operating system.
