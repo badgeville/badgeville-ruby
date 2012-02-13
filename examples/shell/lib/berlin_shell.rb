@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'ruby-debug'
-require 'badgeville-berlin'
+require 'badgeville_berlin'
 require 'highline/import'
 
 require_relative 'berlin_shell/core.rb'

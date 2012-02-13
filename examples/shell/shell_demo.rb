@@ -1,6 +1,6 @@
 require "rubygems"
 require "ruby-debug"
-require "badgeville-berlin"
+require "badgeville_berlin"
 require "highline/import"
 
 # We created a shell using the Berlin Gem.  In other words, we have created a terminal for the publisher module.

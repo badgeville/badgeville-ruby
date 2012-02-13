@@ -1,6 +1,6 @@
 # For custom BadgevilleBerlinJson
 require 'active_support/json'
-require "badgeville-berlin/version"
+require "badgeville_berlin/version"
 
 
 

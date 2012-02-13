@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "badgeville-berlin/version"
+require "badgeville_berlin/version"
 
 Gem::Specification.new do |s|
-  s.name        = "badgeville-berlin"
+  s.name        = "badgeville_berlin"
   s.version     = BadgevilleBerlin::VERSION
   s.authors     = ["Andrija Perovic", "Alex Tran", "Jimmy Zhang", "Supraja Narasimhan"]
   s.email       = ["supraja.n@gmail.com"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{A Ruby wrapper for the Badgeville RESTful Berlin API.}
   s.description = %q{Uses the activeresource (3.0.5) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.}
 
-  s.rubyforge_project = "badgeville-berlin"
+  s.rubyforge_project = "badgeville_berlin"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

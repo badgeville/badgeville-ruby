@@ -12,7 +12,7 @@ module BadgevilleBerlin
         BaseResource.format = :badgeville_berlin_json
 
         if options[:host_name] == nil || options[:host_name].empty?
-            raise ArgumentError.new("Please enter the URL for the Badgeville host where you want to make your request ( e.g. :host_name  => 'http://staging.badgeville-berlin.com' ).")
+            raise ArgumentError.new("Please enter the URL for the Badgeville host where you want to make your request ( e.g. :host_name  => 'http://www.example.com' ).")
         else
           BaseResource.site = options[:host_name]
           if options[:host_name].split("://")[1] == nil

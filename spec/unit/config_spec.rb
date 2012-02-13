@@ -56,7 +56,7 @@ module BadgevilleBerlin
 
     context "where the :host_name has no scheme (i.e. no 'http')" do
       it "should raise ArgumentError" do
-        @host_name_no_scheme  = 'staging.badgeville-berlin.com'
+        @host_name_no_scheme  = 'example.com'
         lambda { Config.conf(:host_name => @host_name_no_scheme, :api_key => @my_api_key) }.should raise_error(ArgumentError)
       end
     end

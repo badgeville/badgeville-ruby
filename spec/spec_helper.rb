@@ -4,7 +4,7 @@ require 'fakeweb'
 require 'factory_girl'
 require 'active_support/inflector'
 require 'logger'
-require_relative '../lib/badgeville-berlin'
+require_relative '../lib/badgeville_berlin'
 require_relative 'factories'
 
 RSpec.configure do |c|
