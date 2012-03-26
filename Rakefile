@@ -1,12 +1,11 @@
-require "bundler/gem_tasks"
-
-require 'rake'
+require "bundler"
+Bundler::GemHelper.install_tasks
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rspec_opts = ['--backtrace']
-  # spec.ruby_opts = ['-w']
+desc "Run specs"
+RSpec::Core::RakeTask.new do |t|
+  t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.
+  # Put spec opts in a file named .rspec in root
 end
 
 task :default => :spec

@@ -1,2 +1,1 @@
---color
---format nested
+--colour -d -r ./spec/spec_helper.rb
