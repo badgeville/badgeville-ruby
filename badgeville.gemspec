@@ -6,10 +6,10 @@ Gem::Specification.new do |s|
   s.name        = "badgeville_berlin"
   s.version     = BadgevilleBerlin::VERSION
   s.authors     = ["Andrija Perovic", "Alex Tran", "Jimmy Zhang", "Supraja Narasimhan"]
-  s.email       = ["supraja.n@gmail.com"]
+  s.email       = ["supraja@badgeville.com"]
   s.homepage    = "https://github.com/badgeville/badgeville-ruby"
   s.summary     = %q{A Ruby wrapper for the Badgeville RESTful Berlin API.}
-  s.description = %q{Uses the activeresource gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.}
+  s.description = %q{This is an open source Ruby wrapper for interacting with the Badgeville RESTful Berlin API.}
 
   s.rubyforge_project = "badgeville_berlin"
 

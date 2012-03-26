@@ -209,14 +209,14 @@ module BadgevilleBerlin
     end
 
     # UPDATE Player
-    it "should update the player with the display name \"Mitt Romney\"", :affects_bv_server => true do
-      @new_player.display_name = "Mitt Romney"
+    it "should update the player with the display name \"Elite Player\"", :affects_bv_server => true do
+      @new_player.display_name = "Elite Player"
       @new_player.save
-      Player.find(@new_player.id).display_name.should == "Mitt Romney"
+      Player.find(@new_player.id).display_name.should == "Elite Player"
     end
 
     # UPDATE RewardDefinition
-    it "should update the reward definition with the name \"Coment Superstar\"", :affects_bv_server => true do
+    it "should update the reward definition with the name \"Comment Superstar\"", :affects_bv_server => true do
       @new_reward_defn.name = "Comment Superstar"
       @new_reward_defn.save
       RewardDefinition.find(@new_reward_defn.id).name.should == "Comment Superstar"
