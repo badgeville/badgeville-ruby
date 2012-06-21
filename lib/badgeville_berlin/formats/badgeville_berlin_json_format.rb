@@ -2,9 +2,6 @@
 require 'active_support/json'
 require "badgeville_berlin/version"
 
-
-
-
 # Handles the fact that a JSON formatted GET response does not meet the
 # ActiveResource standard, and is instead preceded by the root key :data.
 module BadgevilleBerlinJsonFormat
@@ -41,15 +38,11 @@ module BadgevilleBerlinJsonFormat
   def decode(json)
     return unless json
     json = ActiveResource::Formats.remove_root(ActiveSupport::JSON.decode(json))
-    if json.kind_of?(Array)
+    if json.kind_of?(Array) || !json.has_key?('data')
       json
     else
-      if json.has_key?('data')
-        json['data'].empty? ? json : json['data']
-      else
-        json
-      end
+       json['data']
     end
-
+    
   end
 end
