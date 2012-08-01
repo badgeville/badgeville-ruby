@@ -38,10 +38,10 @@ module BadgevilleBerlinJsonFormat
   def decode(json)
     return unless json
     json = ActiveResource::Formats.remove_root(ActiveSupport::JSON.decode(json))
-    if json.kind_of?(Array) || !json.has_key?('data')
+    if json.kind_of?(Array)
       json
-    else
-       json['data']
+    elsif json.kind_of?(Hash)
+      json.has_key?('data') ? json['data'] : json
     end
     
   end
