@@ -37,8 +37,7 @@ describe BadgevilleBerlinJsonFormat, ".decode" do
     it "should return entire hash when there is an empty hash at root key 'data'" do
         @json_record_data_empty =
           "{\"data\":{}, \"name\":\"visitor_username\",\"created_at\":\"2012-01-05T10:43:42-08:00\",\"email\":\"revised_visitor@emailserver.com\",\"_id\":\"4f05ef5ea768651b3500009f\"}"
-        BadgevilleBerlinJsonFormat.decode(@json_record_data_empty).should ==
-          {"data"=>{}, "name"=>"visitor_username", "created_at"=>"2012-01-05T10:43:42-08:00", "email"=>"revised_visitor@emailserver.com", "_id"=>"4f05ef5ea768651b3500009f"}
+        BadgevilleBerlinJsonFormat.decode(@json_record_data_empty).should == {}
     end
 
   end
