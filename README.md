@@ -15,6 +15,7 @@ This is an open source Ruby wrapper for interacting with the [Badgeville RESTful
           :host_name => "http://example.com",
           :api_key   => MY_API_KEY)
 ```
+:host_name should be the Badgeville endpoint that receives your calls, NOT your site URL.  Example: "http://sandbox.v2.badgeville.com"
 
 ### 2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu ( Develop > Home ) or contact <support@badgeville.com>
 ```ruby
