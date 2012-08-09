@@ -15,6 +15,14 @@ module BadgevilleBerlin
       end
     end
 
+    def initialize(attributes = {}, persisted = false)
+      #we return a nested JSON response with player rewards keyed off of mongo id's
+      #on groups endpoint which causes activeresource to break when looking up a
+      #physical id as an attribute on an activeresource model. fix:
+      attributes["rewards"] = attributes["rewards"].try(:values) if self.class.to_s == "BadgevilleBerlin::Group"
+      super
+    end
+
     # Overrides encode call to prevent to_json from converting non-valid type
     # objects to nested-json hash (e.g. BadgevilleBerlin::ActivityDefinition::Selector)
     # to allow for 200 OK response on PUT

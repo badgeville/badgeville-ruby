@@ -86,6 +86,13 @@ module BadgevilleBerlin
         :active           => true )
        @new_reward_defn_created = @new_reward_defn.save
 
+       # Create a mission which includes this reward definition
+       @new_group = Group.new(
+          :site_id => @new_site.id,
+          :name => 'Comment Rockstar Mission'
+       )
+       @new_group_created = @new_group.save
+
        # Advanced README: Register a player behavior (e.g. comment) for an
        # existing player.
        @comment_activity = Activity.new(
@@ -258,5 +265,13 @@ module BadgevilleBerlin
       Site.delete(@new_site.id)
       lambda { Site.find(@new_site.id) }.should raise_error(ActiveResource::ResourceNotFound)
     end
+
+    #FIND Group
+    it "should parse correctly a group index call which includes rewards keyed under reward definitions" do
+      BadgevilleBerlinJsonFormat.stub!(:decode).and_return([JSON.parse(BadgevilleBerlin.response_json["valid_group_all"])])
+      response = Group.all(params: {site: @new_site.url, per_page: 50, player_id: @new_player.id.to_s})
+      response.first.rewards.count.should == 2
+    end
+
   end
 end

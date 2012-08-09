@@ -41,8 +41,7 @@ module BadgevilleBerlinJsonFormat
     if json.kind_of?(Array)
       json
     elsif json.kind_of?(Hash)
-      json.has_key?('data') ? json['data'] : json
+      json.keys.first == 'data' ? json['data'] : json
     end
-    
   end
 end
