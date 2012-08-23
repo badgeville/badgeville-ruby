@@ -21,14 +21,15 @@ module BadgevilleBerlin
       before do
         @mock = Factory.build(klass)
         @mock_json = BadgevilleBerlin.response_json["valid_" + klass + "_find"]
-        @path = ENDPOINTKEY + "/" + klass.pluralize + "/" + @mock._id + ".json"
+        @path = ENDPOINTKEY + "/" + klass.pluralize + "/" + @mock.id + ".json"
         @method = :get
         @mock_http = MockHTTP.new(@method, @path, {:body => @mock_json, :status => [200, "Ok"]})
       end
     
       it "should make the correct http request and return the correct object." do
         @mock_http.request.should_receive(:send).with(@method, @path, {"Accept"=>"application/json"}).and_return(@mock_http.response)
-        @mock = module_klass.find(@mock._id)
+        @mock = module_klass.find(@mock.id)
+        (@mock.id).should_not be_nil
         BadgevilleBerlin.test_attr(@mock, @mock_json)
       end
     end
@@ -37,7 +38,7 @@ module BadgevilleBerlin
       before do
         @mock = Factory.build(klass)
         @mock_json = BadgevilleBerlin.response_json["valid_" + klass + "_update"]
-        @path = ENDPOINTKEY + "/" + klass.pluralize + "/" + @mock._id + ".json"
+        @path = ENDPOINTKEY + "/" + klass.pluralize + "/" + @mock.id + ".json"
         @method = :put
         @mock_http = MockHTTP.new(@method, @path, {:body => @mock_json, :status => [200, "Ok"]})
         @mock.stub(:persisted?).and_return(true) # Force ActiveResource to use put
@@ -54,14 +55,14 @@ module BadgevilleBerlin
       before do
         @mock = Factory.build(klass)
         @mock_json = "{\"data\":{\"name\":\"visitor_username\",\"created_at\":\"2012-01-05T10:43:42-08:00\",\"email\":\"revised_visitor@emailserver.com\",\"_id\":\"4f05ef5ea768651b3500009f\"},\"paging\":null}" #Factory.build(klass + '_json_save')
-        @path = ENDPOINTKEY + "/" + klass.pluralize + "/" + @mock._id + ".json"
+        @path = ENDPOINTKEY + "/" + klass.pluralize + "/" + @mock.id + ".json"
         @method = :delete
         @mock_http = MockHTTP.new(@method, @path, {:body => @mock_json, :status => [200, "Ok"]})
       end
     
       it "should make the correct http request." do
         @mock_http.request.should_receive(:send).with(@method, @path, {"Accept"=>"application/json"}).and_return(@mock_http.response)
-        module_klass.delete(@mock._id)
+        module_klass.delete(@mock.id)
       end
     end
   end

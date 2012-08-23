@@ -52,7 +52,7 @@ module BadgevilleBerlin
     #   value.should == mock.send(key)
     # end
     if mock_json != "{}"
-      BadgevilleBerlinJsonFormat::decode(mock_json)["_id"].should == mock.id
+      BadgevilleBerlinJsonFormat::decode(mock_json)["id"].should == mock.id
     end
 
   end

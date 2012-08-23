@@ -11,7 +11,7 @@ module BadgevilleBerlin
       #
       # @return [String] primary key name '_id'
       def primary_key
-        @primary_key = '_id'
+        @primary_key = 'id'
       end
     end
 
