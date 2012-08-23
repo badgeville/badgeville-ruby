@@ -4,17 +4,6 @@ module BadgevilleBerlin
   # Subclasses ActiveResource::Base as BaseResource
   class BaseResource < ActiveResource::Base
 
-
-    class << self
-      # Overrides the ActiveResource class method primary_key to be '_id'
-      # instead of 'id.'
-      #
-      # @return [String] primary key name '_id'
-      def primary_key
-        @primary_key = 'id'
-      end
-    end
-
     def initialize(attributes = {}, persisted = false)
       #we return a nested JSON response with player rewards keyed off of mongo id's
       #on groups endpoint which causes activeresource to break when looking up a
