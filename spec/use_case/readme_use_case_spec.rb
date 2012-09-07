@@ -6,7 +6,7 @@ module BadgevilleBerlin
       # Initializations
       @rand1 = rand(5000)
       @rand2 = rand(5000)
-      @my_network_id = '4d5dc61ed0c0b32b79000001'
+      @my_network_id = '<my_network_id>'
 
       # Set FakeWeb to allow a real connection to the Badgeville server as
       # configured in spec_helper.rb
