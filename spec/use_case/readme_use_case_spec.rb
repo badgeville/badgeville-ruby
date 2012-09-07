@@ -223,7 +223,7 @@ module BadgevilleBerlin
       Player.find(@new_player.id).display_name.should == "Elite Player"
     end
 
-    it "should update picture_url on the player object" do
+    it "should update picture_url on the player object", :affects_bv_server => true  do
       @new_player.picture_url = "http://i.imgur.com/OsbzX.png"
       @new_player.save
       Player.find(@new_player.id).picture_url.should == "http://i.imgur.com/OsbzX.png"

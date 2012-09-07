@@ -28,10 +28,10 @@ This is an open source Ruby wrapper for interacting with the [Badgeville RESTful
 </ul>
 ```ruby
         new_activity_definition = ActivityDefinition.new(
-          :adjustment => '{"points": 4}',
+          :adjustment => {:points => 4},
           :name => 'A Cool Comment Behavior',
           :site_id => new_site.id,
-          :selector => '{"verb":"vote"}' )
+          :selector => {:verb => "comment"} )
         success = new_activity_definition.save
 ```
 
@@ -42,11 +42,11 @@ This is an open source Ruby wrapper for interacting with the [Badgeville RESTful
   <li>See the API Explorer for a full list of activity definition properties to update.</li>
 </ul>
 ```ruby
-        new_activity_definition.adjustment.points = 3
+        new_activity_definition.adjustment = {:points => 3}
         success = new_activity_definition.save
 
         activity_def_points_updated = BadgevilleBerlin::ActivityDefinition.find(new_activity_definition.id)
-        puts activity_def_points_updated.points # 3.0
+        puts activity_def_points_updated["points"]["definition"] # 3
 ```
 
 ### 4. Update the properties of activity definition: enable rate-limiting. [(more on rate-limiting)](http://rules.badgeville.com/display/doc/Creating+and+Managing+Behaviors#CreatingandManagingBehaviors-BehaviorRateLimits)
