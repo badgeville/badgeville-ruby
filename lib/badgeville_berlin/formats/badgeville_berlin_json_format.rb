@@ -1,5 +1,6 @@
 # For custom BadgevilleBerlinJson
 require 'active_support/json'
+require 'active_support/hash_with_indifferent_access'
 require "badgeville_berlin/version"
 
 # Handles the fact that a JSON formatted GET response does not meet the
@@ -41,7 +42,8 @@ module BadgevilleBerlinJsonFormat
     if json.kind_of?(Array)
       json
     elsif json.kind_of?(Hash)
-      json.keys.first == 'data' ? json['data'] : json
+      json = ActiveSupport::HashWithIndifferentAccess.new(json)
+      json.keys.first == "data" ? json["data"] : json
     end
   end
 end

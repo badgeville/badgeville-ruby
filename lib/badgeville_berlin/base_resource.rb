@@ -12,6 +12,44 @@ module BadgevilleBerlin
       super
     end
 
+    def load(attributes, remove_root = false)
+      raise ArgumentError, "expected an attributes Hash, got #{attributes.inspect}" unless attributes.is_a?(Hash)
+      @prefix_options, attributes = split_options(attributes)
+
+      if attributes.keys.size == 1
+        remove_root = self.class.element_name == attributes.keys.first.to_s
+      end
+
+      attributes = ActiveResource::Formats.remove_root(attributes) if remove_root
+
+      attributes.each do |key, value|
+        @attributes[key.to_s] =
+            case value
+              when Array
+                resource = nil
+                value.map do |attrs|
+                  if attrs.is_a?(Hash)
+                    resource ||= find_or_create_resource_for_collection(key)
+                    resource.new(attrs)
+                  else
+                    attrs.duplicable? ? attrs.dup : attrs
+                  end
+                end
+              when Hash
+                if [:selector, :adjustment].include?(key)
+                  #if the key is selector or adjustment, as on the ActivityDefinition object, we don't want to create a nested resource
+                  value
+                else
+                  resource = find_or_create_resource_for(key)
+                  resource.new(value)
+                end
+              else
+                value.duplicable? ? value.dup : value
+            end
+      end
+      self
+    end
+
     # Overrides encode call to prevent to_json from converting non-valid type
     # objects to nested-json hash (e.g. BadgevilleBerlin::ActivityDefinition::Selector)
     # to allow for 200 OK response on PUT
@@ -21,10 +59,10 @@ module BadgevilleBerlin
     end
 
     def sanitize_request
-      valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass", "Float"]
+      valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass", "ActiveSupport::HashWithIndifferentAccess", "Float", "Array"]
       self.attributes.values.each_with_index do |k,index|
         if !valid_types.include?(self.attributes[self.attributes.keys[index]].class.to_s)
-          self.attributes[self.attributes.keys[index]] = self.attributes[self.attributes.keys[index]].to_json
+          self.attributes[self.attributes.keys[index]] = self.attributes[self.attributes.keys[index]].attributes.to_json
         end
       end
     end

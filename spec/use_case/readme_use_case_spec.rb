@@ -57,17 +57,17 @@ module BadgevilleBerlin
       # Advanced README: Create an activity definition to specify that a player will earn 4
       # points each time they perform the "comment" behavior.
       @new_activity_definition = ActivityDefinition.new(
-        :selector => '{"verb":"comment"}',
+        :selector => {:verb => :comment},
         :name => "A Cool Comment Behavior #{@rand1}",
         :site_id => @new_site.id,
-        :adjustment => '{"points":4}'
+        :adjustment => {:points => 3}
         )
       @new_activity_defn_created = @new_activity_definition.save
 
       # Advanced README: Update the activity definition such that a player
       # on your site will earn 3 points rather than 4 each time they
       # perform the "comment" behavior.
-      @new_activity_definition.adjustment.points = 3
+      @new_activity_definition.adjustment = {:points => 3}
       @new_activity_defn_updated = @new_activity_definition.save
 
        # Advanced README: Update the activity definition to include a rate
@@ -201,7 +201,8 @@ module BadgevilleBerlin
 
     it "should have updated the activity definition points for comment", :affects_bv_server => true do
       @updated_activity_definition = ActivityDefinition.find(@new_activity_definition.id)
-      @updated_activity_definition.adjustment.points.should == 3
+      @updated_activity_definition.adjustment.should == {"points" => { "definition" => 3}}
+      @updated_activity_definition.selector.should == {"verb" => "comment"}
     end
 
     # UPDATE ActivityDefinition (rate-limiting)
@@ -222,6 +223,12 @@ module BadgevilleBerlin
       Player.find(@new_player.id).display_name.should == "Elite Player"
     end
 
+    it "should update picture_url on the player object" do
+      @new_player.picture_url = "http://i.imgur.com/OsbzX.png"
+      @new_player.save
+      Player.find(@new_player.id).picture_url.should == "http://i.imgur.com/OsbzX.png"
+    end
+
     # UPDATE RewardDefinition
     it "should update the reward definition with the name \"Comment Superstar\"", :affects_bv_server => true do
       @new_reward_defn.name = "Comment Superstar"
@@ -231,9 +238,9 @@ module BadgevilleBerlin
 
     #UPDATE Site
     it "should update the site", :affects_bv_server => true do
-      @new_site.name = "New Site Name"
+      @new_site.name = "New Site Name #{rand(5000)}"
       @new_site.save
-      Site.find(@new_site.id).name.should == "New Site Name"
+      Site.find(@new_site.id).name.should == @new_site.name
     end
 
     # DELETE RewardDefinition
@@ -267,9 +274,11 @@ module BadgevilleBerlin
     end
 
     #FIND Group
-    it "should parse correctly a group index call which includes rewards keyed under reward definitions" do
+    # Not integration test!
+    it "should parse correctly a group index call which includes rewards keyed under reward definitions", :affects_bv_server => true do
       BadgevilleBerlinJsonFormat.stub!(:decode).and_return([JSON.parse(BadgevilleBerlin.response_json["valid_group_all"])])
-      response = Group.all(params: {site: @new_site.url, per_page: 50, player_id: @new_player.id.to_s})
+      response = Group.all
+      #(params: {site: @new_site.url, per_page: 50, player_id: @new_player.id.to_s})
       response.first.rewards.count.should == 2
     end
 
