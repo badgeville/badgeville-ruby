@@ -28,47 +28,44 @@ module BadgevilleBerlin
 
   describe BaseResource, ".find_in_batches" do
 
+    # Set find_in_batches expectations
+    #
+    # @param [Hash{Integer => Array}] batches keys are expected page numbers passed to find.
+    # values are expected batches returned by find for the corresponding page.
+    def expect_batches(batches)
+      batches.each do |page, batch|
+        BaseResource.should_receive(:find).once.ordered
+                    .with(:all, :params => {page: page, per_page: BaseResource::BATCH_SIZE_DEFAULT})
+                    .and_return(batch)
+      end
+    end
+
     context "no resources are available" do
       it "should call find once and not yield any batches" do
-        expected_find_params = {page: 1, per_page: BaseResource::PER_PAGE_DEFAULT}
-        BaseResource.should_receive(:find)
-                    .once
-                    .with(:all, :params => expected_find_params)
-                    .and_return([])
+        expect_batches(1 => [])
         expect { |b| BaseResource.find_in_batches(&b) }.to_not yield_control
       end
     end
 
     context "fewer than one batch of resources is available" do
       before do
-        @batch = [0]
+        @batches = {1 => [0]}
       end
 
       it "should call find once and yield one batch" do
-        expected_find_params = {page: 1, per_page: BaseResource::PER_PAGE_DEFAULT}
-        BaseResource.should_receive(:find)
-                    .once
-                    .with(:all, :params => expected_find_params)
-                    .and_return(@batch)
-        expect { |b| BaseResource.find_in_batches(&b) }.to yield_with_args(@batch)
+        expect_batches(@batches)
+        expect { |b| BaseResource.find_in_batches(&b) }.to yield_with_args(@batches[1])
       end
     end
 
     context "exactly one batch of resources is available" do
       before do
-        @batch = [*0..49]
+        @batches = {1 => [*0..49], 2 => []}
       end
 
       it "should call find twice and yield one batch" do
-        {1 => @batch, 2 => []}.each do |page, batch|
-          expected_find_params = {page: page, per_page: BaseResource::PER_PAGE_DEFAULT}
-          BaseResource.should_receive(:find)
-                      .once
-                      .ordered
-                      .with(:all, :params => expected_find_params)
-                      .and_return(batch)
-        end
-        expect { |b| BaseResource.find_in_batches(&b) }.to yield_with_args(@batch)
+        expect_batches(@batches)
+        expect { |b| BaseResource.find_in_batches(&b) }.to yield_with_args(@batches[1])
       end
     end
 
@@ -78,12 +75,7 @@ module BadgevilleBerlin
       end
 
       it "should call find twice and yield two batches" do
-        @batches.each do |page, batch|
-          expected_find_params = {page: page, per_page: BaseResource::PER_PAGE_DEFAULT}
-          BaseResource.should_receive(:find).once.ordered
-                      .with(:all, :params => expected_find_params)
-                      .and_return(batch)
-        end
+        expect_batches(@batches)
         expect { |b| BaseResource.find_in_batches(&b) }.to yield_successive_args(*@batches.values)
       end
     end

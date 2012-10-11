@@ -4,7 +4,7 @@ module BadgevilleBerlin
   # Subclasses ActiveResource::Base as BaseResource
   class BaseResource < ActiveResource::Base
 
-    PER_PAGE_DEFAULT = 50
+    BATCH_SIZE_DEFAULT = 50
 
     def initialize(attributes = {}, persisted = false)
       #we return a nested JSON response with player rewards keyed off of mongo id's
@@ -110,7 +110,7 @@ module BadgevilleBerlin
     # @param [Hash] options :batch_size, :start (see also ActiveResource#find options)
     def self.find_in_batches(options = {})
       page = 1
-      per_page = PER_PAGE_DEFAULT
+      per_page = BATCH_SIZE_DEFAULT
       find_options = options.dup
       find_options[:params] ||= {}
       find_options[:params] = find_options[:params].merge(per_page: per_page)
