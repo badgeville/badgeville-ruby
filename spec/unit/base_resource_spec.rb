@@ -26,6 +26,69 @@ module BadgevilleBerlin
 
   end
 
+  describe BaseResource, ".find_in_batches" do
+
+    context "no resources are available" do
+      it "should call find once and not yield any batches" do
+        expected_find_params = {page: 1, per_page: BaseResource::PER_PAGE_DEFAULT}
+        BaseResource.should_receive(:find)
+                    .once
+                    .with(:all, :params => expected_find_params)
+                    .and_return([])
+        expect { |b| BaseResource.find_in_batches(&b) }.to_not yield_control
+      end
+    end
+
+    context "fewer than one batch of resources is available" do
+      before do
+        @batch = [0]
+      end
+
+      it "should call find once and yield one batch" do
+        expected_find_params = {page: 1, per_page: BaseResource::PER_PAGE_DEFAULT}
+        BaseResource.should_receive(:find)
+                    .once
+                    .with(:all, :params => expected_find_params)
+                    .and_return(@batch)
+        expect { |b| BaseResource.find_in_batches(&b) }.to yield_with_args(@batch)
+      end
+    end
+
+    context "exactly one batch of resources is available" do
+      before do
+        @batch = [*0..49]
+      end
+
+      it "should call find twice and yield one batch" do
+        {1 => @batch, 2 => []}.each do |page, batch|
+          expected_find_params = {page: page, per_page: BaseResource::PER_PAGE_DEFAULT}
+          BaseResource.should_receive(:find)
+                      .once
+                      .ordered
+                      .with(:all, :params => expected_find_params)
+                      .and_return(batch)
+        end
+        expect { |b| BaseResource.find_in_batches(&b) }.to yield_with_args(@batch)
+      end
+    end
+
+    context "more than one batch of resources is available" do
+      before do
+        @batches = {1 => [*0..49], 2 => [50]}
+      end
+
+      it "should call find twice and yield two batches" do
+        @batches.each do |page, batch|
+          expected_find_params = {page: page, per_page: BaseResource::PER_PAGE_DEFAULT}
+          BaseResource.should_receive(:find).once.ordered
+                      .with(:all, :params => expected_find_params)
+                      .and_return(batch)
+        end
+        expect { |b| BaseResource.find_in_batches(&b) }.to yield_successive_args(*@batches.values)
+      end
+    end
+  end
+
   #describe BaseResource, ".encode" do
   #  before do
   #    @mock_activity_definition = Factory.create(:activity_definition)
