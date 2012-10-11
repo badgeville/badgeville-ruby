@@ -32,65 +32,66 @@ module BadgevilleBerlin
     #
     # @param [Hash{Integer => Array}] batches keys are expected page numbers passed to find.
     # values are expected batches returned by find for the corresponding page.
-    # @param [Integer] batch_size expected batch size passed to find
-    def expect_batches(batches, batch_size = BaseResource::BATCH_SIZE_DEFAULT)
-      expected_per_page = (batch_size == :default) ? BaseResource::BATCH_SIZE_DEFAULT : batch_size
+    # @param [Hash] options find_in_batches options
+    # @return expectation of call to #find_in_batches
+    def expect_find_in_batches(batches, options)
+      expected_per_page = options[:batch_size] || BaseResource::BATCH_SIZE_DEFAULT
       batches.each do |page, batch|
         BaseResource.should_receive(:find).once.ordered
                     .with(:all, :params => {page: page, per_page: expected_per_page})
                     .and_return(batch)
       end
-
-      if batch_size == :default
-        expect { |b| BaseResource.find_in_batches(&b) }
-      else
-        expect { |b| BaseResource.find_in_batches(:batch_size => batch_size, &b) }
-      end
+      expect { |b| BaseResource.find_in_batches(options, &b) }
     end
 
-    [:default, 2, BaseResource::BATCH_SIZE_DEFAULT+1].each do |batch_size|
-      context "batch size of #{batch_size}" do
+    [:default, 2, BaseResource::BATCH_SIZE_DEFAULT+1].product([:default, 2]).map do |batch_size, start|
+      context "batch size of #{batch_size}, starting at #{start}" do
         before do
-          @batch_size_value = (batch_size == :default) ? BaseResource::BATCH_SIZE_DEFAULT : batch_size
+          @batch_size = (batch_size == :default) ? BaseResource::BATCH_SIZE_DEFAULT : batch_size
+          @start = (start == :default) ? 1 : start
+
+          @options = {}
+          @options[:batch_size] = batch_size unless batch_size == :default
+          @options[:start] = start unless start == :default
         end
 
         context "no resources are available" do
           before do
-            @batches = {1 => []}
+            @batches = {@start => []}
           end
 
           it "should call find once and not yield any batches" do
-            expect_batches(@batches, batch_size).to_not yield_control
+            expect_find_in_batches(@batches, @options).to_not yield_control
           end
         end
 
         context "fewer than one batch of resources is available" do
           before do
-            @batches = {1 => [0]}
+            @batches = {@start => [0]}
           end
 
           it "should call find once and yield one batch" do
-            expect_batches(@batches, batch_size).to yield_with_args(@batches[1])
+            expect_find_in_batches(@batches, @options).to yield_with_args(@batches[1])
           end
         end
 
         context "exactly one batch of resources is available" do
           before do
-            @batches = {1 => [*0...@batch_size_value], 2 => []}
+            @batches = {@start => [*0...@batch_size], @start+1 => []}
           end
 
           it "should call find twice and yield one batch" do
-            expect_batches(@batches, batch_size).to yield_with_args(@batches[1])
+            expect_find_in_batches(@batches, @options).to yield_with_args(@batches[1])
           end
         end
 
         context "more than one batch of resources is available" do
           before do
-            @batches = {1 => [*0...@batch_size_value], 2 => [@batch_size_value+1]}
+            @batches = {@start => [*0...@batch_size], @start+1 => [@batch_size+1]}
           end
 
           it "should call find twice and yield two batches" do
-            expect_batches(@batches, batch_size).to yield_successive_args(*@batches.values)
+            expect_find_in_batches(@batches, @options).to yield_successive_args(*@batches.values)
           end
         end
 
