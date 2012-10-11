@@ -110,7 +110,7 @@ module BadgevilleBerlin
     # @param [Hash] options :batch_size, :start (see also ActiveResource#find options)
     def self.find_in_batches(options = {})
       page = 1
-      per_page = BATCH_SIZE_DEFAULT
+      per_page = options[:batch_size] || BATCH_SIZE_DEFAULT
       find_options = options.dup
       find_options[:params] ||= {}
       find_options[:params] = find_options[:params].merge(per_page: per_page)
