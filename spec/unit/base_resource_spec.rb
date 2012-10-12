@@ -60,7 +60,7 @@ module BadgevilleBerlin
             @batches = {@start => []}
           end
 
-          it "should call find once and not yield any batches" do
+          it "calls find once and does not yield any batches" do
             expect_find_in_batches(@batches, @options).to_not yield_control
           end
         end
@@ -70,7 +70,7 @@ module BadgevilleBerlin
             @batches = {@start => [0]}
           end
 
-          it "should call find once and yield one batch" do
+          it "calls find once and yields one batch" do
             expect_find_in_batches(@batches, @options).to yield_with_args(@batches[1])
           end
         end
@@ -80,7 +80,7 @@ module BadgevilleBerlin
             @batches = {@start => [*0...@batch_size], @start+1 => []}
           end
 
-          it "should call find twice and yield one batch" do
+          it "calls find twice and yields one batch" do
             expect_find_in_batches(@batches, @options).to yield_with_args(@batches[1])
           end
         end
@@ -90,11 +90,44 @@ module BadgevilleBerlin
             @batches = {@start => [*0...@batch_size], @start+1 => [@batch_size+1]}
           end
 
-          it "should call find twice and yield two batches" do
+          it "calls find twice and yields two batches" do
             expect_find_in_batches(@batches, @options).to yield_successive_args(*@batches.values)
           end
         end
 
+      end
+    end
+  end
+
+  describe BaseResource, ".find_each" do
+    it "passes its options hash to #find_in_batches" do
+      options = {}
+      BaseResource.should_receive(:find_in_batches).once.with(equal(options))
+      BaseResource.find_each(options)
+    end
+
+    context "no resources are available" do
+      it "does not yield any resources" do
+        BaseResource.should_receive(:find_in_batches).once
+        expect { |b| BaseResource.find_each(&b) }.to_not yield_control
+      end
+    end
+
+    context "one batch of resources is available" do
+      it "yields all resources in the batch" do
+        batch = [1, 2]
+        BaseResource.should_receive(:find_in_batches).once.and_yield(batch)
+        expect { |b| BaseResource.find_each(&b) }.to yield_successive_args(*batch)
+      end
+    end
+
+    context "more than one batch of resources is available" do
+      it "yields all resources from all the batches in succession" do
+        batches = [[1, 2], [3]]
+        BaseResource.should_receive(:find_in_batches).once
+                    .and_yield(batches[0])
+                    .and_yield(batches[1])
+        expect { |b| BaseResource.find_each(&b) }.to yield_successive_args(*(batches.flatten))
       end
     end
   end

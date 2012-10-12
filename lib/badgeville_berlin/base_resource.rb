@@ -126,6 +126,15 @@ module BadgevilleBerlin
       end
     end
 
+    # Yields each resource that was found by the find +options+.
+    # The find is performed by BaseResource#find_in_batches
+    #
+    # @param [Hash] options see BaseResource#find_in_batches
+    def self.find_each(options = {})
+      self.find_in_batches(options) do |batch|
+        batch.each { |resource| yield resource}
+      end
+    end
   end
 
 end
