@@ -13,8 +13,9 @@ module BadgevilleBerlin
       FakeWeb.allow_net_connect = true
 
       # Configure the gem with the host site and the API Key
-      my_api_key     = "myapikey"
-      my_hostname = "http://myhostname.com"
+      my_api_key = "<myapikey>"
+      my_hostname = "<http://myhostname.com>"
+
       Config.conf(:host_name => my_hostname, :api_key => my_api_key)
 
       # Basic README: Create a new site
@@ -42,6 +43,7 @@ module BadgevilleBerlin
       @attr_specific_err = @new_user2.errors[:email]
 
       # Basic README: Create a player
+      # Basic README: Find existing players that match the given email
       @new_player = Player.new(
         :site_id      => @new_site.id,
         :user_id      => @new_user.id ,
@@ -136,6 +138,24 @@ module BadgevilleBerlin
 
     it "should have a new player with user ID for @new_user", :affects_bv_server => true do
       @new_player.user_id.should == @new_user.id
+    end
+
+    # FIND Players by email (:all matches)
+    it "should return all players that match the email address as a collection", :affects_bv_server => true do
+      @existing_player = Player.find(:all, :params => {:email => "visitor#{@rand1}@emailserver.com"})
+      @existing_player.first.email.should == "visitor#{@rand1}@emailserver.com"
+    end
+
+    # FIND Player by email (:first match)
+    it "should return the first player that matches the email address as a single record", :affects_bv_server => true do
+      @existing_player = Player.find(:first, :params => {:email => "visitor#{@rand1}@emailserver.com"})
+      @existing_player.email.should == "visitor#{@rand1}@emailserver.com"
+    end
+
+    # FIND Player by email (:last match)
+    it "should return the first player that matches the email address as a single record", :affects_bv_server => true do
+      @existing_player = Player.find(:last, :params => {:email => "visitor#{@rand1}@emailserver.com"})
+      @existing_player.email.should == "visitor#{@rand1}@emailserver.com"
     end
 
     # CREATE Activity (share)
@@ -273,7 +293,7 @@ module BadgevilleBerlin
       lambda { Site.find(@new_site.id) }.should raise_error(ActiveResource::ResourceNotFound)
     end
 
-    #FIND Group
+    # FIND Group (a.k.a. Mission)
     # Not integration test!
     it "should parse correctly a group index call which includes rewards keyed under reward definitions", :affects_bv_server => true do
       BadgevilleBerlinJsonFormat.stub!(:decode).and_return([JSON.parse(BadgevilleBerlin.response_json["valid_group_all"])])

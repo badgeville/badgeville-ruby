@@ -85,7 +85,17 @@ This is an open source Ruby wrapper for interacting with the [Badgeville RESTful
         success = new_player.save
 ```
 
-### 7. Register a player behavior.
+### 7. Find existing players by email.
+<ul> 
+  <li>Here we find an existing player by email.</li>
+  <li>To get all players on the network that match the email, we have passed :all.</li>
+  <li>You can alternatively pass :first or :last in the place of :all.</li>
+</ul>
+``` ruby
+        @existing_player = Player.find(:all, :params => {:email => "revised_visitor@emailserver.com"})
+```
+
+### 8. Register a player behavior.
 <ul>
   <li>Here we record the fact that the newly created player performed a "share" behavior.</li>
   <li>See the API Explorer for required and optional parameters.</li>
