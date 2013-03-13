@@ -4,6 +4,8 @@ module BadgevilleBerlin
   # Subclasses ActiveResource::Base as BaseResource
   class BaseResource < ActiveResource::Base
 
+    BATCH_SIZE_DEFAULT = 50
+
     def initialize(attributes = {}, persisted = false)
       #we return a nested JSON response with player rewards keyed off of mongo id's
       #on groups endpoint which causes activeresource to break when looking up a
@@ -98,6 +100,41 @@ module BadgevilleBerlin
       end
     end
 
+    # Yields each batch of resources that was found by the find +options+ as
+    # an array. The size of each batch is set by the <tt>:batch_size</tt>
+    # option; the default is 50.
+    #
+    # You can control the starting point for the batch processing by
+    # supplying the <tt>:start</tt> option.
+    #
+    # @param [Hash] options :batch_size, :start (see also ActiveResource#find options)
+    def self.find_in_batches(options = {})
+      page = options[:start] || 1
+      per_page = options[:batch_size] || BATCH_SIZE_DEFAULT
+      find_options = options.dup
+      find_options[:params] ||= {}
+      find_options[:params] = find_options[:params].merge(per_page: per_page)
+      [:batch_size, :start].each { |o| find_options.delete(o) }
+
+      loop do
+        find_options[:params].merge!(page: page)
+        batch = self.find(:all, find_options)
+        break if batch.empty?
+        yield batch
+        break if batch.size < per_page
+        page += 1
+      end
+    end
+
+    # Yields each resource that was found by the find +options+.
+    # The find is performed by BaseResource#find_in_batches
+    #
+    # @param [Hash] options see BaseResource#find_in_batches
+    def self.find_each(options = {})
+      self.find_in_batches(options) do |batch|
+        batch.each { |resource| yield resource}
+      end
+    end
   end
 
 end
