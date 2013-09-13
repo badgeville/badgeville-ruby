@@ -106,7 +106,10 @@ This is an open source Ruby wrapper for interacting with the [Badgeville RESTful
 
 ```
 
-### 8. Delete a reward definition.
+### 8. Delete a reward definition. 
+<ul>
+  <li>A reward definition can only be deleted if associated earned rewards have been deleted.</li>
+</ul>
 ```ruby
         BadgevilleBerlin::RewardDefinition.delete(new_reward_def.id)
 ```

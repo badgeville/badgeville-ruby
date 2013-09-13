@@ -13,8 +13,9 @@ module BadgevilleBerlin
       FakeWeb.allow_net_connect = true
 
       # Configure the gem with the host site and the API Key
-      my_api_key = "<myapikey>"
-      my_hostname = "<http://myhostname.com>"
+
+      my_hostname = '<http://myhostname.com>'
+      my_api_key = '<my_api_key>'
 
       Config.conf(:host_name => my_hostname, :api_key => my_api_key)
 
@@ -265,8 +266,17 @@ module BadgevilleBerlin
 
     # DELETE RewardDefinition
     it "should have deleted a reward definition", :affects_bv_server => true do
-      RewardDefinition.delete(@new_reward_defn.id)
-      lambda { RewardDefinition.find(@new_reward_defn.id) }.should raise_error(ActiveResource::ResourceNotFound)
+      # Not in the README:
+      @new_reward_defn2 = RewardDefinition.new(
+        :site_id          => @new_site.id,
+        :name             => 'Blog Rockstar',
+        :reward_template  => '{"message":"Congrats, you are a Blog Rockstar!"}',
+        :components       => '[{"comparator":{"$gte":1},"where":{"verb":"blog","player_id":"%player_id"},"command":"count"}]',
+        :active           => true )
+      @new_reward_defn2.save
+
+      RewardDefinition.delete(@new_reward_defn2.id)
+      lambda { RewardDefinition.find(@new_reward_defn2.id) }.should raise_error(ActiveResource::ResourceNotFound)
     end
 
     # DELETE ActivityDefinition

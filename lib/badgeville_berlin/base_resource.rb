@@ -4,6 +4,8 @@ module BadgevilleBerlin
   # Subclasses ActiveResource::Base as BaseResource
   class BaseResource < ActiveResource::Base
 
+    COMPLEX_ATTRIBUTES = []
+
     def initialize(attributes = {}, persisted = false)
       #we return a nested JSON response with player rewards keyed off of mongo id's
       #on groups endpoint which causes activeresource to break when looking up a
@@ -36,7 +38,7 @@ module BadgevilleBerlin
                   end
                 end
               when Hash
-                if [:selector, :adjustment].include?(key)
+                if self.class::COMPLEX_ATTRIBUTES.include?(key)
                   #if the key is selector or adjustment, as on the ActivityDefinition object, we don't want to create a nested resource
                   value
                 else
