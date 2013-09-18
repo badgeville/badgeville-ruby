@@ -80,13 +80,13 @@ module BadgevilleBerlin
       @errors ||= BadgevilleBerlin::Errors.new(self)
     end
 
-    # Overrides the ActiveResource isntance method in module Validations
+    # Overrides the ActiveResource instance method in module Validations
     # in order to load_remote_errors() for the case where the format is
     # the custom BadgevilleJson format. Loads the set of remote errors into
     # the object’s Errors collection based on the content-type of the
     # error-block received.
     #
-    # @param remote_errors errors from teh remote server
+    # @param remote_errors errors from the remote server
     # @param [Object] save_cache flag that directs the errors cache to be
     # cleared by default
     def load_remote_errors(remote_errors, save_cache = false ) #:nodoc:

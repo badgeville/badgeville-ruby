@@ -10,7 +10,8 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/badgeville/badgeville-ruby"
   s.summary     = %q{A Ruby wrapper for the Badgeville RESTful Berlin API.}
   s.description = %q{This is an open source Ruby wrapper for interacting with the Badgeville RESTful Berlin API.}
-
+  s.license     = 'MIT'
+  
   s.rubyforge_project = "badgeville_berlin"
 
   s.files         = `git ls-files`.split("\n")
@@ -26,9 +27,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "fakeweb"
   s.add_development_dependency "factory_girl", '=2.4.0'
-  s.add_development_dependency "ZenTest"
-  s.add_development_dependency "autotest"
-  s.add_development_dependency "autotest-growl"
   s.add_development_dependency "logger", ">=1.2.8"
 
   s.add_runtime_dependency "activeresource", "~> 3.1"
