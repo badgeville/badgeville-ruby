@@ -23,7 +23,7 @@ module BadgevilleBerlin
       end
 
       attributes = ActiveResource::Formats.remove_root(attributes) if remove_root
-
+      
       attributes.each do |key, value|
         @attributes[key.to_s] =
             case value
@@ -52,6 +52,26 @@ module BadgevilleBerlin
       self
     end
 
+    # Enables revising Berlin JSON response key names to match what
+    # is expected by model-level logic. (e.g. Berlin JSON payload
+    # returns the player's nickname under the key :nick_name, but the
+    # Player model expects it as :nickname without the underscore.)
+    #
+    # @example Rewrites the BadgevilleBerlin::Player :nick_name key as 
+    # :nickname.
+    def customize_keys_for_request
+      # The given resource type determined by self.class. For each attribute key
+      # in the ActiveResource object that needs renaming, replace the original
+      # hash key with the revised hash key as specified in the resource type
+      # -specific constant CUSTOM_ATTRS_FOR_REQUEST.
+      if defined?(self.class::CUSTOM_REQUEST_KEYS)
+        self.class::CUSTOM_REQUEST_KEYS.each do |orig_key, revised_key| 
+          attributes[revised_key] = @attributes.delete(orig_key.to_s) if attributes.include?(orig_key) 
+        end
+      end
+    end
+
+
     # Overrides encode call to prevent to_json from converting non-valid type
     # objects to nested-json hash (e.g. BadgevilleBerlin::ActivityDefinition::Selector)
     # to allow for 200 OK response on PUT
@@ -61,6 +81,7 @@ module BadgevilleBerlin
     end
 
     def sanitize_request
+      customize_keys_for_request
       valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass", "ActiveSupport::HashWithIndifferentAccess", "Float", "Array"]
       self.attributes.values.each_with_index do |k,index|
         if !valid_types.include?(self.attributes[self.attributes.keys[index]].class.to_s)

@@ -6,17 +6,18 @@ module BadgevilleBerlin
       # Initializations
       @rand1 = rand(5000)
       @rand2 = rand(5000)
-      @my_network_id = '<my_network_id>'
-      
-      # Set FakeWeb to allow a real connection to the Badgeville server as
-      # configured in spec_helper.rb
-      FakeWeb.allow_net_connect = true
+      @rand3 = rand(5000)
 
       # Configure the gem with the host site and the API Key
       my_hostname = '<http://myhostname.com>'
       my_api_key = '<my_api_key>'
- 
+      @my_network_id = '<my_network_id>'
+      
       Config.conf(:host_name => my_hostname, :api_key => my_api_key)
+
+      # Set FakeWeb to allow a real connection to the Badgeville server as
+      # configured in spec_helper.rb
+      FakeWeb.allow_net_connect = true
     end
 
     describe "README examples" do
@@ -58,7 +59,7 @@ module BadgevilleBerlin
           :verb      => "share",
           :player_id => @new_player.id )
         @share_activity_created = @share_activity.save
-
+ 
         # Advanced README: Create an activity definition to specify that a player will earn 4
         # points each time they perform the "comment" behavior.
         @new_activity_definition = ActivityDefinition.new(
@@ -159,7 +160,7 @@ module BadgevilleBerlin
       end
 
       it "should have registered a new share activity", :affects_bv_server => true do
-        @share_activity.verb.should == "share"
+        Activity.find(@share_activity.id).verb.should == "share"
       end
 
       # CREATE ActivityDefinition
@@ -168,7 +169,7 @@ module BadgevilleBerlin
       end
 
       it "should have a new activity definition for comment", :affects_bv_server => true do
-        @new_activity_definition.verb.should == "comment"
+        ActivityDefinition.find(@new_activity_definition.id).verb.should == "comment"
       end
 
       # CREATE Activity (comment)
@@ -177,7 +178,7 @@ module BadgevilleBerlin
       end
 
       it "should have registered a new comment activity", :affects_bv_server => true do
-        @comment_activity.verb.should == "comment"
+        Activity.find(@comment_activity.id).verb.should == "comment"
       end
 
       it "should have added 3 points to the new player", :affects_bv_server => true do
@@ -205,8 +206,8 @@ module BadgevilleBerlin
         @user_found_by_id.email = "visitor#{@rand2}@emailserver.com"
         @user_updated           = @user_found_by_id.save
 
-        User.find(@new_user.id).email.should == "visitor#{@rand2}@emailserver.com"
         @user_updated.should == true
+        User.find(@new_user.id).email.should == "visitor#{@rand2}@emailserver.com"
       end
 
       # UPDATE ActivityDefinition (points)
@@ -309,6 +310,58 @@ module BadgevilleBerlin
 
       after(:all) do
         Site.delete(@site.id)
+      end
+
+      describe "BadgevilleBerlin::Player", :affects_bv_server => true do
+        before(:all) do
+
+          # Create a new user
+          @new_user = User.new(
+            :name       => "user#{@rand3}",
+            :network_id => @my_network_id,
+            :email      => "user#{@rand3}@emailserver.com")
+          @user_created = @new_user.save
+
+          # Create a player
+          @new_player = Player.new(
+            :site_id      => @site.id,
+            :user_id      => @new_user.id,
+            :display_name => "Visitor #{@rand3}" )
+          @player_created = @new_player.save
+        end
+
+        context 'updating nickname' do
+          it 'should support the "nickname" setter & getter' do
+            @new_player.nickname = 'Sasha'
+            @new_player.save
+            Player.find(@new_player.id).nickname.should eq('Sasha')
+          end
+
+          it 'should support the "nick_name" setter & getter'do
+            @new_player.nick_name = 'Sasha'
+            @new_player.save
+            Player.find(@new_player.id).nick_name.should eq('Sasha')          
+          end
+        end
+
+        context 'updating player preferences' do
+          it "should default preferences field hide_notifications to false" do
+            Player.find(@new_player.id).preferences['hide_notifications'].should be_false
+          end
+
+          # it "should update preferences field hide_notifications" do
+            # pending 'fix in Badgeville Platform'
+            # @new_player.preferences = {'hide_notifications' => true}
+            # @new_player.save
+            # Player.find(@new_player.id).preferences['hide_notifications'].should be_true
+          # end
+
+          it "should update preferences field hide_notifications" do
+            @new_player.preferences = {'hide_notifications' => 'true'}
+            @new_player.save
+            Player.find(@new_player.id).preferences['hide_notifications'].should be_true
+          end
+        end
       end
 
       describe "BadgevilleBerlin::RewardDefinition", :affects_bv_server => true do
