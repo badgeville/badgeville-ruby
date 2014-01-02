@@ -12,7 +12,9 @@ module BadgevilleBerlin
       my_hostname = '<http://myhostname.com>'
       my_api_key = '<my_api_key>'
       @my_network_id = '<my_network_id>'
-
+      
+      Config.conf(:host_name => my_hostname, :api_key => my_api_key)
+     
       # Set FakeWeb to allow a real connection to the Badgeville server as
       # configured in spec_helper.rb
       FakeWeb.allow_net_connect = true
