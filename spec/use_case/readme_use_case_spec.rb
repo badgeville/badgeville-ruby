@@ -12,8 +12,6 @@ module BadgevilleBerlin
       my_hostname = '<http://myhostname.com>'
       my_api_key = '<my_api_key>'
       @my_network_id = '<my_network_id>'
-      
-      Config.conf(:host_name => my_hostname, :api_key => my_api_key)
 
       # Set FakeWeb to allow a real connection to the Badgeville server as
       # configured in spec_helper.rb
@@ -349,14 +347,13 @@ module BadgevilleBerlin
             Player.find(@new_player.id).preferences['hide_notifications'].should be_false
           end
 
-          # it "should update preferences field hide_notifications" do
-            # pending 'fix in Badgeville Platform'
-            # @new_player.preferences = {'hide_notifications' => true}
-            # @new_player.save
-            # Player.find(@new_player.id).preferences['hide_notifications'].should be_true
-          # end
+          it 'should update preferences field hide_notifications to true if set to Boolean true' do
+            @new_player.preferences = {'hide_notifications' => true}
+            @new_player.save
+            Player.find(@new_player.id).preferences['hide_notifications'].should be_true
+          end
 
-          it "should update preferences field hide_notifications" do
+          it 'should update preferences field hide_notifications to true if set to String "true"' do
             @new_player.preferences = {'hide_notifications' => 'true'}
             @new_player.save
             Player.find(@new_player.id).preferences['hide_notifications'].should be_true
