@@ -337,11 +337,26 @@ module BadgevilleBerlin
             Player.find(@new_player.id).nickname.should eq('Sasha')
           end
 
-          it 'should support the "nick_name" setter & getter'do
-            @new_player.nick_name = 'Sasha'
-            @new_player.save
-            Player.find(@new_player.id).nick_name.should eq('Sasha')          
+          it 'should NOT set "nickname" when the "nick_name" setter is used' do
+            # Create a new user
+            @new_user2 = User.new(
+              :name       => "user#{@rand2}",
+              :network_id => @my_network_id,
+              :email      => "user#{@rand2}@emailserver.com")
+            @user_created2 = @new_user2.save
+
+            #Create a player
+            @new_player2 = Player.new(
+              :site_id      => @site.id,
+              :user_id      => @new_user2.id,
+              :display_name => "Visitor #{@rand2}" )
+            @player_created2 = @new_player2.save
+
+            @new_player2.nick_name = 'Sasha'
+            @new_player2.save
+            Player.find(@new_player2.id).nickname.should be_nil
           end
+
         end
 
         context 'updating player preferences' do

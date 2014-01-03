@@ -23,8 +23,8 @@ module BadgevilleBerlin
       end
 
       attributes = ActiveResource::Formats.remove_root(attributes) if remove_root
-      
-      attributes.each do |key, value|
+
+      customize_keys_for_request(attributes).each do |key, value|
         @attributes[key.to_s] =
             case value
               when Array
@@ -59,16 +59,17 @@ module BadgevilleBerlin
     #
     # @example Rewrites the BadgevilleBerlin::Player :nick_name key as 
     # :nickname.
-    def customize_keys_for_request
+    def customize_keys_for_request(attrs)
       # The given resource type determined by self.class. For each attribute key
       # in the ActiveResource object that needs renaming, replace the original
       # hash key with the revised hash key as specified in the resource type
       # -specific constant CUSTOM_ATTRS_FOR_REQUEST.
       if defined?(self.class::CUSTOM_REQUEST_KEYS)
         self.class::CUSTOM_REQUEST_KEYS.each do |orig_key, revised_key| 
-          attributes[revised_key] = @attributes.delete(orig_key.to_s) if attributes.include?(orig_key) 
+          attrs[revised_key] = attrs.delete(orig_key) if attrs.include?(orig_key) 
         end
       end
+      attrs
     end
 
 
@@ -81,7 +82,6 @@ module BadgevilleBerlin
     end
 
     def sanitize_request
-      customize_keys_for_request
       valid_types = ["String", "Fixnum", "NilClass", "TrueClass", "FalseClass", "ActiveSupport::HashWithIndifferentAccess", "Float", "Array"]
       self.attributes.values.each_with_index do |k,index|
         if !valid_types.include?(self.attributes[self.attributes.keys[index]].class.to_s)
