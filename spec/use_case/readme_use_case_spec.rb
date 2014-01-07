@@ -11,8 +11,8 @@ module BadgevilleBerlin
       # Configure the gem with the host site and the API Key
       my_hostname = '<http://myhostname.com>'
       my_api_key = '<my_api_key>'
-      @my_network_id = '<my_network_id>'
-      
+      @my_network_id = '<my_network_id>' 
+
       Config.conf(:host_name => my_hostname, :api_key => my_api_key)
      
       # Set FakeWeb to allow a real connection to the Badgeville server as
@@ -418,7 +418,7 @@ module BadgevilleBerlin
         end
     
         it "should parse correctly a group index call which includes rewards keyed under reward definitions", :affects_bv_server => true do
-          BadgevilleBerlinJsonFormat.stub!(:decode).and_return([JSON.parse(BadgevilleBerlin.response_json["valid_group_all"])])
+          BadgevilleBerlinJsonFormat.stub(:decode).and_return([JSON.parse(BadgevilleBerlin.response_json["valid_group_all"])])
           response = Group.all
           response.first.rewards.count.should == 2
         end
@@ -471,6 +471,42 @@ module BadgevilleBerlin
           lambda { Leaderboard.find(@new_leaderboard.id) }.should raise_error(ActiveResource::ResourceNotFound)
         end
       end
+
+      describe "BadgevilleBerlin::Team", :affects_bv_server => true do
+        before(:all) do
+          # Create a team
+          @team = Team.new(
+            :site_id      => @site.id,
+            :display_name => "Team #{@rand1}" )
+          @team.save!
+          @team
+        end
+
+        it 'should save teams using the team_ids= setter' do
+          # Create a player
+          @u1 = User.new(:name => "user#{@rand1}", :network_id => @my_network_id, :email => "team_player#{@rand1}@emailserver.com")
+          @u1.save
+          @p1 = Player.new(:site_id => @site.id, :user_id => @u1.id)
+          @p1.save
+
+          @p1.team_ids = [@team.id.to_s]
+          @p1.save!
+          Player.find(@p1.id).team_ids.should eq([@team.id.to_s])
+        end
+
+        it 'should NOT set teams using the teams= setter because "teams" is not attr_accessible' do
+          # Create a player
+          @u2 = User.new(:name => "user#{@rand2}", :network_id => @my_network_id, :email => "team_player#{@rand2}@emailserver.com")
+          @u2.save
+          @p2 = Player.new(:site_id => @site.id, :user_id => @u2.id)
+          @p2.save
+
+          @p2.teams = [@team.id.to_s]
+          @p2.save!
+          Player.find(@p2.id).team_ids.should eq([])
+        end
+      end
+
     end
 
   end

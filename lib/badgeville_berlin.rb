@@ -17,6 +17,7 @@ require "badgeville_berlin/player.rb"
 require "badgeville_berlin/reward.rb"
 require "badgeville_berlin/reward_definition.rb"
 require "badgeville_berlin/site.rb"
+require "badgeville_berlin/team.rb"
 require "badgeville_berlin/track.rb"
 require "badgeville_berlin/user.rb"
 
