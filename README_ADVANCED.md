@@ -116,8 +116,5 @@ This is an open source Ruby wrapper for interacting with the [Badgeville RESTful
 ## Dependencies, Installation & Documentation
 Please see the [Basic README](https://github.com/badgeville/badgeville-ruby/blob/alpha/README.markdown) for details.
 
-## Contributors
-David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.
-
 
 Copyright (c) 2012 Badgeville.

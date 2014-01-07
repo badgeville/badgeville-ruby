@@ -154,8 +154,5 @@ You can use the [GitHub issue tracker](https://github.com/badgeville/badgeville-
 7. Commit and push your changes.
 8. Click the GitHub "Pull Request" to submit a pull request. Please do not include changes to the gemspec, version or history file.
 
-## Contributors
-David Czarnecki of Major League Gaming wrote the initial gem that inspired this wrapper.
-
 
 Copyright (c) 2012 Badgeville.
