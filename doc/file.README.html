@@ -6,7 +6,7 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.7.1
+    &mdash; Documentation by YARD 0.8.2.1
   
 </title>
 
@@ -15,9 +15,11 @@
   <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
   relpath = '';
-  if (relpath != '') relpath += '/';
+  framesUrl = "frames.html#!" + escape(window.location.href);
 </script>
+
 
   <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
 
@@ -26,148 +28,262 @@
 
   </head>
   <body>
-    <script type="text/javascript" charset="utf-8">
-      if (window.top.frames.main) document.body.className = 'frames';
-    </script>
-    
     <div id="header">
       <div id="menu">
   
-    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <a href="_index.html">Index</a> &raquo; 
     <span class="title">File: README</span>
   
-  
+
   <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
 </div>
 
       <div id="search">
   
-    <a id="class_list_link" href="#">Class List</a>
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
   
-    <a id="method_list_link" href="#">Method List</a>
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
   
-    <a id="file_list_link" href="#">File List</a>
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
   
 </div>
       <div class="clear"></div>
     </div>
-    
+
     <iframe id="search_frame"></iframe>
-    
+
     <div id="content"><div id='filecontents'><h1>Badgeville RESTful Wrapper for Berlin API -- Basic README</h1>
 
-<p>This is a Ruby wrapper for interacting with the <a href="http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation">Badgeville RESTful Berlin API</a>.</p>
+<p>This is an open source Ruby wrapper for interacting with the <a href="http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation">Badgeville RESTful Berlin API</a>.</p>
 
 <h2>Features</h2>
 
 <ul>
-<li>Uses the activeresource (3.0.5) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.</li>
-<li>Allows creating, reading (finding), updating and deleting the following classes of remote resources: Site, User, Player, ActivityDefinition, Activity.</li>
+<li>Uses the activeresource (3.1.3) gem to map ActiveModel-like RESTful methods to resources on the remote Badgeville server.</li>
+<li>Allows creating, reading (finding), updating and deleting the following classes of remote resources: Site, User, Player, ActivityDefinition, Activity, Reward and RewardDefinition.</li>
 </ul>
 
 
 <h2>Basic Examples</h2>
 
-<h3>1. Configure the gem to use your Badgeville API Key and the site to which your requests should go.</h3>
+<h3>1. Configure the gem to use your Badgeville Private API Key and the site to which your requests should go.</h3>
 
-<p><code>ruby
-BadgevilleBerlin::Config.conf(
-  :site    =&gt; "http://sandbox.v2.badgeville.com",
-  :api_key =&gt; MY_API_KEY)
-</code></p>
+<p>```ruby</p>
 
-<h3>2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu Develop > Home or contact support@badgeville.com.</h3>
+<pre class="code ruby"><code>    <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>Config</span><span class='period'>.</span><span class='id identifier rubyid_conf'>conf</span><span class='lparen'>(</span>
+      <span class='symbol'>:host_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://example.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='symbol'>:api_key</span>   <span class='op'>=&gt;</span> <span class='const'>MY_API_KEY</span><span class='rparen'>)</span>
+</code></pre>
 
-<p><code>ruby
-new_site = BadgevilleBerlin::Site.new(
-  :name       =&gt; "My Website",
-  :url        =&gt; "mydomain.com",
-  :network_id =&gt; MY_NETWORK_ID )
-success = new_site.save
-</code></p>
+<p>```
+:host_name should be the Badgeville endpoint that receives your calls, NOT your site URL.  Example: "http://sandbox.v2.badgeville.com"</p>
 
-<h3>3. Create a user to add them to your network.</h3>
+<h3>2. Add a new site to your network. Find your network ID the Publisher Module's tabbed menu ( Develop > Home ) or contact <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#58;&#115;&#x75;&#x70;&#x70;&#111;&#x72;&#116;&#x40;&#98;&#x61;&#x64;&#x67;&#101;&#x76;&#105;&#x6c;&#108;&#x65;&#46;&#99;&#x6f;&#109;">&#x73;&#117;&#112;&#112;&#111;&#114;&#x74;&#x40;&#98;&#x61;&#100;&#103;&#101;&#118;&#x69;&#108;&#108;&#101;&#46;&#x63;&#x6f;&#109;</a></h3>
 
-<p><code>ruby
-new_user = BadgevilleBerlin::User.new(
-  :name       =&gt; 'visitor_username',
-  :network_id =&gt; MY_NETWORK_ID,
-  :email      =&gt; 'visitor@emailserver.com',
-  :password   =&gt; 'visitor_password' )
-success = new_user.save
-</code></p>
+<p>```ruby</p>
 
-<h3>4. Find the newly created user by ID to update their email address.</h3>
-
-<p><code>ruby
-user_found_by_id = BadgevilleBerlin::User.find( new_user.id )
-user_found_by_id.email = 'revised_visitor@emailserver.com'
-success = user_found_by_id.save
-</code></p>
-
-<h3>5. Create a player using the user corresponding to the updated email address for the site you created.</h3>
-
-<p><code>ruby
-new_player = BadgevilleBerlin::Player.new(
-  :site_id =&gt; new_site.id,
-  :user_id =&gt; new_user.id )
-success = new_player.save
-</code></p>
-
-<h3>6. Register a player behavior (e.g. share) for the newly created player.</h3>
-
-<p><code>ruby
-new_activity = BadgevilleBerlin::Activity.new(
-  :verb      =&gt; 'share',
-  :player_id =&gt; new_player.id )
-success = new_activity.save
-</code></p>
-
-<h2>Tips</h2>
-
-<h3>Monitoring HTTP Requests and JSON Responses</h3>
-
-<p>Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.</p>
-
-<p>```ruby
-require 'logger'
-BadgevilleBerlin::BaseResource.logger       = Logger.new(STDOUT)
-BadgevilleBerlin::BaseResource.logger.level = Logger::DEBUG</p>
+<pre class="code ruby"><code>    <span class='id identifier rubyid_new_site'>new_site</span> <span class='op'>=</span> <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>Site</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='symbol'>:name</span>       <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>My Website</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='symbol'>:url</span>        <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mydomain.com</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+      <span class='symbol'>:network_id</span> <span class='op'>=&gt;</span> <span class='const'>MY_NETWORK_ID</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_success'>success</span> <span class='op'>=</span> <span class='id identifier rubyid_new_site'>new_site</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+</code></pre>
 
 <p>```</p>
 
-<h3>Avoiding "BadgevilleBerlin::"</h3>
+<h3>3. Create a user on your network.</h3>
 
-<p>Encapsulate your code inside a module Badgeville to avoid frequently typing "Badgeville::"</p>
+<ul>
+  <li>See the API Explorer for required and optional parameters.</li>
+</ul>
 
-<p><code>ruby
-module BadgevilleBerlin
-  # your code goes here
-end
-</code></p>
+
+<p>```ruby</p>
+
+<pre class="code ruby"><code>    <span class='id identifier rubyid_new_user'>new_user</span> <span class='op'>=</span> <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='symbol'>:name</span>       <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>visitor_username</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+      <span class='symbol'>:network_id</span> <span class='op'>=&gt;</span> <span class='const'>MY_NETWORK_ID</span><span class='comma'>,</span>
+      <span class='symbol'>:email</span>      <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>visitor@emailserver.com</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+      <span class='symbol'>:password</span>   <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>visitor_password</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_success'>success</span> <span class='op'>=</span> <span class='id identifier rubyid_new_user'>new_user</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+</code></pre>
+
+<p>```</p>
+
+<h3>4. See error messages from the remote server.</h3>
+
+<ul>
+  <li>Here we attempt to create a second user on the network with the same email as the first user.</li>
+  <li>See the API Explorer for required and optional parameters.</li>
+</ul>
+
+
+<p>```ruby</p>
+
+<pre class="code ruby"><code>    <span class='id identifier rubyid_new_user2'>new_user2</span> <span class='op'>=</span> <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='symbol'>:name</span>       <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>visitor_username</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+      <span class='symbol'>:network_id</span> <span class='op'>=&gt;</span> <span class='const'>MY_NETWORK_ID</span><span class='comma'>,</span>
+      <span class='symbol'>:email</span>      <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>visitor@emailserver.com</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+      <span class='symbol'>:password</span>   <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>visitor_password</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_success'>success</span> <span class='op'>=</span> <span class='id identifier rubyid_new_user2'>new_user2</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_new_user2'>new_user2</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='period'>.</span><span class='id identifier rubyid_messages'>messages</span> <span class='comment'># {:email=&gt;[&quot;user email is already taken&quot;]}
+</span>    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_new_user2'>new_user2</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='lbracket'>[</span><span class='symbol'>:email</span><span class='rbracket'>]</span>  <span class='comment'># [&quot;user email is already taken&quot;]
+</span></code></pre>
+
+<p>```</p>
+
+<h3>5. Find a user to update user properties.</h3>
+
+<ul>
+  <li>Here we find the newly created user by ID to update their email address.</li>
+  <li>See the API Explorer for a full list of user properties to update.</li>
+</ul>
+
+
+<p>```ruby</p>
+
+<pre class="code ruby"><code>    <span class='id identifier rubyid_user_found_by_id'>user_found_by_id</span> <span class='op'>=</span> <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span> <span class='id identifier rubyid_new_user'>new_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_user_found_by_id'>user_found_by_id</span><span class='period'>.</span><span class='id identifier rubyid_email'>email</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>revised_visitor@emailserver.com</span><span class='tstring_end'>'</span></span>
+    <span class='id identifier rubyid_success'>success</span> <span class='op'>=</span> <span class='id identifier rubyid_user_found_by_id'>user_found_by_id</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+
+    <span class='id identifier rubyid_updated_user'>updated_user</span> <span class='op'>=</span> <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span> <span class='id identifier rubyid_new_user'>new_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_updated_user'>updated_user</span><span class='period'>.</span><span class='id identifier rubyid_email'>email</span> <span class='comment'># revised_visitor@emailserver.com
+</span></code></pre>
+
+<p>```</p>
+
+<h3>6. Create a player.</h3>
+
+<ul>
+  <li>Here we create a player for the new site, corresponding to the user with the updated email address.</li>
+  <li>See the API Explorer for required and optional parameters.</li>
+</ul>
+
+
+<p>```ruby</p>
+
+<pre class="code ruby"><code>    <span class='id identifier rubyid_new_player'>new_player</span> <span class='op'>=</span> <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>Player</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='symbol'>:site_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_new_site'>new_site</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span>
+      <span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user_found_by_id'>user_found_by_id</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_success'>success</span> <span class='op'>=</span> <span class='id identifier rubyid_new_player'>new_player</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+</code></pre>
+
+<p>```</p>
+
+<h3>7. Find existing players by email.</h3>
+
+<ul> 
+  <li>Here we find an existing player by email.</li>
+  <li>To get all players on the network that match the email, we have passed :all.</li>
+  <li>You can alternatively pass :first or :last in the place of :all.</li>
+</ul>
+
+
+<p>``` ruby</p>
+
+<pre class="code ruby"><code>    <span class='ivar'>@existing_player</span> <span class='op'>=</span> <span class='const'>Player</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='comma'>,</span> <span class='symbol'>:params</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>revised_visitor@emailserver.com</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>```</p>
+
+<h3>8. Register a player behavior.</h3>
+
+<ul>
+  <li>Here we record the fact that the newly created player performed a "share" behavior.</li>
+  <li>See the API Explorer for required and optional parameters.</li>
+</ul>
+
+
+<p>```ruby</p>
+
+<pre class="code ruby"><code>    <span class='id identifier rubyid_new_activity'>new_activity</span> <span class='op'>=</span> <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>Activity</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+      <span class='symbol'>:verb</span>      <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>share</span><span class='tstring_end'>'</span></span><span class='comma'>,</span>
+      <span class='symbol'>:player_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_new_player'>new_player</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='rparen'>)</span>
+    <span class='id identifier rubyid_success'>success</span> <span class='op'>=</span> <span class='id identifier rubyid_new_activity'>new_activity</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+</code></pre>
+
+<p>```</p>
+
+<h2>Monitoring HTTP Requests and JSON Responses</h2>
+
+<p>Print HTTP requests and JSON responses by installing the "logger" gem and including this code in your script.</p>
+
+<p>```ruby</p>
+
+<pre class="code ruby"><code>    <span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>logger</span><span class='tstring_end'>'</span></span>
+    <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>BaseResource</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span>       <span class='op'>=</span> <span class='const'>Logger</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>STDOUT</span><span class='rparen'>)</span>
+    <span class='const'>BadgevilleBerlin</span><span class='op'>::</span><span class='const'>BaseResource</span><span class='period'>.</span><span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_level'>level</span> <span class='op'>=</span> <span class='const'>Logger</span><span class='op'>::</span><span class='const'>DEBUG</span>
+</code></pre>
+
+<p>```</p>
 
 <h2>Dependencies</h2>
 
 <ul>
 <li>activeresource (3.1.3) - Provides Ruby classes to RESTfully interact with remote resources.</li>
-<li>logger (1.2.8) - Provides logging to the standard output stream.</li>
 </ul>
 
 
 <h2>Installation</h2>
 
-<p>[STILL NEEDS TO BE WRITTEN]</p>
+<p>gem install badgeville_berlin</p>
 
 <h2>Documentation</h2>
 
 <p>For more documentation on how the Badgeville RESTful Berlin API works, see [here] (http://rules.badgeville.com/display/doc/2.0+Core+API+Documentation).</p>
 
+<h2>Submitting an Issue</h2>
+
+<p>You can use the <a href="https://github.com/badgeville/badgeville-ruby/issues">GitHub issue tracker</a> to report bugs. After ensuring that the bug has not already been submitted, please submit:</p>
+
+<ol>
+<li>A <a href="https://gist.github.com/">gist</a> a that contains a stack trace.</li>
+<li>Details needed to reproduce the bug, including gem version, Ruby version and operating system.</li>
+</ol>
+
+
+<h2>Submitting a Pull Request</h2>
+
+<ol>
+<li>Click the GitHub "Fork" button to fork this project.</li>
+<li><p>Clone the repository for a local copy:</p>
+
+<pre class="code ruby"><code> <span class='id identifier rubyid_git'>git</span> <span class='id identifier rubyid_clone'>clone</span> <span class='id identifier rubyid_git'>git</span><span class='ivar'>@github</span><span class='period'>.</span><span class='id identifier rubyid_com'>com</span><span class='symbol'>:username</span><span class='op'>/</span><span class='id identifier rubyid_badgeville'>badgeville</span><span class='op'>-</span><span class='id identifier rubyid_ruby'>ruby</span><span class='period'>.</span><span class='id identifier rubyid_git'>git</span>
+</code></pre></li>
+<li><p>Create a topic branch:</p>
+
+<pre class="code ruby"><code> git checkout -b my_bug_fix_or_feature_branch
+</code></pre></li>
+<li><p>Add documentation and specs for your bug fix or feature.</p></li>
+<li>Implement your bug fix or feature.</li>
+<li><p>Run the following command to ensure your tests cover your changes:</p>
+
+<pre class="code ruby"><code> <span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_exec'>exec</span> <span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_spec'>spec</span>
+</code></pre></li>
+<li><p>Commit and push your changes.</p></li>
+<li>Click the GitHub "Pull Request" to submit a pull request. Please do not include changes to the gemspec, version or history file.</li>
+</ol>
+
+
+<p>-## Contributors
+ -David Czarnecki wrote the initial gem that inspired this wrapper.</p>
+
 <p>Copyright (c) 2012 Badgeville.</p></div></div>
-    
+
     <div id="footer">
-  Generated on Tue Jan 24 14:21:13 2012 by 
+  Generated on Wed Jan  8 10:43:04 2014 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.1 (ruby-1.9.2).
+  0.8.2.1 (ruby-1.9.2).
 </div>
 
   </body>

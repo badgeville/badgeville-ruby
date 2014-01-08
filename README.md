@@ -155,4 +155,7 @@ You can use the [GitHub issue tracker](https://github.com/badgeville/badgeville-
 8. Click the GitHub "Pull Request" to submit a pull request. Please do not include changes to the gemspec, version or history file.
 
 
+-## Contributors
+ -David Czarnecki wrote the initial gem that inspired this wrapper.
+
 Copyright (c) 2012 Badgeville.
